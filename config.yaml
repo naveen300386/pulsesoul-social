@@ -31,6 +31,25 @@ bio_cta: "Link in bio → pulsesoul.app"
 # After a few weeks run `python tools/learn.py` -- it reads the engagement
 # your own posts actually got and tells you which of these slots to change.
 # ---------------------------------------------------------------------------
+# Language mix. The number is the share of posts that go out in Hinglish on
+# that account; the rest go out in English. 0 = always English, 1 = always
+# Hinglish, 0.5 = roughly half and half.
+#
+# Which post gets which language is decided by a hash of the account name and
+# the post id, so it never changes between runs and the two accounts posting
+# the same item do not have to say it the same way. Change a number here and
+# the split changes; nothing else has to be edited.
+language:
+  mix:
+    facebook: 0.6
+    instagram: 0.6
+    telegram: 0.5
+    threads: 0.4
+    pinterest: 0.25
+    bluesky: 0.0      # audience is mostly outside India
+    mastodon: 0.0     # same
+    linkedin: 0.0     # the one account a partner or recruiter reads
+
 schedule:
   timezone: Asia/Kolkata
 

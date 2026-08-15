@@ -12,6 +12,7 @@ A platform with no tokens is skipped, not failed. A platform that errors does
 not stop the others. Nothing is ever posted twice.
 """
 import argparse
+import hashlib
 import os
 import sys
 import traceback
@@ -81,7 +82,38 @@ def is_protected(paragraph: str) -> bool:
     return any(phrase in low for phrase in PROTECTED)
 
 
-def compose(post: dict, platform, cfg: dict) -> str:
+def voice_for(post: dict, platform, cfg: dict) -> str:
+    """
+    Which language this post goes out in on this account.
+
+    An account used to be locked to one language forever -- Facebook was always
+    Hinglish, Telegram always English. Now each account mixes the two, with the
+    share set per account in config.yaml under `language:`.
+
+    The choice must be the same every time it is asked, or a retry would post
+    the English version of something whose Hinglish version already went out.
+    So it is decided by a hash of the account name and the post id, not by
+    chance and not by the clock. Python's built-in hash() is randomised per
+    process and would have exactly the bug this is avoiding -- hence md5.
+    """
+    share = (cfg.get("language", {}).get("mix", {}) or {}).get(platform.name)
+    if share is None:
+        share = 1.0 if getattr(platform, "voice", "english") == "hinglish" else 0.0
+    try:
+        share = min(1.0, max(0.0, float(share)))
+    except (TypeError, ValueError):
+        share = 0.0
+
+    if share <= 0:
+        return "english"
+    if share >= 1:
+        return "hinglish"
+
+    digest = hashlib.md5(f"{platform.name}:{post.get('id', '')}".encode()).hexdigest()
+    return "hinglish" if int(digest[:8], 16) / 0xFFFFFFFF < share else "english"
+
+
+def compose(post: dict, platform, cfg: dict, voice: str | None = None) -> str:
     """
     Build the final text for one platform.
 
@@ -92,7 +124,7 @@ def compose(post: dict, platform, cfg: dict) -> str:
     qualifier. Truncation is the last resort and should never actually happen
     with the current bank -- tools/check.py fails the build if it does.
     """
-    body = (post.get(platform.voice) or post.get("english") or "").strip()
+    body = (post.get(voice or voice_for(post, platform, cfg)) or post.get("english") or "").strip()
     paras = [p.strip() for p in body.split("\n\n") if p.strip()]
 
     tail = ""

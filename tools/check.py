@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from autopost import PROTECTED, compose, load_config  # noqa: E402
+from autopost import PROTECTED, compose, load_config, voice_for  # noqa: E402
 from core import queue, schedule  # noqa: E402
 from platforms import ALL  # noqa: E402
 
@@ -80,15 +80,20 @@ def main() -> int:
                     problems.append(f"{post['id']}: rendered/{stem}__{shape}.jpg missing -- run tools/render_images.py")
 
         for platform in ALL:
-            source = (post.get(platform.voice) or post.get("english") or "")
-            text = compose(post, platform, cfg)
+          # Both languages are checked on every platform, not just the one this
+          # post happens to draw today. Otherwise raising an account's Hinglish
+          # share in config.yaml could push a post over a character limit that
+          # nothing had ever tested.
+          for voice in ("english", "hinglish"):
+            source = (post.get(voice) or post.get("english") or "")
+            text = compose(post, platform, cfg, voice=voice)
 
             if text.endswith("…"):
-                problems.append(f"{post['id']} on {platform.name}: truncated mid-sentence ({len(text)} chars)")
+                problems.append(f"{post['id']} on {platform.name} ({voice}): truncated mid-sentence ({len(text)} chars)")
             if platform.limit and len(text) > platform.limit:
                 problems.append(
-                    f"{post['id']} on {platform.name}: {len(text)} chars, over the {platform.limit} limit "
-                    f"-- shorten the copy, it cannot be trimmed without losing a safety line"
+                    f"{post['id']} on {platform.name} ({voice}): {len(text)} chars, over the {platform.limit} "
+                    f"limit -- shorten the copy, it cannot be trimmed without losing a safety line"
                 )
 
             # The dangerous failure is not a long post, it is a SHORTENED post
@@ -97,7 +102,7 @@ def main() -> int:
             for phrase in PROTECTED:
                 if phrase in source.lower() and phrase not in text.lower():
                     problems.append(
-                        f"{post['id']} on {platform.name}: '{phrase}' was in the copy but got dropped to fit"
+                        f"{post['id']} on {platform.name} ({voice}): '{phrase}' was in the copy but got dropped to fit"
                     )
 
     # --- schedule sanity ---------------------------------------------------
