@@ -82,6 +82,10 @@ jobs:
           MASTODON_TOKEN:       ${{ secrets.MASTODON_TOKEN }}
           LINKEDIN_TOKEN:       ${{ secrets.LINKEDIN_TOKEN }}
           LINKEDIN_ORG_ID:      ${{ secrets.LINKEDIN_ORG_ID }}
+          # Page posting without a registered company: the runner writes the
+          # post into content/feed.xml and Zapier publishes it to the Page.
+          # Set the LINKEDIN_FEED secret to 1 to switch this on.
+          LINKEDIN_FEED:        ${{ secrets.LINKEDIN_FEED }}
           PINTEREST_TOKEN:      ${{ secrets.PINTEREST_TOKEN }}
           PINTEREST_BOARD_ID:   ${{ secrets.PINTEREST_BOARD_ID }}
         run: |
@@ -132,7 +136,7 @@ jobs:
             # either side has fired. Worst case a post is skipped, never repeated.
             python tools/merge_state.py "origin/$BRANCH"
 
-            git add content/state.json content/history.jsonl
+            git add content/state.json content/history.jsonl content/feed.xml
             if git diff --staged --quiet; then
               echo "nothing new to record"
               exit 0

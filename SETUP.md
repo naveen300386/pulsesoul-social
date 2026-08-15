@@ -13,7 +13,7 @@ Nothing here costs money. Time estimates are honest.
 | 4 | Mastodon | 10 min | no |
 | 5 | Facebook Page + Instagram | 60 min | no |
 | 6 | Threads | 30 min | no |
-| 7 | LinkedIn company page | 30 min | yes — 1 to 4 weeks, and there is an eligibility gate |
+| 7 | LinkedIn Page (via a feed + Zapier) | 30 min | no — no company and no token needed |
 | 8 | Pinterest | 30 min | yes — two separate reviews |
 
 ---
@@ -322,45 +322,88 @@ permissions directly.
 
 ---
 
-## Step 7 — LinkedIn company page (1 to 4 weeks, with a real gate)
+## Step 7 — LinkedIn Page (30 minutes, no company needed)
 
-Read this before spending time. LinkedIn grants the Community Management API
-only to **registered legal organizations for commercial use**. A solo
-developer with no registered entity gets rejected — and **you cannot re-apply
-with the same app**, so it is one shot per app.
+LinkedIn will not let a solo developer post to a company Page through its API.
+The Community Management API is granted only to registered legal
+organizations, and there is no way around that. What LinkedIn *does* allow is
+approved partners posting to Pages on your behalf — and Zapier is one.
 
-**If PulseSoul has no company behind it, skip this step entirely.** Nothing
-else in the project depends on LinkedIn, and it is not worth registering a
-company just to unlock it. Do not apply through an employer's entity for a
-personal project either — that muddies who owns the app.
+So the runner does not call LinkedIn at all. It writes the post into
+`content/feed.xml`, pushes it to the repo with everything else, and a Zap
+reads that feed and publishes to the PulseSoul Page.
 
-Come back to this step if and when PulseSoul has its own registered entity.
+The alternative — posting as yourself with the self-serve "Share on LinkedIn"
+product — is still in the code (`LINKEDIN_PERSON_ID`), and so is the direct
+Page API for the day PulseSoul has an entity (`LINKEDIN_ORG_ID`). Set either
+one and it takes precedence over the feed automatically.
 
-You will need: a business email LinkedIn can verify, the legal name and
-registered address, a live website on your own domain (`pulsesoul.app` works),
-a privacy policy URL, and **a super admin of the Page to verify the app**.
+### 7a — Create the PulseSoul Page (5 minutes)
 
-1. Create a LinkedIn **Company Page** for PulseSoul if you have not.
-2. Go to <https://www.linkedin.com/developers/apps> → **Create app**, and
-   associate it with that Page.
-3. **Products** tab → request **Community Management API**. Use case, plainly:
-   *"Publishing our own product updates to our own company page on a schedule."*
-4. Have a Page super admin verify the app when LinkedIn prompts.
-5. Wait 1–4 weeks.
-6. Once approved: **Auth** tab → generate a token with the
-   `w_organization_social` scope.
-7. Your organisation id is the number in your page admin URL:
-   `linkedin.com/company/`**`12345678`**`/admin/`
+1. <https://www.linkedin.com/company/setup/new/> → **Company**
+2. Name `PulseSoul` · website `https://pulsesoul.app` · industry
+   `Software Development` · size `0-1` · type `Self-employed`
+3. Tagline: `Never Miss What Matters.` · upload the app icon · **Create page**
+
+You must be an admin of this Page — creating it makes you one.
+
+### 7b — Switch the runner into feed mode (1 minute)
+
+Add one GitHub secret at
+<https://github.com/naveen300386/pulsesoul-social/settings/secrets/actions>:
 
 | Secret name | Value |
 |---|---|
-| `LINKEDIN_TOKEN` | the access token |
-| `LINKEDIN_ORG_ID` | the numeric id, e.g. `12345678` |
+| `LINKEDIN_FEED` | `1` |
 
-> There is also a 12-month clock: Development tier access is revoked if you do
-> not reach Standard tier within a year.
+If you previously added `LINKEDIN_TOKEN` or `LINKEDIN_PERSON_ID`, **delete
+them**. While `LINKEDIN_PERSON_ID` is set the runner posts under your own name
+instead of the Page.
 
----
+### 7c — Build the Zap (15 minutes, free plan)
+
+1. Sign up at <https://zapier.com> — the free plan is enough: it allows 100
+   tasks a month and LinkedIn posts six times a week, about 26 a month.
+2. **Create Zap** → Trigger: **RSS by Zapier** → **New Item in Feed**.
+3. Feed URL:
+
+   ```
+   https://raw.githubusercontent.com/naveen300386/pulsesoul-social/main/content/feed.xml
+   ```
+
+   Test the trigger. It should find the most recent queued post. If the feed
+   does not exist yet, run the workflow once from the Actions tab first.
+4. Action: **LinkedIn** → **Create Company Update**.
+5. Connect your LinkedIn account, then set:
+   - **Company Page**: PulseSoul
+   - **Comment**: the `Description` field from the trigger — this is the full
+     post text, and it already includes the link and hashtags
+   - **Image URL**: the `Enclosure Url` field from the trigger
+   - Leave Title, URL and Description of the *link preview* empty; the post
+     carries its own image, and filling those turns it into a link card.
+6. Test, then **Publish**.
+
+Zapier polls the feed every 15 minutes, so a post lands within about a quarter
+hour of its slot. Each item carries a unique id, so a Zap that runs twice
+cannot post the same item twice.
+
+### 7d — What can go wrong
+
+**Zapier's image field has been unreliable.** Users have reported the image
+silently dropping out of Create Company Update. If that happens the text still
+posts. Check the first few, and if the image never attaches, either drop the
+Image URL field and let LinkedIn build a link preview from `pulsesoul.app`, or
+switch to `LINKEDIN_PERSON_ID` mode where the image upload is done by this
+project's own code.
+
+**The free task limit.** 100 tasks a month, 26 used. If you add more posting
+slots, watch it.
+
+**No API token is involved** in feed mode, so nothing expires every 60 days —
+that whole problem disappears with the personal-profile route.
+
+LinkedIn posts once a day on weekdays and once on Saturday, six a week. That
+is deliberate: LinkedIn's feed suppresses accounts that post more.
 
 ## Step 8 — Pinterest (do this last)
 
