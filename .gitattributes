@@ -1,0 +1,5 @@
+# The runner appends to this log on every post. Two sides appending different
+# lines is not a conflict, it is two true records -- take both. Without this,
+# a conflict here halts the workflow's push step, which is how the record of
+# a post gets lost and the post goes out twice.
+content/history.jsonl merge=union
