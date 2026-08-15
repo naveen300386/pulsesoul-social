@@ -1,8 +1,21 @@
 {
   "posted": {
     "telegram": [
-      "t10"
+      "t10",
+      "t11"
+    ],
+    "facebook": [
+      "t11"
+    ],
+    "instagram": [
+      "t07"
     ]
   },
-  "fired": {}
+  "fired": {
+    "instagram": {
+      "2026-08-15": [
+        "18:00"
+      ]
+    }
+  }
 }
