@@ -50,13 +50,29 @@ def load_config() -> dict:
 # never dropped to make a post fit -- a shortened post that keeps the claim
 # but loses the qualifier is exactly the thing that gets an app pulled.
 PROTECTED = [
+    # English
     "not an emergency service",
-    "emergency services",
+    "emergency service",          # substring: also catches "emergency services"
     "never an alarm",
     "not a medical",
     "not a health device",
     "optional",
     "encrypted",
+    "no health claims",
+    "nothing is dialled",
+    "nobody outside your family",
+    "switch it off",
+    # Hinglish. Facebook and Instagram post the Hinglish copy, so a list that
+    # only knows English protects the wrong half of the bank.
+    "emergency service nahi",
+    "alarm kabhi nahi",
+    "alarm nahi",
+    "medical nahi",
+    "health device nahi",
+    "call nahi lagti",
+    "bahar kisi ko nahi",
+    "health ka daava nahi",
+    "band bhi kar sakte",
 ]
 
 

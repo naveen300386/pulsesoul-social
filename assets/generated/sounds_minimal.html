@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+/* Sounds picker, Minimal (ivory & gold) - matches the eight published cards.
+   Grid, labels and copy taken from a real screenshot. The chat behind is
+   dimmed exactly as the app does it. Demo contact only. */
+@font-face{font-family:P;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Regular.ttf')}
+@font-face{font-family:P;font-weight:500;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf')}
+@font-face{font-family:P;font-weight:700;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf')}
+@font-face{font-family:E;src:url('/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf')}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{width:1080px;height:2280px;font-family:P,sans-serif;overflow:hidden;background:#7C736A;position:relative}
+
+/* dimmed conversation behind the sheet */
+.behind{position:absolute;inset:0;background:#7C736A}
+.bar{height:150px;display:flex;align-items:center;gap:30px;padding:0 34px;opacity:.92}
+.bar svg{width:48px;height:48px;stroke:#2B2723;fill:none;stroke-width:2.6}
+.pa{width:84px;height:84px;border-radius:50%;background:#6E76D8;display:flex;align-items:center;
+    justify-content:center;font-size:34px;font-weight:600;color:#fff;flex:none}
+.who b{display:block;font-size:38px;font-weight:700;color:#2B2723}
+.who span{font-size:26px;color:#4A443E}
+.spacer{flex:1}
+.daychip{display:flex;justify-content:center;margin-top:330px}
+.daychip span{background:#8C837A;border-radius:34px;padding:14px 44px;font-size:30px;font-weight:700;color:#2B2723}
+
+/* the sheet */
+.sheet{position:absolute;left:0;right:0;bottom:0;height:1720px;background:#F1EAE0;
+       border-radius:44px 44px 0 0;padding:0 46px}
+.grip{width:96px;height:10px;border-radius:5px;background:#4A443E;opacity:.75;margin:34px auto 0}
+.head{display:flex;align-items:baseline;gap:34px;margin:52px 0 44px}
+.head h1{font-size:66px;font-weight:700;color:#17150F;letter-spacing:-.5px}
+.head p{font-size:33px;color:#5B534A}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.t{background:#E1D7CA;border-radius:30px;height:262px;display:flex;flex-direction:column;
+   align-items:center;justify-content:center;gap:18px}
+.t .em{font-family:E;font-size:86px;line-height:1}
+.t .lb{font-size:31px;font-weight:700;color:#17150F}
+</style></head><body>
+
+<div class="behind">
+  <div class="bar">
+    <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+    <span class="pa">M</span>
+    <span class="who"><b>Meera</b><span>last seen …</span></span>
+    <span class="spacer"></span>
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+    <svg viewBox="0 0 24 24" style="fill:#2B2723;stroke:none"><path d="M5.2 3.6h3.9l1.9 4.8-2.8 1.9a12.4 12.4 0 005.5 5.5l1.9-2.8 4.8 1.9v3.9a1.8 1.8 0 01-1.8 1.8A16.8 16.8 0 013.4 5.4a1.8 1.8 0 011.8-1.8z"/></svg>
+    <svg viewBox="0 0 24 24" style="fill:#2B2723;stroke:none"><rect x="2" y="6" width="13" height="12" rx="3"/><path d="M16 11l6-4v10l-6-4z"/></svg>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.6" fill="#2B2723"/><circle cx="12" cy="12" r="1.6" fill="#2B2723"/><circle cx="12" cy="19" r="1.6" fill="#2B2723"/></svg>
+  </div>
+  <div class="daychip"><span>Wednesday</span></div>
+</div>
+
+<div class="sheet">
+  <div class="grip"></div>
+  <div class="head"><h1>Sounds</h1><p>tap to hear · tap again to send</p></div>
+  <div class="grid">
+    <div class="t"><span class="em">😂</span><span class="lb">Laugh</span></div>
+    <div class="t"><span class="em">👏</span><span class="lb">Applause</span></div>
+    <div class="t"><span class="em">🎉</span><span class="lb">Party</span></div>
+    <div class="t"><span class="em">🙏</span><span class="lb">Thank you</span></div>
+
+    <div class="t"><span class="em">🙇</span><span class="lb">Sorry</span></div>
+    <div class="t"><span class="em">🔔</span><span class="lb">Temple bell</span></div>
+    <div class="t"><span class="em">❤️</span><span class="lb">Heartbeat</span></div>
+    <div class="t"><span class="em">😘</span><span class="lb">Kiss</span></div>
+
+    <div class="t"><span class="em">👍</span><span class="lb">Nice</span></div>
+    <div class="t"><span class="em">💯</span><span class="lb">Ta-da</span></div>
+    <div class="t"><span class="em">🥁</span><span class="lb">Drumroll</span></div>
+    <div class="t"><span class="em">😭</span><span class="lb">Sad horn</span></div>
+
+    <div class="t"><span class="em">💔</span><span class="lb">Heartbreak</span></div>
+    <div class="t"><span class="em">🔥</span><span class="lb">Fire</span></div>
+    <div class="t"><span class="em">🤯</span><span class="lb">Boom</span></div>
+    <div class="t"><span class="em">😱</span><span class="lb">Shock</span></div>
+
+    <div class="t"><span class="em">🤔</span><span class="lb">Hmm</span></div>
+    <div class="t"><span class="em">😴</span><span class="lb">Snore</span></div>
+    <div class="t"><span class="em">🦗</span><span class="lb">Crickets</span></div>
+    <div class="t"><span class="em">✨</span><span class="lb">Sparkle</span></div>
+  </div>
+</div>
+</body></html>

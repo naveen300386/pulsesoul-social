@@ -24,10 +24,11 @@ SHAPES = {
     "pin": (1000, 1500),
 }
 
-# how much of the source height to keep. The bottom of a store screenshot is
-# usually empty app background, so trimming a little lets the real content sit
-# bigger in the frame.
-TRIM_BOTTOM = 0.06
+# How much of the source height to trim off the bottom. Keep this SMALL: the
+# phone mockup inside a 1920-tall card ends at y=1860, so anything above 0.031
+# starts eating the app's own bottom navigation bar. It was 0.06 once, which
+# cut 56 pixels of screen off every posted image and removed the dock entirely.
+TRIM_BOTTOM = 0.02
 
 
 def cover(img: Image.Image, w: int, h: int) -> Image.Image:

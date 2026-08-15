@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+/* Rebuilt from a real Liquid Glass screenshot. Corrections over the first
+   attempt: flat rows on true black with hairline dividers (NOT cards), one
+   segmented filter bar (not four loose chips), camera icon inside the search
+   field, brown active pill in the dock, time top-right.
+   Names are demo only - no real contacts, faces or numbers.               */
+@font-face { font-family:P; src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Regular.ttf'); }
+@font-face { font-family:P; font-weight:500; src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf'); }
+@font-face { font-family:P; font-weight:700; src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf'); }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{width:1080px;height:2340px;background:#000;font-family:P,sans-serif;color:#F2F2ED;overflow:hidden;position:relative}
+
+.status{height:0px;display:flex;align-items:center;justify-content:space-between;padding:0 34px;font-size:31px;font-weight:500;color:#EDEDE8}
+.status .r{display:flex;gap:16px;align-items:center}
+
+.header{height:122px;display:flex;align-items:center;justify-content:space-between;padding:0 30px}
+.brand{display:flex;align-items:center;gap:14px}
+.mark{width:70px;height:64px}
+.word{font-size:46px;font-weight:700;background:linear-gradient(95deg,#F97316 0%,#EF4444 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hi{display:flex;gap:40px;align-items:center}
+.hi svg{width:48px;height:48px}
+.dot{position:relative}
+.dot::after{content:'';position:absolute;right:-3px;top:-3px;width:19px;height:19px;border-radius:50%;background:#F43F5E}
+.me{width:74px;height:74px;border-radius:50%;background:#6E76D8;display:flex;align-items:center;justify-content:center;
+    font-size:34px;font-weight:600;color:#fff;box-shadow:0 0 0 5px #000,0 0 0 8px #F97316}
+
+.search{margin:16px 30px 0;height:112px;background:#0E0E10;border:1.5px solid #FFFFFF1F;border-radius:56px;
+        display:flex;align-items:center;gap:26px;padding:0 38px}
+.search .mag{width:42px;height:42px;stroke:#8E8E93;fill:none;stroke-width:2.6}
+.search span{flex:1;color:#8E8E93;font-size:35px}
+.search .cam{width:44px;height:44px;stroke:#C9C9CE;fill:none;stroke-width:2.2}
+
+.segwrap{margin:22px 30px 0;height:112px;background:#0B0B0D;border:1.5px solid #FFFFFF1A;border-radius:56px;
+         display:flex;align-items:center;padding:0 8px}
+.seg{flex:1;height:92px;display:flex;align-items:center;justify-content:center;font-size:33px;color:#D6D6D8}
+.seg.on{background:linear-gradient(180deg,#3A2415,#241608);border:1.5px solid #FFFFFF33;border-radius:46px;
+        color:#F59E0B;font-weight:600}
+
+.list{margin-top:44px}
+.row{height:162px;display:flex;align-items:center;padding:0 30px;gap:26px;border-bottom:1.5px solid #FFFFFF0F}
+.av{font-size:34px;width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:38px;font-weight:600;color:#fff;flex:none}
+.mid{flex:1;min-width:0}
+.nm{display:flex;align-items:center;gap:16px;font-size:37px;font-weight:700;color:#F5F5F0}
+.pv{font-size:31px;color:#9A9A9E;margin-top:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fl{display:inline-flex;align-items:center;gap:8px;font-size:26px;font-weight:700;color:#F59E0B;
+    background:#3A2415;border-radius:22px;padding:5px 18px}
+.tm{font-size:28px;color:#9A9A9E;align-self:flex-start;margin-top:34px;flex:none}
+.sect{padding:38px 30px 0;font-size:31px;font-weight:600;color:#F59E0B}
+
+.dock{position:absolute;left:26px;right:26px;bottom:96px;height:150px;border-radius:75px;
+      background:#0D0D0F;border:1.5px solid #FFFFFF1A;display:flex;align-items:center;justify-content:space-around}
+.tab{display:flex;flex-direction:column;align-items:center;gap:8px;color:#9A9A9E;font-size:27px}
+.tab svg{width:46px;height:46px;fill:currentColor}
+.tab.on{color:#F97316}
+.tab.on .box{background:linear-gradient(180deg,#3A2415,#241608);border:1.5px solid #FFFFFF33;
+             border-radius:38px;padding:12px 46px;margin-bottom:4px;display:inline-block}
+.navbar{position:absolute;left:0;right:0;bottom:0;height:78px;display:flex;align-items:center;justify-content:center;gap:150px}
+</style></head><body>
+
+
+<div class="header">
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 48 44">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#8B5CF6"/><stop offset=".55" stop-color="#EC4899"/><stop offset="1" stop-color="#F97316"/></linearGradient></defs>
+      <path d="M24 3.5C12.6 3.5 3.5 11 3.5 20.2c0 5.3 3 10 7.8 13l-1.6 7.3 8-4.3c2 .5 4.1.7 6.3.7 11.4 0 20.5-7.5 20.5-16.7S35.4 3.5 24 3.5z"
+            fill="none" stroke="url(#g)" stroke-width="3.4"/>
+      <path d="M11.5 20.5h5l2.8-6.2 3.8 12.4 3.2-7.6 2.5 3.8h2.8" fill="none" stroke="#EF4444" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M33.4 17c1.5-1.6 4.1-1.4 5.3.4 1 1.4.7 3.3-.6 4.5l-4.4 4-4.4-4c-1.3-1.2-1.6-3.1-.6-4.5 1.2-1.8 3.8-2 5.3-.4z" fill="#EF4444"/>
+    </svg>
+    <span class="word">PulseSoul</span>
+  </div>
+  <div class="hi">
+    <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#F2F2ED" stroke-width="2"><rect x="3" y="5" width="18" height="17" rx="3"/><path d="M8 2.5v5M16 2.5v5M3 11h18"/></svg></span>
+    <svg viewBox="0 0 24 24" fill="#F2F2ED"><path d="M12 2.5l8 3.2v6.1c0 5.3-3.4 8.6-8 9.7-4.6-1.1-8-4.4-8-9.7V5.7z"/><path d="M11 8.2h2v3h3v2h-3v3h-2v-3H8v-2h3z" fill="#000"/></svg>
+    <svg viewBox="0 0 24 24" fill="#F2F2ED"><circle cx="8" cy="4.6" r="2.3"/><path d="M6.2 8h3.6l1.3 6.2H9.9V21H6.1v-6.8H4.9z"/><circle cx="16.8" cy="4.6" r="2.3"/><path d="M14.5 8.4h4.6l1 5.8h-1.5V21h-1.4v-6.8h-.7V21h-1.4v-6.8h-1.6z"/></svg>
+    <span class="me">M</span>
+  </div>
+</div>
+
+<div class="search">
+  <svg class="mag" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.2"/><path d="M20 20l-4.2-4.2"/></svg>
+  <span>Search family, messages…</span>
+  <svg class="cam" viewBox="0 0 24 24"><path d="M3 8.6h3.4l1.3-2.1h8.6l1.3 2.1H21a1 1 0 011 1v8.8a1 1 0 01-1 1H3a1 1 0 01-1-1V9.6a1 1 0 011-1z"/><circle cx="12" cy="14" r="3.6"/></svg>
+</div>
+
+<div class="segwrap">
+  <div class="seg on">All</div><div class="seg">Family</div><div class="seg">Unread</div><div class="seg">Starred</div>
+</div>
+
+<div class="list">
+  <div class="row"><span class="av" style="background:#6E76D8">A</span>
+    <div class="mid"><div class="nm">Aarav</div><div class="pv">You: 📞 Missed voice call</div></div>
+    <div class="tm">5:40 pm</div></div>
+
+  <div class="row"><span class="av" style="background:#E0788A">P</span>
+    <div class="mid"><div class="nm">Priya <span class="fl">🔥 1</span></div><div class="pv">You: 📹 Missed video call</div></div>
+    <div class="tm">5:40 pm</div></div>
+
+  <div class="row"><span class="av" style="background:#E0894F">M</span>
+    <div class="mid"><div class="nm">Meera <span class="fl">🔥 1</span></div><div class="pv">You: ✅ I'm safe. Just letting you kno…</div></div>
+    <div class="tm">5:38 pm</div></div>
+
+  <div class="row"><span class="av" style="background:#6BBE8E">R</span>
+    <div class="mid"><div class="nm">Rohan</div><div class="pv">You: Aa raha hoon</div></div>
+    <div class="tm">4 Aug</div></div>
+
+  <div class="row"><span class="av" style="background:#8B8FE3">A</span>
+    <div class="mid"><div class="nm">Ananya</div><div class="pv">Voice note · 0:31</div></div>
+    <div class="tm">2 Aug</div></div>
+
+  <div class="row"><span class="av" style="background:#C173C9">K</span>
+    <div class="mid"><div class="nm">Kabir</div><div class="pv">You: Photos bhej diye</div></div>
+    <div class="tm">2 Aug</div></div>
+
+  <div class="row"><span class="av" style="background:#D2607A">I</span>
+    <div class="mid"><div class="nm">Ishaan</div><div class="pv">You: Ha, pahunch gaye</div></div>
+    <div class="tm">1 Aug</div></div>
+</div>
+
+<div class="sect">Your contacts on PulseSoul</div>
+
+<div class="list">
+  <div class="row" style="height:150px"><span class="av" style="background:#6BBE8E">V</span>
+    <div class="mid"><div class="nm">Vikram</div></div></div>
+  <div class="row" style="height:150px"><span class="av" style="background:#E06B9A">D</span>
+    <div class="mid"><div class="nm">Diya</div></div></div>
+  <div class="row" style="height:150px"><span class="av" style="background:#A97CD8">S</span>
+    <div class="mid"><div class="nm">Sanya</div></div></div>
+</div>
+
+<div class="dock">
+  <div class="tab on"><span class="box"><svg viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="14" rx="3"/><path d="M7 21.2l1.2-3.2h3.4z"/></svg></span>Chats</div>
+  <div class="tab"><svg viewBox="0 0 24 24"><path d="M5.2 3.6h3.9l1.9 4.8-2.8 1.9a12.4 12.4 0 005.5 5.5l1.9-2.8 4.8 1.9v3.9a1.8 1.8 0 01-1.8 1.8A16.8 16.8 0 013.4 5.4a1.8 1.8 0 011.8-1.8z"/></svg>Calls</div>
+  <div class="tab"><svg viewBox="0 0 24 24"><circle cx="8.6" cy="8.2" r="3.1"/><circle cx="16.4" cy="9.4" r="2.5"/><path d="M2.6 19.4c0-3.3 2.7-5.2 6-5.2s6 1.9 6 5.2zM15.4 19.4c0-2 .5-3.4 1.5-4.2 2.6-.3 4.5 1.3 4.5 4.2z"/></svg>Groups</div>
+  <div class="tab"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5.5"><circle cx="12" cy="12" r="8.4"/></svg>Moments</div>
+</div>
+
+
+</body></html>

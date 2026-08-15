@@ -1,0 +1,81 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><style>
+@font-face{font-family:P;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Regular.ttf')}
+@font-face{font-family:P;font-weight:500;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf')}
+@font-face{font-family:P;font-weight:700;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf')}
+@font-face{font-family:E;src:url('/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf')}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{width:1080px;height:2280px;font-family:P,sans-serif;overflow:hidden;position:relative;
+     background:#EDE6DB;color:#1E1B16}
+.hdr{height:150px;background:#E3D8C2;display:flex;align-items:center;justify-content:space-between;padding:0 34px}
+.brand{display:flex;align-items:center;gap:16px}
+.mark{width:66px;height:60px}
+.word{font-size:46px;font-weight:700;background:linear-gradient(95deg,#D9822B,#C9A227);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hi{display:flex;gap:38px;align-items:center}
+.hi svg{width:46px;height:46px}
+.dot{position:relative}
+.dot::after{content:'';position:absolute;right:-3px;top:-3px;width:18px;height:18px;border-radius:50%;background:#E0322F}
+.me{width:72px;height:72px;border-radius:50%;background:#6E76D8;display:flex;align-items:center;
+    justify-content:center;font-size:32px;font-weight:600;color:#fff;box-shadow:0 0 0 5px #E3D8C2,0 0 0 8px #C9A227}
+.title{height:150px;display:flex;align-items:center;gap:34px;padding:0 40px;background:#E3D8C2}
+.title svg{width:50px;height:50px;stroke:#1E1B16;fill:none;stroke-width:2.6}
+.title h1{font-size:50px;font-weight:700}
+.card{background:#F3EDE4;border:1.5px solid #00000010;border-radius:28px}
+.dock{position:absolute;left:26px;right:26px;bottom:34px;height:150px;border-radius:75px;
+      background:#EBE3D6;display:flex;align-items:center;justify-content:space-around}
+.tab{display:flex;flex-direction:column;align-items:center;gap:8px;color:#6B6459;font-size:27px;font-weight:500}
+.tab svg{width:44px;height:44px;fill:currentColor}
+.tab.on{color:#1E1B16}
+.tab.on .box{background:#E0A63A;border-radius:38px;padding:12px 48px;margin-bottom:4px;display:inline-block;color:#3A2A08}
+.fab{position:absolute;right:46px;bottom:230px;width:126px;height:126px;border-radius:38px;
+     background:#E0A63A;display:flex;align-items:center;justify-content:center}
+.fab svg{width:58px;height:58px;stroke:#fff;fill:none;stroke-width:2.4}
+
+    body{background:#000;color:#EFEFEA}
+    .top{padding:40px 40px 0}
+    .top svg{width:52px;height:52px;stroke:#EFEFEA;fill:none;stroke-width:2.6}
+    .pf{text-align:center;margin-top:30px}
+    .pf .av{width:290px;height:290px;border-radius:50%;margin:0 auto;background:linear-gradient(150deg,#6E76D8,#8E64C8);
+            display:flex;align-items:center;justify-content:center;font-size:110px;font-weight:700;color:#fff}
+    .pf b{display:block;font-size:56px;font-weight:700;margin-top:34px}
+    .pf span{display:block;font-size:32px;color:#9A968E;margin-top:10px}
+    .lbl{padding:56px 40px 20px;font-size:29px;font-weight:700;color:#E0A63A;letter-spacing:1.6px}
+    .card{margin:0 40px;background:#141416;border:1.5px solid #FFFFFF14;border-radius:28px}
+    .it{display:flex;align-items:center;gap:32px;padding:34px 34px}
+    .it svg{width:52px;height:52px;stroke:#EFEFEA;fill:none;stroke-width:2.2;flex:none}
+    .it b{font-size:38px;font-weight:500;display:block}
+    .it span{font-size:29px;color:#9A968E;display:block;margin-top:8px}
+    .scrim{position:absolute;inset:0;background:#00000078}
+    .sheet{position:absolute;left:0;right:0;bottom:0;background:#141418;border-radius:44px 44px 0 0;padding:0 42px 56px}
+    .shead{font-size:44px;font-weight:700;margin-bottom:10px}
+    .ssub{font-size:30px;color:#9A968E;margin-bottom:16px}
+    .size{display:flex;align-items:baseline;gap:20px;padding:30px 34px 34px;border-top:1.5px solid #FFFFFF12}
+    .size b{font-size:52px;font-weight:700;color:#E0A63A}
+    .size span{font-size:30px;color:#9A968E}
+    .grip{width:96px;height:10px;border-radius:5px;background:#EFE3D0;opacity:.55;margin:30px auto 44px}
+    .opt{display:flex;gap:32px;padding:30px 0;align-items:flex-start}
+    .opt svg{width:52px;height:52px;stroke:#EFEFEA;fill:none;stroke-width:2.2;flex:none;margin-top:6px}
+    .opt b{font-size:38px;font-weight:500;display:block}
+    .opt p{font-size:29px;color:#9A968E;line-height:1.42;margin-top:8px}
+    .warn b{color:#F08A8A}.warn svg{stroke:#F08A8A}</style></head><body>
+    <div class="top"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></div>
+    <div class="pf"><span class="av">M</span><b>Meera</b><span>last seen recently</span></div>
+    <div class="lbl">SHARED</div>
+    <div class="card">
+      <div class="it"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 15l5-4 4 3 3-2 6 5"/></svg>
+        <span><b>Media, links and docs</b><span>Photos, videos, documents, links</span></span></div>
+      <div class="size"><b>1.7 GB</b><span>media saved on this phone from this chat</span></div>
+    </div>
+    <div class="scrim"></div>
+    <div class="sheet">
+      <div class="grip"></div>
+      <div class="shead">Send media to Google Drive</div>
+      <div class="ssub">Uploads to your own Google Drive account</div>
+      <div class="opt"><svg viewBox="0 0 24 24"><path d="M6 18a4 4 0 010-8 6 6 0 0111.5-1.5A3.5 3.5 0 0119 18z"/><path d="M12 12v6M9 15l3-3 3 3"/></svg>
+        <span><b>Only transfer</b><p>Copies this chat's media to your Drive</p></span></div>
+      <div class="opt warn"><svg viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"/></svg>
+        <span><b>Transfer &amp; delete from mobile</b><p>After a safe upload, removes the local copies to free
+        space - media stays in the chat and re-downloads anytime</p></span></div>
+      <div class="opt"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="6" r="2.6"/><circle cx="18" cy="18" r="2.6"/><path d="M8.4 10.8l7.2-3.6M8.4 13.2l7.2 3.6"/></svg>
+        <span><b>Backup to other cloud…</b></span></div>
+    </div></body></html>

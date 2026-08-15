@@ -23,9 +23,11 @@ sys.path.insert(0, str(ROOT))
 
 from tools.make_card import PHONE_BOX, build  # noqa: E402
 
+# One card straight off a phone (11) and one built from a rendered screen (22).
+# Both must rebuild pixel-for-pixel, or the template has drifted.
 CASES = [
-    ("pulsesoul_06", "A quiet safety net", "CareShield: optional, and never an alarm"),
     ("pulsesoul_11", "Made the way you like", "Themes, quality, notifications, control"),
+    ("pulsesoul_22", "Never miss a birthday", "Family dates everyone gets reminded of"),
 ]
 
 
@@ -36,6 +38,8 @@ def main() -> int:
 
     for name, headline, subhead in CASES:
         original_path = ROOT / "assets" / "screenshots" / f"{name}.png"
+        if not original_path.exists():                       # retired cards moved aside
+            original_path = ROOT / "assets" / "retired" / f"{name}.png"
         if not original_path.exists():
             print(f"  {name}: missing, skipped")
             continue

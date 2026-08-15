@@ -31,13 +31,19 @@ W, H = 1080, 1920
 PHONE_BOX = (168, 300, 912, 1860)      # left, top, right, bottom
 PHONE_RADIUS = 32
 
-# Phone screenshots arrive with the OS status bar on top (clock, battery -- a
-# 15% battery in a marketing image is not a good look) and the Android
-# navigation bar at the bottom. Neither is your app, so both are trimmed.
-# Expressed as a fraction of the source height so it works for a full-res
-# 1080x2340 grab and a WhatsApp-shrunk 722x1600 alike.
-CROP_TOP = 0.034
-CROP_BOTTOM = 0.034
+# A real phone screenshot carries an OS status bar (clock, battery -- a 15%
+# battery is not a good look in a marketing image) and an Android navigation
+# bar. Neither is your app, so --phone trims both. As a fraction of height, so
+# it works on a full-res 1080x2340 grab and a WhatsApp-shrunk one alike.
+#
+# DEFAULT IS NO CROP, deliberately. Cropping a screen that has no status bar
+# eats the app header instead -- that is how the Sounds card lost its contact
+# name. An uncropped status bar is untidy; a cropped-off header is broken, so
+# the default fails in the harmless direction. I tried auto-detecting the
+# difference and the heuristic could not tell a status bar from a dimmed
+# backdrop, so this stays an explicit choice.
+PHONE_CROP_TOP = 0.034
+PHONE_CROP_BOTTOM = 0.034
 
 HEADLINE_TOP = 125                      # top of the ink, not the baseline
 # Your headlines are set in a SemiBold weight, which is not on this system.
@@ -87,7 +93,7 @@ def rounded(img: Image.Image, radius: int) -> Image.Image:
 
 
 def build(shot_path: Path, headline: str, subhead: str,
-          crop_top: float = CROP_TOP, crop_bottom: float = CROP_BOTTOM) -> Image.Image:
+          crop_top: float = 0.0, crop_bottom: float = 0.0) -> Image.Image:
     if not TEMPLATE.exists():
         raise SystemExit("Background missing - run: python tools/fit_background.py")
 
@@ -129,17 +135,18 @@ def main() -> int:
     ap.add_argument("subhead")
     ap.add_argument("name", help="output stem, e.g. pulsesoul_20")
     ap.add_argument("--out", default=None, help="output directory (default assets/screenshots)")
-    ap.add_argument("--crop-top", type=float, default=CROP_TOP,
-                    help="fraction of height to trim off the top (status bar)")
-    ap.add_argument("--crop-bottom", type=float, default=CROP_BOTTOM,
-                    help="fraction of height to trim off the bottom (nav bar)")
+    ap.add_argument("--phone", action="store_true",
+                    help="source is a real phone screenshot: trim its status and navigation bars")
+    ap.add_argument("--crop-top", type=float, default=None, help="override: fraction to trim off the top")
+    ap.add_argument("--crop-bottom", type=float, default=None, help="override: fraction to trim off the bottom")
     args = ap.parse_args()
 
     out_dir = Path(args.out) if args.out else OUT_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
     dst = out_dir / f"{args.name}.png"
-    build(Path(args.screenshot), args.headline, args.subhead,
-          args.crop_top, args.crop_bottom).save(dst)
+    top = args.crop_top if args.crop_top is not None else (PHONE_CROP_TOP if args.phone else 0.0)
+    bottom = args.crop_bottom if args.crop_bottom is not None else (PHONE_CROP_BOTTOM if args.phone else 0.0)
+    build(Path(args.screenshot), args.headline, args.subhead, top, bottom).save(dst)
     print(f"wrote {dst}")
     print("now run: python tools/render_images.py")
     return 0

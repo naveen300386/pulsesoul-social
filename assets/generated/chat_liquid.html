@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+/* Chat screen, Liquid Glass. From a real screenshot: the conversation sits on
+   a warm sepia backdrop with soft blobs, not the true black of the chat list.
+   Shows the sound-effect voice notes, which nothing else in the bank does.
+   Demo contact only. */
+@font-face{font-family:P;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Regular.ttf')}
+@font-face{font-family:P;font-weight:500;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf')}
+@font-face{font-family:P;font-weight:700;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf')}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{width:1080px;height:2264px;font-family:P,sans-serif;color:#F0EAE2;overflow:hidden;
+     background:#241A13;position:relative}
+.blobs{position:absolute;inset:0;overflow:hidden}
+.blobs i{position:absolute;border-radius:50%;background:#3A2A1E;opacity:.85}
+.status{height:78px}
+.appbar{height:150px;display:flex;align-items:center;gap:30px;padding:0 34px;position:relative}
+.appbar svg{width:50px;height:50px;stroke:#F0EAE2;fill:none;stroke-width:2.6}
+.pa{width:88px;height:88px;border-radius:50%;background:#6E76D8;display:flex;align-items:center;
+    justify-content:center;font-size:36px;font-weight:600;color:#fff;flex:none}
+.who{flex:1}
+.who b{display:block;font-size:40px;font-weight:700}
+.who span{font-size:28px;color:#BFB3A6}
+
+.day{display:flex;justify-content:center;margin:26px 0}
+.day span{background:#3A2A1E;border:1.5px solid #FFFFFF14;border-radius:34px;padding:12px 40px;
+          font-size:28px;font-weight:600;color:#E4D9CD}
+.wrap{position:relative;padding:0 34px}
+.b{max-width:640px;margin-left:auto;background:#4A3628;border:1.5px solid #FFFFFF12;border-radius:30px;
+   padding:26px 32px;margin-bottom:22px}
+.b .tx{font-size:35px}
+.b .mt{font-size:25px;color:#C3B4A5;margin-top:10px;display:flex;gap:10px;justify-content:flex-end;align-items:center}
+.b .mt svg{width:32px;height:22px;stroke:#7FD7F5;fill:none;stroke-width:2.6}
+
+.vn{max-width:700px;background:#4A3628;border:1.5px solid #FFFFFF12;border-radius:30px;padding:28px 32px;margin:0 0 22px auto}
+.vrow{display:flex;align-items:center;gap:26px}
+.play{width:76px;height:76px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none}
+.play svg{width:34px;height:34px;fill:#241A13}
+.bar{flex:1;height:6px;border-radius:3px;background:#D9CDBF}
+.sp{font-size:30px;font-weight:600}
+.tag{display:inline-flex;align-items:center;gap:12px;background:#3A2A1E;border-radius:16px;
+     padding:9px 22px;font-size:26px;font-weight:700;letter-spacing:.6px;margin-top:20px}
+
+.composer{position:absolute;left:0;right:0;bottom:0;height:170px;display:flex;align-items:center;
+          gap:32px;padding:0 34px}
+.composer svg{width:50px;height:50px;fill:none;stroke-width:2.3}
+.field{flex:1;height:104px;border-radius:52px;background:#3A2A1E;border:1.5px solid #FFFFFF14;
+       display:flex;align-items:center;padding:0 38px;font-size:34px;color:#B9AA9B}
+.mic{width:110px;height:110px;border-radius:50%;background:#E8B45C;display:flex;align-items:center;justify-content:center;flex:none}
+.mic svg{width:52px;height:52px;stroke:#241A13;fill:none;stroke-width:2.6}
+</style></head><body>
+<div class="blobs">
+  <i style="width:150px;height:110px;left:60px;top:420px"></i>
+  <i style="width:110px;height:80px;left:760px;top:330px"></i>
+  <i style="width:190px;height:130px;left:300px;top:640px"></i>
+  <i style="width:120px;height:90px;left:900px;top:820px"></i>
+  <i style="width:160px;height:110px;left:40px;top:1080px"></i>
+  <i style="width:130px;height:95px;left:640px;top:1240px"></i>
+  <i style="width:170px;height:120px;left:180px;top:1560px"></i>
+  <i style="width:120px;height:85px;left:880px;top:1700px"></i>
+  <i style="width:140px;height:100px;left:420px;top:1900px"></i>
+</div>
+
+<div class="status"></div>
+<div class="appbar">
+  <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+  <span class="pa">M</span>
+  <span class="who"><b>Meera</b><span>last seen recently</span></span>
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+  <svg viewBox="0 0 24 24" style="fill:#F0EAE2;stroke:none"><path d="M5.2 3.6h3.9l1.9 4.8-2.8 1.9a12.4 12.4 0 005.5 5.5l1.9-2.8 4.8 1.9v3.9a1.8 1.8 0 01-1.8 1.8A16.8 16.8 0 013.4 5.4a1.8 1.8 0 011.8-1.8z"/></svg>
+  <svg viewBox="0 0 24 24" style="fill:#F0EAE2;stroke:none"><rect x="2" y="6" width="13" height="12" rx="3"/><path d="M16 11l6-4v10l-6-4z"/></svg>
+</div>
+
+<div class="day"><span>Today</span></div>
+
+<div class="wrap">
+  <div class="b"><div class="tx">Ghar pahunch gaye 🙏</div>
+    <div class="mt">17:42 <svg viewBox="0 0 26 18"><path d="M2 10l4.5 4.5L14 5M11 12l2 2 8-9"/></svg></div></div>
+
+  <div class="b"><div class="tx">Aaj mausam accha hai</div>
+    <div class="mt">17:43 <svg viewBox="0 0 26 18"><path d="M2 10l4.5 4.5L14 5M11 12l2 2 8-9"/></svg></div></div>
+
+  <div class="vn">
+    <div class="vrow"><span class="play"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg></span>
+      <span class="bar"></span><span class="sp">1x</span></div>
+    <span class="tag">🥁 DRUMROLL</span>
+    <div class="mt" style="font-size:25px;color:#C3B4A5;margin-top:14px;display:flex;gap:10px;justify-content:flex-end">19:48
+      <svg viewBox="0 0 26 18" style="width:32px;height:22px;stroke:#7FD7F5;fill:none;stroke-width:2.6"><path d="M2 10l4.5 4.5L14 5M11 12l2 2 8-9"/></svg></div>
+  </div>
+
+  <div class="vn">
+    <div class="vrow"><span class="play"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg></span>
+      <span class="bar"></span><span class="sp">1x</span></div>
+    <span class="tag">🔥 FIRE</span>
+    <div class="mt" style="font-size:25px;color:#C3B4A5;margin-top:14px;display:flex;gap:10px;justify-content:flex-end">19:48
+      <svg viewBox="0 0 26 18" style="width:32px;height:22px;stroke:#7FD7F5;fill:none;stroke-width:2.6"><path d="M2 10l4.5 4.5L14 5M11 12l2 2 8-9"/></svg></div>
+  </div>
+</div>
+
+<div class="composer">
+  <svg viewBox="0 0 24 24" style="stroke:#D9CDBF"><circle cx="12" cy="12" r="9"/><path d="M8.5 14a4.5 4.5 0 007 0M9 9.5h.01M15 9.5h.01"/></svg>
+  <svg viewBox="0 0 24 24" style="stroke:#D9CDBF"><path d="M20 11l-8.5 8.5a4.5 4.5 0 01-6.4-6.4L14 4.3a3 3 0 014.2 4.2l-9 9a1.5 1.5 0 01-2.1-2.1l8.4-8.4"/></svg>
+  <svg viewBox="0 0 24 24" style="fill:#F43F5E;stroke:none"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="3"/><circle cx="17.5" cy="16" r="3"/></svg>
+  <svg viewBox="0 0 24 24" style="stroke:#F43F5E"><path d="M3 8.6h3.4l1.3-2.1h8.6l1.3 2.1H21a1 1 0 011 1v8.8a1 1 0 01-1 1H3a1 1 0 01-1-1V9.6a1 1 0 011-1z"/><circle cx="12" cy="14" r="3.6"/></svg>
+  <span class="field">Message</span>
+  <span class="mic"><svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0013 0M12 17.5V21"/></svg></span>
+</div>
+</body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><style>
+@font-face{font-family:P;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Regular.ttf')}
+@font-face{font-family:P;font-weight:500;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf')}
+@font-face{font-family:P;font-weight:700;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf')}
+@font-face{font-family:E;src:url('/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf')}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{width:1080px;height:2280px;font-family:P,sans-serif;overflow:hidden;position:relative;
+     background:#EDE6DB;color:#1E1B16}
+.hdr{height:150px;background:#E3D8C2;display:flex;align-items:center;justify-content:space-between;padding:0 34px}
+.brand{display:flex;align-items:center;gap:16px}
+.mark{width:66px;height:60px}
+.word{font-size:46px;font-weight:700;background:linear-gradient(95deg,#D9822B,#C9A227);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hi{display:flex;gap:38px;align-items:center}
+.hi svg{width:46px;height:46px}
+.dot{position:relative}
+.dot::after{content:'';position:absolute;right:-3px;top:-3px;width:18px;height:18px;border-radius:50%;background:#E0322F}
+.me{width:72px;height:72px;border-radius:50%;background:#6E76D8;display:flex;align-items:center;
+    justify-content:center;font-size:32px;font-weight:600;color:#fff;box-shadow:0 0 0 5px #E3D8C2,0 0 0 8px #C9A227}
+.title{height:150px;display:flex;align-items:center;gap:34px;padding:0 40px;background:#E3D8C2}
+.title svg{width:50px;height:50px;stroke:#1E1B16;fill:none;stroke-width:2.6}
+.title h1{font-size:50px;font-weight:700}
+.card{background:#F3EDE4;border:1.5px solid #00000010;border-radius:28px}
+.dock{position:absolute;left:26px;right:26px;bottom:34px;height:150px;border-radius:75px;
+      background:#EBE3D6;display:flex;align-items:center;justify-content:space-around}
+.tab{display:flex;flex-direction:column;align-items:center;gap:8px;color:#6B6459;font-size:27px;font-weight:500}
+.tab svg{width:44px;height:44px;fill:currentColor}
+.tab.on{color:#1E1B16}
+.tab.on .box{background:#E0A63A;border-radius:38px;padding:12px 48px;margin-bottom:4px;display:inline-block;color:#3A2A08}
+.fab{position:absolute;right:46px;bottom:230px;width:126px;height:126px;border-radius:38px;
+     background:#E0A63A;display:flex;align-items:center;justify-content:center}
+.fab svg{width:58px;height:58px;stroke:#fff;fill:none;stroke-width:2.4}
+
+    .scrim{position:absolute;inset:0;background:#0000004D}
+    .fab{z-index:3}
+    .mem{display:flex;align-items:center;gap:28px;padding:44px 40px 0}
+    .mem .av{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;
+             justify-content:center;font-size:38px;font-weight:600;color:#fff}
+    .mem b{font-size:40px;font-weight:700;display:block}
+    .mem span{font-size:30px;color:#6B6459}
+    .dlg{position:absolute;left:70px;right:70px;top:640px;background:#F7F2E9;border-radius:36px;
+         padding:48px 46px 34px;box-shadow:0 30px 70px #00000045}
+    .dlg h2{font-size:52px;font-weight:700;margin-bottom:38px}
+    .ev{display:flex;align-items:center;gap:30px;padding:22px 0}
+    .ev svg{width:52px;height:52px;stroke:#3B342A;fill:none;stroke-width:2.2;flex:none}
+    .ev b{font-size:38px;font-weight:500;display:block}
+    .ev span{font-size:30px;color:#6B6459;display:block;margin-top:8px}
+    .close{text-align:right;font-size:34px;font-weight:600;color:#8A5A12;padding:26px 6px 0}</style></head><body>
+    <div class="title"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><h1>My family</h1></div>
+    <div class="mem"><span class="av" style="background:#E0894F">A</span>
+      <span><b>Aarav</b><span>my Father</span></span></div><div class="mem"><span class="av" style="background:#E0788A">P</span>
+      <span><b>Priya</b><span>my Mother</span></span></div><div class="mem"><span class="av" style="background:#6E76D8">M</span>
+      <span><b>Meera</b><span>my Sister</span></span></div><div class="mem"><span class="av" style="background:#6BBE8E">R</span>
+      <span><b>Rohan</b><span>my Brother</span></span></div><div class="mem"><span class="av" style="background:#8B8FE3">K</span>
+      <span><b>Kabir</b><span>my Brother</span></span></div><div class="mem"><span class="av" style="background:#C98BB0">A</span>
+      <span><b>Ananya</b><span>my Cousin</span></span></div><div class="mem"><span class="av" style="background:#7FB0D4">I</span>
+      <span><b>Ishaan</b><span>my Uncle</span></span></div><div class="mem"><span class="av" style="background:#D9A15B">D</span>
+      <span><b>Diya</b><span>my Niece</span></span></div><div class="mem"><span class="av" style="background:#6BBE8E">V</span>
+      <span><b>Vikram</b><span>my Uncle</span></span></div><div class="mem"><span class="av" style="background:#A97CD8">S</span>
+      <span><b>Sanya</b><span>my Cousin</span></span></div>
+    <div class="scrim"></div>
+    <div class="dlg">
+      <h2>Aarav's events</h2>
+      <div class="ev"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20v-6h12v6M8 14V9h8v5M12 9V5M9.5 5.5a2.5 2.5 0 015 0"/></svg>
+        <span><b>Birthday</b><span>14 Sep · every year</span></span></div>
+      <div class="ev"><svg viewBox="0 0 24 24"><path d="M12 20.5S3.5 15 3.5 9.4A4.4 4.4 0 0112 7.6a4.4 4.4 0 018.5 1.8c0 5.6-8.5 11.1-8.5 11.1z"/></svg>
+        <span><b>Anniversary</b><span>22 Nov · every year</span></span></div>
+      <div class="close">Close</div>
+    </div>
+    <div class="fab"><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="3.6"/><path d="M3.5 20c0-3.4 2.9-5.4 6.5-5.4M18 12v7M14.5 15.5h7"/></svg></div></body></html>

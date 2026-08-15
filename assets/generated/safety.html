@@ -1,0 +1,88 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><style>
+@font-face{font-family:P;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Regular.ttf')}
+@font-face{font-family:P;font-weight:500;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf')}
+@font-face{font-family:P;font-weight:700;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf')}
+@font-face{font-family:E;src:url('/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf')}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{width:1080px;height:2280px;font-family:P,sans-serif;overflow:hidden;position:relative;
+     background:#EDE6DB;color:#1E1B16}
+.hdr{height:150px;background:#E3D8C2;display:flex;align-items:center;justify-content:space-between;padding:0 34px}
+.brand{display:flex;align-items:center;gap:16px}
+.mark{width:66px;height:60px}
+.word{font-size:46px;font-weight:700;background:linear-gradient(95deg,#D9822B,#C9A227);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hi{display:flex;gap:38px;align-items:center}
+.hi svg{width:46px;height:46px}
+.dot{position:relative}
+.dot::after{content:'';position:absolute;right:-3px;top:-3px;width:18px;height:18px;border-radius:50%;background:#E0322F}
+.me{width:72px;height:72px;border-radius:50%;background:#6E76D8;display:flex;align-items:center;
+    justify-content:center;font-size:32px;font-weight:600;color:#fff;box-shadow:0 0 0 5px #E3D8C2,0 0 0 8px #C9A227}
+.title{height:150px;display:flex;align-items:center;gap:34px;padding:0 40px;background:#E3D8C2}
+.title svg{width:50px;height:50px;stroke:#1E1B16;fill:none;stroke-width:2.6}
+.title h1{font-size:50px;font-weight:700}
+.card{background:#F3EDE4;border:1.5px solid #00000010;border-radius:28px}
+.dock{position:absolute;left:26px;right:26px;bottom:34px;height:150px;border-radius:75px;
+      background:#EBE3D6;display:flex;align-items:center;justify-content:space-around}
+.tab{display:flex;flex-direction:column;align-items:center;gap:8px;color:#6B6459;font-size:27px;font-weight:500}
+.tab svg{width:44px;height:44px;fill:currentColor}
+.tab.on{color:#1E1B16}
+.tab.on .box{background:#E0A63A;border-radius:38px;padding:12px 48px;margin-bottom:4px;display:inline-block;color:#3A2A08}
+.fab{position:absolute;right:46px;bottom:230px;width:126px;height:126px;border-radius:38px;
+     background:#E0A63A;display:flex;align-items:center;justify-content:center}
+.fab svg{width:58px;height:58px;stroke:#fff;fill:none;stroke-width:2.4}
+
+    .banner{background:#D32F2F;color:#fff;display:flex;align-items:center;gap:26px;padding:26px 34px}
+    .banner svg{width:52px;height:52px;stroke:#fff;fill:none;stroke-width:2.6;flex:none}
+    .banner .t{flex:1}.banner b{display:block;font-size:38px;font-weight:700}
+    .banner span{font-size:29px;opacity:.92}
+    .safe{background:#fff;color:#D32F2F;font-size:33px;font-weight:700;border-radius:20px;padding:20px 34px}
+    .search{margin:24px 30px 0;height:106px;background:#F3EDE4;border-radius:53px;display:flex;
+            align-items:center;gap:26px;padding:0 36px}
+    .search svg{width:40px;height:40px;stroke:#8A8378;fill:none;stroke-width:2.5}
+    .search span{flex:1;color:#8A8378;font-size:34px}
+    .segwrap{margin:22px 30px 0;height:108px;background:#F0EAE1;border-radius:54px;display:flex;align-items:center;padding:0 8px}
+    .seg{flex:1;height:90px;display:flex;align-items:center;justify-content:center;font-size:33px;color:#5C554A}
+    .seg.on{background:#E0A63A;border-radius:45px;color:#3A2A08;font-weight:700}
+    .list{margin-top:34px;padding:0 30px;display:flex;flex-direction:column;gap:20px}
+    .row{height:150px;display:flex;align-items:center;padding:0 28px;gap:26px}
+    .av{width:94px;height:94px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+        font-size:36px;font-weight:600;color:#fff;flex:none}
+    .mid{flex:1;min-width:0}.nm{display:flex;align-items:center;gap:16px;font-size:37px;font-weight:700}
+    .pv{font-size:30px;color:#6B6459;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .fl{font-size:25px;font-weight:700;color:#B4700A;background:#F2DFB4;border-radius:20px;padding:4px 16px}
+    .tm{font-size:27px;color:#6B6459;align-self:flex-start;margin-top:30px}</style></head><body>
+    <div class="hdr"><div class="brand"><svg class="mark" viewBox="0 0 48 44">
+ <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#8B5CF6"/><stop offset=".55" stop-color="#EC4899"/><stop offset="1" stop-color="#F97316"/></linearGradient></defs>
+ <path d="M24 3.5C12.6 3.5 3.5 11 3.5 20.2c0 5.3 3 10 7.8 13l-1.6 7.3 8-4.3c2 .5 4.1.7 6.3.7 11.4 0 20.5-7.5 20.5-16.7S35.4 3.5 24 3.5z" fill="none" stroke="url(#g)" stroke-width="3.4"/>
+ <path d="M11.5 20.5h5l2.8-6.2 3.8 12.4 3.2-7.6 2.5 3.8h2.8" fill="none" stroke="#EF4444" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M33.4 17c1.5-1.6 4.1-1.4 5.3.4 1 1.4.7 3.3-.6 4.5l-4.4 4-4.4-4c-1.3-1.2-1.6-3.1-.6-4.5 1.2-1.8 3.8-2 5.3-.4z" fill="#EF4444"/></svg><span class="word">PulseSoul</span></div><div class="hi">
+ <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#1E1B16" stroke-width="2"><rect x="3" y="5" width="18" height="17" rx="3"/><path d="M8 2.5v5M16 2.5v5M3 11h18"/></svg></span>
+ <svg viewBox="0 0 24 24" fill="#1E1B16"><path d="M12 2.5l8 3.2v6.1c0 5.3-3.4 8.6-8 9.7-4.6-1.1-8-4.4-8-9.7V5.7z"/><path d="M11 8.2h2v3h3v2h-3v3h-2v-3H8v-2h3z" fill="#E3D8C2"/></svg>
+ <svg viewBox="0 0 24 24" fill="#1E1B16"><circle cx="8" cy="4.6" r="2.3"/><path d="M6.2 8h3.6l1.3 6.2H9.9V21H6.1v-6.8H4.9z"/><circle cx="16.8" cy="4.6" r="2.3"/><path d="M14.5 8.4h4.6l1 5.8h-1.5V21h-1.4v-6.8h-.7V21h-1.4v-6.8h-1.6z"/></svg>
+ <span class="me">M</span></div></div>
+    <div class="banner">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.4"/><circle cx="12" cy="12" r="8.4"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg>
+      <div class="t"><b>Live location sharing is ON</b><span>Your family can see you · stops in 29m</span></div>
+      <span class="safe">I'm safe</span>
+    </div>
+    <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.2"/><path d="M20 20l-4.2-4.2"/></svg>
+      <span>Search family, messages…</span></div>
+    <div class="segwrap"><div class="seg on">All</div><div class="seg">Family</div><div class="seg">Unread</div><div class="seg">Starred</div></div>
+    <div class="list"><div class="row card"><span class="av" style="background:#6E76D8">M</span>
+        <div class="mid"><div class="nm">Meera <span class="fl">🔥 1</span></div>
+        <div class="pv">You: ✅ I'm safe. Just letting you know.</div></div><div class="tm">8:09 pm</div></div><div class="row card"><span class="av" style="background:#E0788A">A</span>
+        <div class="mid"><div class="nm">Aarav</div>
+        <div class="pv">You: 🎤 Voice message</div></div><div class="tm">7:48 pm</div></div><div class="row card"><span class="av" style="background:#E0894F">P</span>
+        <div class="mid"><div class="nm">Priya <span class="fl">🔥 1</span></div>
+        <div class="pv">You: 📹 Missed video call</div></div><div class="tm">5:40 pm</div></div><div class="row card"><span class="av" style="background:#6BBE8E">R</span>
+        <div class="mid"><div class="nm">Rohan</div>
+        <div class="pv">Ghar pahunch gaya</div></div><div class="tm">4 Aug</div></div><div class="row card"><span class="av" style="background:#8B8FE3">K</span>
+        <div class="mid"><div class="nm">Kabir</div>
+        <div class="pv">Voice note · 0:31</div></div><div class="tm">2 Aug</div></div></div>
+    <div class="dock">
+ <div class="tab on"><span class="box"><svg viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="14" rx="3"/><path d="M7 21.2l1.2-3.2h3.4z"/></svg></span>Chats</div>
+ <div class="tab "><svg viewBox="0 0 24 24"><path d="M5.2 3.6h3.9l1.9 4.8-2.8 1.9a12.4 12.4 0 005.5 5.5l1.9-2.8 4.8 1.9v3.9a1.8 1.8 0 01-1.8 1.8A16.8 16.8 0 013.4 5.4a1.8 1.8 0 011.8-1.8z"/></svg>Calls</div>
+ <div class="tab"><svg viewBox="0 0 24 24"><circle cx="8.6" cy="8.2" r="3.1"/><circle cx="16.4" cy="9.4" r="2.5"/><path d="M2.6 19.4c0-3.3 2.7-5.2 6-5.2s6 1.9 6 5.2zM15.4 19.4c0-2 .5-3.4 1.5-4.2 2.6-.3 4.5 1.3 4.5 4.2z"/></svg>Groups</div>
+ <div class="tab "><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5.5"><circle cx="12" cy="12" r="8.4"/></svg>Moments</div>
+</div></body></html>

@@ -40,6 +40,13 @@ FORBIDDEN = [
     ("medical", "CareShield must never be described medically"),
 ]
 
+# ...except when the sentence is the disclaimer itself. Flagging "not a medical
+# device" pushed the copy towards weaker wording, which is the opposite of the
+# point.
+ALLOWED_AROUND = {
+    "medical": ("not a medical", "no medical", "never medical", "medical nahi"),
+}
+
 
 def main() -> int:
     cfg = load_config()
@@ -50,8 +57,11 @@ def main() -> int:
     for post in posts:
         blob = f"{post.get('english', '')} {post.get('hinglish', '')}".lower()
         for phrase, why in FORBIDDEN:
-            if phrase in blob:
-                problems.append(f"{post['id']}: says '{phrase}' -- {why}")
+            if phrase not in blob:
+                continue
+            if any(ok in blob for ok in ALLOWED_AROUND.get(phrase, ())):
+                continue
+            problems.append(f"{post['id']}: says '{phrase}' -- {why}")
 
         for field in ("english", "hinglish"):
             if not post.get(field, "").strip():
@@ -59,6 +69,12 @@ def main() -> int:
 
         stem = post.get("image", "")
         if stem:
+            # The source card matters as much as the rendered crops: if it has
+            # been deleted or retired, render_images.py cannot rebuild them and
+            # the next edit to this post would go out with no picture.
+            if not (ROOT / "assets" / "screenshots" / f"{stem}.png").exists():
+                problems.append(f"{post['id']}: assets/screenshots/{stem}.png missing -- "
+                                f"the card was moved or retired, point this post at a card that exists")
             for shape in ("sq", "p45", "pin"):
                 if not (ROOT / "rendered" / f"{stem}__{shape}.jpg").exists():
                     problems.append(f"{post['id']}: rendered/{stem}__{shape}.jpg missing -- run tools/render_images.py")
