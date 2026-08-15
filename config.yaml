@@ -1,0 +1,136 @@
+# AutoPostAI settings. Edit this file, commit, done -- no code changes needed.
+
+# Which set of posts is running right now.
+#   testers   -> recruiting the 12 closed testers Google requires (start here)
+#   launch    -> switch to this the day PulseSoul goes live on Play
+#   evergreen -> the long-running feature and story posts
+phase: testers
+
+# Where every post points.
+link: https://pulsesoul.app
+
+# Instagram does not make links in captions clickable, so its posts say this instead.
+bio_cta: "Link in bio → pulsesoul.app"
+
+# ---------------------------------------------------------------------------
+# WHEN each platform posts. All times are IST, 24-hour clock.
+#
+# The runner wakes hourly and posts only for platforms that are due, so these
+# times are the whole schedule -- there is nothing else to edit.
+#
+# Per-platform, because the platforms genuinely disagree with each other:
+#   Threads   peaks on WEEKDAY MORNINGS (6-11am); evenings underperform.
+#   Bluesky   peaks on WEEKDAY EVENINGS and weekend afternoons -- the opposite.
+#   Instagram in India peaks 7-9pm on weekdays, late morning at weekends.
+#   LinkedIn  has moved to 3-8pm, and Wednesday beats every other day.
+#
+# Precedence: a specific day (mon/tue/...) beats weekday/weekend, which beats
+# default. An empty list means "do not post that day".
+#
+# These are starting values from published studies, not from YOUR audience.
+# After a few weeks run `python tools/learn.py` -- it reads the engagement
+# your own posts actually got and tells you which of these slots to change.
+# ---------------------------------------------------------------------------
+schedule:
+  timezone: Asia/Kolkata
+
+  # How long after a slot the post may still go out. GitHub's free scheduler
+  # runs late routinely and sometimes drops an hour entirely, so an exact-match
+  # rule would silently skip posts.
+  #
+  # Tuned with tools/simulate.py against a deliberately awful runner (12% of
+  # runs dropped, up to 33 minutes late), over 28 days:
+  #     90 min  -> 91.6% of posts delivered
+  #    120 min  -> 97.9%   <- chosen
+  #    150 min  -> 98.2%
+  #    180 min  -> 100%, but a 20:00 post could land at 23:00
+  # 120 keeps every post inside a sensible window while losing almost nothing.
+  #
+  # A missed slot does NOT lose the post. The queue only advances on a
+  # successful send, so that post simply goes out at the next slot instead.
+  catch_up_minutes: 120
+
+  platforms:
+    # India: 7-9pm weekdays is the strongest window, Wednesday 8pm the peak.
+    instagram:
+      weekday: ["12:00", "20:00"]
+      wed:     ["11:00", "20:00"]
+      sat:     ["13:00", "18:00"]
+      sun:     ["13:00", "20:00"]
+
+    # Offset from Instagram so the same follower does not get the identical
+    # post on two apps in the same minute.
+    facebook:
+      weekday: ["09:00", "21:00"]
+      weekend: ["11:00", "20:00"]
+
+    # Mornings only. Buffer's 2.5M-post study found 6-11am consistently best
+    # and 6-11pm consistently worst -- the reverse of Instagram.
+    threads:
+      weekday: ["07:00", "10:00"]
+      thu:     ["09:00", "11:00"]
+      weekend: ["10:00"]
+
+    # Chronological feed, so timing bites harder here than anywhere else:
+    # ~2x engagement between the best and worst slots. Evenings and weekends.
+    bluesky:
+      weekday: ["18:00", "21:00"]
+      sat:     ["16:00", "21:00"]
+      sun:     ["16:00", "21:00"]
+
+    # Also chronological. Same evening shape as Bluesky, nudged off it.
+    mastodon:
+      weekday: ["13:00", "19:00"]
+      weekend: ["17:00"]
+
+    # Once a day, on purpose -- LinkedIn's feed suppresses accounts that post
+    # more. Wednesday is the strongest day of the week.
+    linkedin:
+      weekday: ["16:00"]
+      sat:     ["09:00"]
+      sun:     []
+
+    # Channel subscribers get a notification, so this is the one place where
+    # posting at a bad hour is actively rude. Nothing late at night.
+    telegram:
+      weekday: ["11:00", "20:00"]
+      weekend: ["12:00", "19:00"]
+
+    # Pinterest is a search engine with a slow burn -- timing matters least
+    # here. Evenings and weekends are the convention.
+    pinterest:
+      weekday: ["15:00"]
+      weekend: ["15:00", "21:00"]
+
+# Hashtags added to the end of each post, per platform. Keep them short and
+# real -- 5 to 10 good tags beat 30 generic ones on every platform now.
+hashtags:
+  facebook:
+    - "#PulseSoul"
+    - "#FamilyApp"
+    - "#MadeInIndia"
+  instagram:
+    - "#PulseSoul"
+    - "#FamilyApp"
+    - "#MadeInIndia"
+    - "#IndieApp"
+    - "#AndroidApp"
+    - "#BuildInPublic"
+    - "#FamilyFirst"
+    - "#JaipurStartup"
+  threads:
+    - "#buildinpublic"
+    - "#indieapp"
+  telegram: []
+  bluesky:
+    - "#buildinpublic"
+  mastodon:
+    - "#buildinpublic"
+    - "#android"
+  linkedin:
+    - "#buildinpublic"
+    - "#indiedev"
+    - "#androiddevelopment"
+  pinterest:
+    - "#familyapp"
+    - "#messagingapp"

@@ -1,0 +1,250 @@
+{
+  "_readme": [
+    "Every post has an English version and a Hinglish version. Facebook and Instagram use the Hinglish one; everything else uses English.",
+    "'image' is a filename stem from assets/screenshots/ (without the .png). Leave it empty for a text-only post.",
+    "'phase' groups the posts. config.yaml decides which phase is running: testers -> launch -> evergreen.",
+    "Claims deliberately NOT made anywhere in this file: end-to-end encryption, SOS contacting emergency services, and any medical claim about CareShield."
+  ],
+  "posts": [
+
+    { "id": "t01", "phase": "testers", "image": "pulsesoul_01",
+      "english": "I built a messaging app for families and it is nearly ready.\n\nBefore Google will let PulseSoul onto the Play Store, 12 real people have to test it for 14 days straight. That is the rule.\n\nSo: 12 seats. You get the app early, I get the feedback, everyone wins. Comment IN and I will send you the link.",
+      "hinglish": "Ek messaging app banayi hai — poore parivaar ke liye. Ab bas launch ka last step baaki hai.\n\nGoogle ka rule hai: 12 log 14 din tak app test karein, tabhi Play Store par aa sakti hai.\n\n12 seats hain. Aapko app pehle mil jaayegi, mujhe feedback. Comment karein IN — link bhej dunga." },
+
+    { "id": "t02", "phase": "testers", "image": "pulsesoul_05",
+      "english": "Streaks, filters, custom themes, voice effects.\n\nThe apps your kids use charge for most of that. In PulseSoul it is all free, permanently, because a family app should not have a paywall between a father and his daughter.\n\nLooking for 12 testers before launch. Comment IN.",
+      "hinglish": "Streaks, filters, themes, voice effects.\n\nBaaki apps inke paise lete hain. PulseSoul mein sab free hai — hamesha ke liye. Kyunki papa aur beti ke beech paywall nahi hona chahiye.\n\nLaunch se pehle 12 testers chahiye. Comment kijiye IN." },
+
+    { "id": "t03", "phase": "testers", "image": "pulsesoul_07",
+      "english": "The feature I built first, before chat even worked properly:\n\nFamily birthdays that everybody in the family gets reminded of. Not one person remembering. All of them.\n\nPulseSoul opens for testing soon. 12 seats. Comment IN.",
+      "hinglish": "Sabse pehle jo feature banaya, chat se bhi pehle:\n\nFamily birthdays — jinka reminder sabko jaata hai. Sirf ek ko yaad rahe, aisa nahi. Sabko.\n\nPulseSoul testing ke liye khul rahi hai. 12 seats. Comment kijiye IN." },
+
+    { "id": "t04", "phase": "testers", "image": "pulsesoul_06",
+      "english": "My parents live alone. I wanted to know they were okay without calling three times a day.\n\nCareShield notices a phone that has gone quiet, asks that phone first, then nudges the family you chose. Optional, and never an alarm.\n\n12 tester seats. Comment IN.",
+      "hinglish": "Mere maa-baap akele rehte hain. Din mein teen baar call karke unhe yeh feel nahi karana chahta tha ki koi nazar rakh raha hai.\n\nIsliye PulseSoul mein CareShield hai: phone kaafi der chup rahe, to pehle wahi phone poochta hai — sab theek hai? Uske baad hi aapke chune hue family members ko halki si khabar jaati hai. Optional hai. Alarm kabhi nahi.\n\n12 tester seats khuli hain. Comment kijiye IN." },
+
+    { "id": "t05", "phase": "testers", "image": "pulsesoul_04",
+      "english": "Two kinds of memory in one app.\n\nMoments that disappear after a day, for the everyday stuff. And a family album that never disappears, for the rest.\n\nTesting starts shortly. 12 seats, first come. Comment IN.",
+      "hinglish": "Ek hi app mein do tarah ki yaadein.\n\nMoments jo 24 ghante mein gayab — rozmarra ke liye. Aur family album jo kabhi gayab nahi hota — baaki sab ke liye.\n\nTesting jald shuru. 12 seats, pehle aao pehle pao. Comment kijiye IN." },
+
+    { "id": "t06", "phase": "testers", "image": "pulsesoul_02",
+      "english": "Voice notes with filters. Chipmunk, deep, robot, alien.\n\nI put it in because my nephew will use it forty times a day and my mother will use it once and laugh for a week. Both of those are the point.\n\n12 testers wanted. Comment IN.",
+      "hinglish": "Voice notes with filters — chipmunk, deep, robot, alien.\n\nBanaya isliye kyunki bhatija din mein chaalis baar use karega, aur mummy ek baar karengi aur hafte bhar hasengi. Dono hi asli maksad hain.\n\n12 testers chahiye. Comment kijiye IN." },
+
+    { "id": "t07", "phase": "testers", "image": "pulsesoul_08",
+      "english": "One button that tells your whole family you are safe.\n\nAnd next to it, an SOS that reaches every confirmed family member loudly, even from a muted chat. It goes to your family. It is not an emergency service.\n\n12 tester seats before launch. Comment IN.",
+      "hinglish": "Ek button jo poore parivaar ko bata deta hai ki aap safe hain.\n\nAur uske paas SOS — jo har confirmed family member tak zor se pahunchta hai, muted chat se bhi. Yeh aapke parivaar tak jaata hai. Emergency service nahi hai.\n\nLaunch se pehle 12 tester seats. Comment kijiye IN." },
+
+    { "id": "t08", "phase": "testers", "image": "pulsesoul_01",
+      "english": "Papa. Mummy. Didi. Bhaiya. Dadi. Chachu. Nanu.\n\nThat is the contact list PulseSoul was designed around. Not a network. A family.\n\nOpening 12 tester seats. Comment IN.",
+      "hinglish": "Papa. Mummy. Didi. Bhaiya. Dadi. Chachu. Nanu.\n\nYahi list dhyan mein rakh kar PulseSoul banayi hai. Network nahi. Parivaar.\n\n12 tester seats khul rahi hain. Comment kijiye IN." },
+
+    { "id": "t09", "phase": "testers", "image": "pulsesoul_11",
+      "english": "Built solo, in Jaipur, over many long nights.\n\nNo ad SDK. No analytics SDK. No advertising ID. Nobody is buying your family's chatter, because there is no one to sell it to.\n\n12 testers, 14 days, then it launches. Comment IN.",
+      "hinglish": "Akele banayi hai, Jaipur mein, kai lambi raaton mein.\n\nKoi ad SDK nahi. Koi analytics SDK nahi. Koi advertising ID nahi. Aapke parivaar ki baatein koi khareed nahi raha, kyunki bechne wala hi koi nahi hai.\n\n12 testers, 14 din, phir launch. Comment kijiye IN." },
+
+    { "id": "t10", "phase": "testers", "image": "pulsesoul_05",
+      "english": "A streak with your sister is a silly little number.\n\nIt is also the reason you both messaged every day for a month. I will take it.\n\nPulseSoul needs 12 testers before Play Store. Comment IN.",
+      "hinglish": "Behen ke saath streak ek bewakoof sa number hai.\n\nAur wahi wajah hai ki aap dono ne poora mahina roz message kiya. Chalega.\n\nPulseSoul ko Play Store se pehle 12 testers chahiye. Comment kijiye IN." },
+
+    { "id": "t11", "phase": "testers", "image": "pulsesoul_04",
+      "english": "Ask a family group chat for a photo from last Diwali and watch everyone scroll for ten minutes.\n\nPulseSoul keeps the family album separate and permanent, so nobody has to scroll.\n\n12 tester seats. Comment IN.",
+      "hinglish": "Family group mein pichli Diwali ki photo maang kar dekhiye — sab das minute scroll karte reh jaayenge.\n\nPulseSoul family album ko alag aur permanent rakhta hai. Kisi ko scroll nahi karna padta.\n\n12 tester seats. Comment kijiye IN." },
+
+    { "id": "t12", "phase": "testers", "image": "pulsesoul_01",
+      "english": "Last call for the tester group.\n\n14 days, one phone, honest feedback. That is the whole ask. In exchange you get the app before anybody else and your name in the credits if you want it.\n\nComment IN.",
+      "hinglish": "Tester group ke liye aakhri call.\n\n14 din, ek phone, sacchi raay. Bas itna hi. Badle mein app sabse pehle aapko milegi, aur chahein to credits mein naam bhi.\n\nComment kijiye IN." },
+
+    { "id": "l01", "phase": "launch", "image": "pulsesoul_01",
+      "english": "PulseSoul is live on Google Play.\n\nA calm messaging app built for families. Free, no ads, nothing to unlock.\n\nDownload it, add your people, and tell me what to fix next.",
+      "hinglish": "PulseSoul ab Google Play par live hai.\n\nParivaar ke liye ek shaant messaging app. Free, koi ads nahi, kuch unlock karne ko nahi.\n\nDownload kijiye, apno ko jodiye, aur bataiye aage kya theek karna hai." },
+
+    { "id": "l02", "phase": "launch", "image": "pulsesoul_07",
+      "english": "Now on Google Play.\n\nPulseSoul remembers every family birthday and anniversary, and reminds all of you, not just the one person who always remembers.\n\nFree. No ads.",
+      "hinglish": "Ab Google Play par.\n\nPulseSoul har family birthday aur anniversary yaad rakhta hai — aur reminder sabko deta hai, sirf us ek ko nahi jise hamesha yaad rehta hai.\n\nFree. Koi ads nahi." },
+
+    { "id": "l03", "phase": "launch", "image": "pulsesoul_06",
+      "english": "PulseSoul is out.\n\nCareShield is the part I am proudest of: if a family member's phone goes quiet, it checks on them gently before it ever involves you. Optional, and never an alarm.\n\nOn Google Play now.",
+      "hinglish": "PulseSoul aa gayi hai.\n\nCareShield par sabse zyada garv hai: kisi family member ka phone chup ho jaaye, to pehle unse hi narmi se poochta hai — aapko baad mein. Optional hai, aur alarm kabhi nahi.\n\nAb Google Play par." },
+
+    { "id": "l04", "phase": "launch", "image": "pulsesoul_05",
+      "english": "Live on Google Play.\n\nStreaks, voice filters, themes, sound effects. Every one of them free, forever. A family app should not have a shop in it.",
+      "hinglish": "Google Play par live.\n\nStreaks, voice filters, themes, sound effects — sab free, hamesha ke liye. Family app mein dukaan nahi honi chahiye." },
+
+    { "id": "l05", "phase": "launch", "image": "pulsesoul_11",
+      "english": "PulseSoul, now on Google Play.\n\nNo advertising ID. No analytics SDK. No crash reporting SDK. Phone numbers hashed on your device. I did not build a business on your family's data.",
+      "hinglish": "PulseSoul, ab Google Play par.\n\nKoi advertising ID nahi. Koi analytics SDK nahi. Koi crash reporting SDK nahi. Phone numbers aapke hi phone par hash hote hain. Aapke parivaar ke data par business nahi banaya." },
+
+    { "id": "l06", "phase": "launch", "image": "pulsesoul_02",
+      "english": "Out now.\n\nText, photos, video, voice notes, voice filters, sound effects mapped to the emoji you actually use. Send a sound instead of a smiley for once.",
+      "hinglish": "Ab available.\n\nText, photos, video, voice notes, voice filters — aur sound effects jo un emoji se jude hain jo aap sach mein use karte hain. Ek baar smiley ki jagah awaaz bhejiye." },
+
+    { "id": "l07", "phase": "launch", "image": "pulsesoul_04",
+      "english": "PulseSoul is on Google Play.\n\nUpdates that vanish in a day for the small stuff. A family album that never vanishes for everything else.",
+      "hinglish": "PulseSoul Google Play par hai.\n\nChhoti baaton ke liye updates jo ek din mein gayab. Baaki sab ke liye family album jo kabhi gayab nahi hota." },
+
+    { "id": "l08", "phase": "launch", "image": "pulsesoul_08",
+      "english": "Now live.\n\nOne tap to tell everyone you are safe. And an SOS that reaches your confirmed family loudly, even through a muted chat. It alerts your family, not emergency services.",
+      "hinglish": "Ab live.\n\nEk tap mein sabko bata dijiye ki aap safe hain. Aur SOS jo aapke confirmed parivaar tak zor se pahunchta hai, muted chat se bhi. Yeh parivaar ko alert karta hai, emergency services ko nahi." },
+
+    { "id": "e01", "phase": "evergreen", "image": "pulsesoul_01",
+      "english": "Most chat apps are built for everyone you have ever met.\n\nPulseSoul is built for the eight people you would call at 2am.",
+      "hinglish": "Zyadatar chat apps un sabke liye bani hain jinse aap kabhi mile.\n\nPulseSoul un aath logon ke liye bani hai jinhe aap raat ke do baje call karenge." },
+
+    { "id": "e02", "phase": "evergreen", "image": "pulsesoul_07",
+      "english": "Nobody in a family forgets a birthday on purpose. They just have 400 unread messages and a job.\n\nSo the app remembers, and tells everybody.",
+      "hinglish": "Koi jaan bujh kar birthday nahi bhoolta. Bas 400 unread messages aur ek naukri hoti hai.\n\nIsliye app yaad rakhta hai — aur sabko bata deta hai." },
+
+    { "id": "e03", "phase": "evergreen", "image": "pulsesoul_06",
+      "english": "There is a difference between checking on someone and checking up on someone.\n\nCareShield asks their phone first, quietly, and only nudges the family they chose if the quiet continues. It is not a health device and it does not read anything.",
+      "hinglish": "Kisi ka haal poochne aur kisi par nazar rakhne mein farq hai.\n\nCareShield pehle unke phone se hi chupchaap poochta hai, aur chuppi bani rahe tabhi unke chune hue parivaar ko batata hai. Yeh health device nahi hai aur kuch padhta bhi nahi." },
+
+    { "id": "e04", "phase": "evergreen", "image": "pulsesoul_05",
+      "english": "A streak is not a feature. It is an excuse to message your mother today.",
+      "hinglish": "Streak koi feature nahi hai. Yeh to bas ek bahana hai aaj mummy ko message karne ka." },
+
+    { "id": "e05", "phase": "evergreen", "image": "pulsesoul_04",
+      "english": "Your family's best photos should not live in a group chat you cannot search.\n\nThey should live in an album. So we built the album in.",
+      "hinglish": "Parivaar ki sabse achhi photos aise group chat mein nahi rehni chahiye jise search hi nahi kar sakte.\n\nWo album mein rehni chahiye. Isliye album app mein hi bana diya." },
+
+    { "id": "e06", "phase": "evergreen", "image": "pulsesoul_02",
+      "english": "My grandmother will never type a long message. She will absolutely record a two minute voice note.\n\nBuild for her and the app gets simpler for everybody.",
+      "hinglish": "Dadi kabhi lamba message type nahi karengi. Do minute ka voice note zaroor bhejengi.\n\nUnke liye banaiye, to app sabke liye aasaan ho jaati hai." },
+
+    { "id": "e07", "phase": "evergreen", "image": "pulsesoul_11",
+      "english": "Free means free.\n\nNo premium tier. No unlockable themes. No sticker shop. If it is in PulseSoul, you already have it.",
+      "hinglish": "Free ka matlab free.\n\nKoi premium tier nahi. Koi theme kharidni nahi. Koi sticker shop nahi. Jo PulseSoul mein hai, wo aapke paas pehle se hai." },
+
+    { "id": "e08", "phase": "evergreen", "image": "pulsesoul_01",
+      "english": "Unread badges in most apps are a demand.\n\nIn a family app they should feel like somebody thought of you.",
+      "hinglish": "Zyadatar apps mein unread badge ek maang lagta hai.\n\nFamily app mein wo aisa lagna chahiye ki kisi ne aapko yaad kiya." },
+
+    { "id": "e09", "phase": "evergreen", "image": "pulsesoul_08",
+      "english": "The message you most want to send your family is four words long.\n\nSo it is one button. I'm safe.",
+      "hinglish": "Parivaar ko jo message sabse zyada bhejna hota hai, wo teen shabdon ka hai.\n\nIsliye wo ek button hai. Main safe hoon." },
+
+    { "id": "e10", "phase": "evergreen", "image": "pulsesoul_07",
+      "english": "Anniversaries are the ones that hurt to miss.\n\nEvery family date in PulseSoul repeats every year and reminds all of you.",
+      "hinglish": "Anniversary bhoolna sabse zyada chubhta hai.\n\nPulseSoul mein har family date har saal repeat hoti hai aur reminder sabko jaata hai." },
+
+    { "id": "e11", "phase": "evergreen", "image": "pulsesoul_02",
+      "english": "Sound effects mapped to the emoji people actually send.\n\nBecause a temple bell lands differently than a bell emoji.",
+      "hinglish": "Sound effects un emoji se jude hain jo log sach mein bhejte hain.\n\nKyunki mandir ki ghanti aur ghanti wala emoji — dono ka asar alag hai." },
+
+    { "id": "e12", "phase": "evergreen", "image": "pulsesoul_06",
+      "english": "Elderly parents do not want a monitoring app. They want to be left alone and also not forgotten.\n\nThat gap is the whole design brief for CareShield. Optional, and it never calls anyone but your family.",
+      "hinglish": "Budhe maa-baap monitoring app nahi chahte. Wo chahte hain ki unhe akela chhoda jaaye, aur bhulaya bhi na jaaye.\n\nIsi beech ki jagah ke liye CareShield bana hai. Optional, aur aapke parivaar ke alawa kisi ko call nahi karta." },
+
+    { "id": "e13", "phase": "evergreen", "image": "pulsesoul_11",
+      "english": "Made in Jaipur. Made by one person. Made for people who use 4G that crawls at 12 KB per second, because that is the phone I test on.",
+      "hinglish": "Jaipur mein bani. Ek aadmi ne banayi. Un logon ke liye bani jinka 4G 12 KB per second chalta hai — kyunki main usi phone par test karta hoon." },
+
+    { "id": "e14", "phase": "evergreen", "image": "pulsesoul_05",
+      "english": "Snapchat charges for its best bits. PulseSoul does not charge for anything.\n\nSame joy, no wallet.",
+      "hinglish": "Snapchat apni sabse achhi cheezon ke paise leta hai. PulseSoul kisi cheez ke paise nahi leta.\n\nWahi mazaa, bina jeb dhile kiye." },
+
+    { "id": "e15", "phase": "evergreen", "image": "pulsesoul_04",
+      "english": "A 24 hour update and a forever album are two completely different needs.\n\nMost apps pick one. We shipped both.",
+      "hinglish": "24 ghante ka update aur hamesha ka album — dono bilkul alag zarooratein hain.\n\nZyadatar apps ek chunte hain. Humne dono banaye." },
+
+    { "id": "e16", "phase": "evergreen", "image": "pulsesoul_01",
+      "english": "Filters for Family, Unread and Starred.\n\nThree taps that turn 40 chats back into the four that matter today.",
+      "hinglish": "Family, Unread aur Starred ke filters.\n\nTeen tap — aur 40 chats wapas un chaar mein badal jaati hain jo aaj maayne rakhti hain." },
+
+    { "id": "e17", "phase": "evergreen", "image": "pulsesoul_08",
+      "english": "An SOS is useless if it lands in a muted chat.\n\nSo in PulseSoul it rings anyway. It reaches your confirmed family members. It does not contact emergency services.",
+      "hinglish": "SOS ka koi fayda nahi agar wo muted chat mein gir jaaye.\n\nIsliye PulseSoul mein wo phir bhi bajta hai. Aapke confirmed family members tak pahunchta hai. Emergency services ko contact nahi karta." },
+
+    { "id": "e18", "phase": "evergreen", "image": "pulsesoul_11",
+      "english": "Light theme, dark theme, glass transparency, and a colour you pick.\n\nYour family's app should look like your family, not like a brand deck.",
+      "hinglish": "Light theme, dark theme, glass transparency, aur rang aapki pasand ka.\n\nAapke parivaar ki app aapke parivaar jaisi lagni chahiye, kisi brand deck jaisi nahi." },
+
+    { "id": "e19", "phase": "evergreen", "image": "pulsesoul_02",
+      "english": "Somebody in your family is going to discover the alien voice filter and ruin an entire evening.\n\nHonestly, that is a successful product.",
+      "hinglish": "Aapke ghar mein koi na koi alien voice filter dhoondh lega aur poori shaam barbaad kar dega.\n\nSach kahein to, wahi successful product hai." },
+
+    { "id": "e20", "phase": "evergreen", "image": "pulsesoul_07",
+      "english": "The family member who remembers every birthday is doing unpaid labour.\n\nLet the app take that shift.",
+      "hinglish": "Ghar mein jo har birthday yaad rakhta hai, wo bina tankhwah ka kaam kar raha hai.\n\nAb wo shift app sambhal legi." },
+
+    { "id": "e21", "phase": "evergreen", "image": "pulsesoul_06",
+      "english": "CareShield never reads a message. It only notices that a phone has been still for a while, and asks that phone first.\n\nThat is the whole mechanism. No sensors on your body, no health claims.",
+      "hinglish": "CareShield kabhi koi message nahi padhta. Wo sirf yeh dekhta hai ki phone kaafi der se shaant hai — aur pehle usi phone se poochta hai.\n\nBas itna hi hai. Shareer par koi sensor nahi, koi health ka daava nahi." },
+
+    { "id": "e22", "phase": "evergreen", "image": "pulsesoul_05",
+      "english": "The flame shows from day one in PulseSoul. Not day three.\n\nSmall thing. It is the difference between a habit starting and a habit never starting.",
+      "hinglish": "PulseSoul mein flame pehle hi din se dikhta hai. Teesre din se nahi.\n\nChhoti baat hai. Par aadat shuru hone aur kabhi shuru na hone ka farq yahi hai." },
+
+    { "id": "e23", "phase": "evergreen", "image": "pulsesoul_01",
+      "english": "I did not add a Stories tab full of strangers, a discover feed, or influencers.\n\nThere is nothing in PulseSoul to scroll except your own family.",
+      "hinglish": "Na ajnabiyon se bhara Stories tab hai, na discover feed, na influencers.\n\nPulseSoul mein scroll karne ko sirf aapka apna parivaar hai." },
+
+    { "id": "e24", "phase": "evergreen", "image": "pulsesoul_04",
+      "english": "Ten photos from one afternoon should arrive as one album, not ten notifications.\n\nTook three builds to get that right. Worth it.",
+      "hinglish": "Ek dopahar ki das photos ek album ban kar aani chahiye, das notifications ban kar nahi.\n\nTeen builds lage sahi karne mein. Worth it tha." },
+
+    { "id": "e25", "phase": "evergreen", "image": "pulsesoul_11",
+      "english": "Storage settings, photo quality settings, notification settings, all in one screen you can actually understand.\n\nSettings are a feature, not a dumping ground.",
+      "hinglish": "Storage, photo quality, notifications — sab ek hi screen par, jise sach mein samajh sakein.\n\nSettings ek feature hai, kachra ghar nahi." },
+
+    { "id": "e26", "phase": "evergreen", "image": "pulsesoul_08",
+      "english": "Reaching home safely is news. Your family should not have to ask for it.",
+      "hinglish": "Ghar safe pahunchna ek khabar hai. Parivaar ko wo maangni nahi padni chahiye." },
+
+    { "id": "e27", "phase": "evergreen", "image": "pulsesoul_02",
+      "english": "Voice notes are the most Indian feature in any messaging app and nobody designs for them properly.\n\nWe gave them filters, speeds and a proper review screen before sending.",
+      "hinglish": "Voice note kisi bhi messaging app ka sabse Indian feature hai, aur koi uske liye theek se design nahi karta.\n\nHumne usme filters, speed aur bhejne se pehle poora review screen diya." },
+
+    { "id": "e28", "phase": "evergreen", "image": "pulsesoul_07",
+      "english": "Add a birthday once. The whole family gets reminded every year after that, forever, without anyone maintaining a spreadsheet.",
+      "hinglish": "Birthday ek baar daal dijiye. Uske baad har saal poore parivaar ko reminder — hamesha, bina kisi spreadsheet ke." },
+
+    { "id": "e29", "phase": "evergreen", "image": "pulsesoul_05",
+      "english": "Streaks are counted on your phone. Nothing extra leaves your device to make that number work.",
+      "hinglish": "Streaks aapke phone par hi gine jaate hain. Us number ke liye aapke device se kuch extra bahar nahi jaata." },
+
+    { "id": "e30", "phase": "evergreen", "image": "pulsesoul_01",
+      "english": "Design goal, written on the first page of my notes: a family should be able to open this app and feel calmer than before they opened it.\n\nEvery feature gets measured against that line.",
+      "hinglish": "Notes ke pehle page par likha design goal: parivaar yeh app khole aur kholne se pehle se zyada shaant mehsoos kare.\n\nHar feature isi line par tola jaata hai." },
+
+    { "id": "e31", "phase": "evergreen", "image": "pulsesoul_04",
+      "english": "Screenshots of a family album are not a growth metric. They are the reason the thing exists.",
+      "hinglish": "Family album ke screenshots koi growth metric nahi hain. Wahi wajah hai ki yeh cheez bani hai." },
+
+    { "id": "e32", "phase": "evergreen", "image": "pulsesoul_06",
+      "english": "You choose who gets nudged. You choose the window: 12, 24 or 48 hours. You can switch it off entirely.\n\nA safety feature you cannot control is not a safety feature.",
+      "hinglish": "Aap chunte hain kise khabar jaayegi. Aap chunte hain window: 12, 24 ya 48 ghante. Aur poori tarah band bhi kar sakte hain.\n\nJis safety feature par aapka control na ho, wo safety feature hai hi nahi." },
+
+    { "id": "e33", "phase": "evergreen", "image": "pulsesoul_11",
+      "english": "Messages are encrypted in transit and encrypted at rest.\n\nThere is a stronger privacy claim that almost every messaging app prints on its homepage. Mine will print it the day it is actually true, and not one day earlier.",
+      "hinglish": "Messages transit mein bhi encrypted hain aur storage mein bhi.\n\nEk aur bada privacy daava hai jo lagbhag har messaging app apne homepage par likhta hai. Main wo us din likhunga jis din wo sach hoga — ek din pehle nahi." },
+
+    { "id": "e34", "phase": "evergreen", "image": "pulsesoul_01",
+      "english": "Building an app alone means every bad decision is yours.\n\nIt also means when someone says their mother finally uses a chat app properly, that is yours too.",
+      "hinglish": "Akele app banane ka matlab hai har galat faisla aapka hai.\n\nAur yeh bhi ki jab koi kahe ki unki mummy ab pehli baar chat app theek se use kar rahi hain — wo bhi aapka hai." },
+
+    { "id": "e35", "phase": "evergreen", "image": "pulsesoul_08",
+      "english": "Muted chats exist because most notifications do not deserve you.\n\nExactly two things in PulseSoul get to ignore that: a family SOS, and nothing else.",
+      "hinglish": "Muted chats isliye hain kyunki zyadatar notifications aapke layak nahi hote.\n\nPulseSoul mein sirf ek cheez ko use ignore karne ka haq hai: family SOS. Aur kuch nahi." },
+
+    { "id": "e36", "phase": "evergreen", "image": "pulsesoul_02",
+      "english": "Every sound effect in the app was synthesised from scratch rather than licensed, so the pack can stay free forever without a rights bill arriving later.",
+      "hinglish": "App ka har sound effect license lekar nahi, shuru se banaya gaya hai — taaki yeh pack hamesha free reh sake aur baad mein koi rights ka bill na aaye." },
+
+    { "id": "e37", "phase": "evergreen", "image": "pulsesoul_07",
+      "english": "Families run on dates. Birthdays, anniversaries, the day someone moved away, the day someone came back.\n\nAn app for families that cannot hold a date is not an app for families.",
+      "hinglish": "Parivaar taareekhon par chalte hain. Birthdays, anniversaries, jis din koi door gaya, jis din koi laut aaya.\n\nJo family app ek taareekh na sambhal sake, wo family app hai hi nahi." },
+
+    { "id": "e38", "phase": "evergreen", "image": "pulsesoul_05",
+      "english": "The best feature in any family app is the one that gets somebody to send the first message today.\n\nEverything else is decoration.",
+      "hinglish": "Kisi bhi family app ka sabse achha feature wahi hai jo aaj kisi se pehla message bhijwa de.\n\nBaaki sab sajaavat hai." },
+
+    { "id": "e39", "phase": "evergreen", "image": "pulsesoul_04",
+      "english": "Photos of your family are worth more in ten years than they are today.\n\nSo they should not be sitting in a chat that auto deletes.",
+      "hinglish": "Parivaar ki photos ki keemat aaj se zyada das saal baad hogi.\n\nIsliye wo aise chat mein nahi rehni chahiye jo apne aap delete ho jaaye." },
+
+    { "id": "e40", "phase": "evergreen", "image": "pulsesoul_01",
+      "english": "If PulseSoul does one thing, let it be this: your family talks a little more than it did last month.\n\nThat is the only number I care about.",
+      "hinglish": "PulseSoul agar ek cheez kare, to yeh: aapka parivaar pichle mahine se thoda zyada baat kare.\n\nBas yahi ek number hai jiski mujhe parwah hai." }
+  ]
+}

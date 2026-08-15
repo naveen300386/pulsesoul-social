@@ -1,0 +1,46 @@
+# AutoPostAI settings. Edit this file, commit, done -- no code changes needed.
+
+# Which set of posts is running right now.
+#   testers   -> recruiting the 12 closed testers Google requires (start here)
+#   launch    -> switch to this the day PulseSoul goes live on Play
+#   evergreen -> the long-running feature and story posts
+phase: testers
+
+# Where every post points.
+link: https://pulsesoul.app
+
+# Instagram does not make links in captions clickable, so its posts say this instead.
+bio_cta: "Link in bio → pulsesoul.app"
+
+# Hashtags added to the end of each post, per platform. Keep them short and
+# real -- 5 to 10 good tags beat 30 generic ones on every platform now.
+hashtags:
+  facebook:
+    - "#PulseSoul"
+    - "#FamilyApp"
+    - "#MadeInIndia"
+  instagram:
+    - "#PulseSoul"
+    - "#FamilyApp"
+    - "#MadeInIndia"
+    - "#IndieApp"
+    - "#AndroidApp"
+    - "#BuildInPublic"
+    - "#FamilyFirst"
+    - "#JaipurStartup"
+  threads:
+    - "#buildinpublic"
+    - "#indieapp"
+  telegram: []
+  bluesky:
+    - "#buildinpublic"
+  mastodon:
+    - "#buildinpublic"
+    - "#android"
+  linkedin:
+    - "#buildinpublic"
+    - "#indiedev"
+    - "#androiddevelopment"
+  pinterest:
+    - "#familyapp"
+    - "#messagingapp"

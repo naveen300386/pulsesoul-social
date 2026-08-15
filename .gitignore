@@ -1,0 +1,8 @@
+# NEVER commit this. Your tokens live here when you run on your own PC.
+.env
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+preview.md

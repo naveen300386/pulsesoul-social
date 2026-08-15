@@ -1,0 +1,152 @@
+name: AutoPost
+
+on:
+  schedule:
+    # Wakes every hour and asks config.yaml who is due. Most runs post nothing
+    # and finish in seconds. The real schedule lives in config.yaml, in IST,
+    # per platform -- do not put posting times here.
+    #
+    # Minute 17 on purpose: GitHub's shared scheduler is most congested at :00
+    # and :30, and a congested run can be delayed or dropped entirely.
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview only, post nothing"
+        type: boolean
+        default: true
+      only:
+        description: "Single platform to post to (blank = all connected)"
+        type: string
+        default: ""
+      force:
+        description: "Post right now, ignoring the peak-time schedule"
+        type: boolean
+        default: false
+
+concurrency:
+  group: autopost
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # Runs before anything is sent. A bad edit to posts.json or config.yaml
+      # stops the run here rather than going out to eight live accounts.
+      - name: Check content and schedule
+        run: python tools/check.py
+
+      # A "Re-run failed jobs" click checks out the ORIGINAL commit, which
+      # predates that run's own state push. Without this, re-running a red run
+      # reposts everything it already sent.
+      - name: Load the newest state, not this commit's
+        run: |
+          git fetch origin "${{ github.ref_name }}" --depth=1
+          git checkout "origin/${{ github.ref_name }}" -- content/state.json content/history.jsonl || true
+
+      - name: Post
+        env:
+          # Instagram and Threads fetch the image from a URL instead of
+          # accepting uploaded bytes, so it has to be publicly readable.
+          IMAGE_BASE_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/rendered
+
+          # Passed through the environment and quoted below, never
+          # interpolated straight into the shell.
+          INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
+          INPUT_FORCE:   ${{ github.event.inputs.force }}
+          INPUT_ONLY:    ${{ github.event.inputs.only }}
+
+          FB_PAGE_ID:           ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_TOKEN:        ${{ secrets.FB_PAGE_TOKEN }}
+          IG_USER_ID:           ${{ secrets.IG_USER_ID }}
+          THREADS_USER_ID:      ${{ secrets.THREADS_USER_ID }}
+          THREADS_TOKEN:        ${{ secrets.THREADS_TOKEN }}
+          TELEGRAM_BOT_TOKEN:   ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:     ${{ secrets.TELEGRAM_CHAT_ID }}
+          BLUESKY_HANDLE:       ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          MASTODON_INSTANCE:    ${{ secrets.MASTODON_INSTANCE }}
+          MASTODON_TOKEN:       ${{ secrets.MASTODON_TOKEN }}
+          LINKEDIN_TOKEN:       ${{ secrets.LINKEDIN_TOKEN }}
+          LINKEDIN_ORG_ID:      ${{ secrets.LINKEDIN_ORG_ID }}
+          PINTEREST_TOKEN:      ${{ secrets.PINTEREST_TOKEN }}
+          PINTEREST_BOARD_ID:   ${{ secrets.PINTEREST_BOARD_ID }}
+        run: |
+          ARGS=""
+          [ "$INPUT_DRY_RUN" = "true" ] && ARGS="$ARGS --dry-run"
+          [ "$INPUT_FORCE"   = "true" ] && ARGS="$ARGS --force"
+          if [ -n "$INPUT_ONLY" ]; then
+            python autopost.py $ARGS --only "$INPUT_ONLY"
+          else
+            python autopost.py $ARGS
+          fi
+
+      # always() matters: the Post step exits non-zero when an account fails,
+      # and the accounts that DID post must still have that recorded or they
+      # post the same thing again next hour.
+      #
+      # The retry loop matters more. This push is the ONLY thing that makes
+      # "already posted" durable -- the runner is destroyed afterwards. If it
+      # is allowed to fail, the next run repeats every post this one made.
+      - name: Remember what was posted
+        if: always() && github.event.inputs.dry_run != 'true'
+        run: |
+          BRANCH="${{ github.ref_name }}"
+          git config user.name  "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          touch content/history.jsonl
+
+          # Keep this run's results somewhere git cannot touch them.
+          mkdir -p /tmp/ap
+          cp content/state.json   /tmp/ap/state.json
+          cp content/history.jsonl /tmp/ap/history.jsonl
+
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$BRANCH"
+
+            # Start from exactly what the remote has, then lay our results back
+            # on top. No rebase, so there is no conflict that can halt the step
+            # and strand the record inside a runner that is about to vanish.
+            git reset --hard "origin/$BRANCH"
+            cp /tmp/ap/state.json content/state.json
+
+            # history is append-only lines, so union = concatenate and dedupe.
+            cat content/history.jsonl /tmp/ap/history.jsonl 2>/dev/null \
+              | awk 'NF && !seen[$0]++' > /tmp/ap/merged.jsonl
+            cp /tmp/ap/merged.jsonl content/history.jsonl
+
+            # Union-merge the remote's state INTO ours: a slot that fired on
+            # either side has fired. Worst case a post is skipped, never repeated.
+            python tools/merge_state.py "origin/$BRANCH"
+
+            git add content/state.json content/history.jsonl
+            if git diff --staged --quiet; then
+              echo "nothing new to record"
+              exit 0
+            fi
+
+            git commit -m "posted $(date -u '+%Y-%m-%d %H:%M') UTC"
+            if git push origin "HEAD:$BRANCH"; then
+              echo "state saved on attempt $attempt"
+              exit 0
+            fi
+            echo "push failed, retrying (attempt $attempt)"
+            sleep $((attempt * 5))
+          done
+
+          echo "::error::Could not save posting state after 5 attempts."
+          echo "::error::The next run may repeat these posts. Check branch protection on ${{ github.ref_name }}."
+          exit 1
