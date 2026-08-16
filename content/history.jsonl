@@ -27,3 +27,5 @@
 {"platform": "mastodon", "post_id": "t07", "slot": "17:00", "weekday": "Sun", "posted_at": "2026-08-16T17:03+05:30", "ref": "FAILED: Invalid URL 'mastodon.social/api/v2/media': No scheme supplied. Perhaps you meant https://mastodon.social/api/v2/media?", "engagement": null}
 {"platform": "pinterest", "post_id": "t09", "slot": "forced", "weekday": "Sun", "posted_at": "2026-08-16T18:05+05:30", "ref": "SANDBOX pin 812759064045611204 - private, not published (Trial access)", "engagement": null}
 {"platform": "telegram", "post_id": "t05", "slot": "19:00", "weekday": "Sun", "posted_at": "2026-08-16T19:14+05:30", "ref": "telegram message 9", "engagement": null}
+{"platform": "facebook", "post_id": "t05", "slot": "20:00", "weekday": "Sun", "posted_at": "2026-08-16T20:08+05:30", "ref": "https://facebook.com/1272833339242313_122120499255389902", "engagement": null}
+{"platform": "instagram", "post_id": "t12", "slot": "20:00", "weekday": "Sun", "posted_at": "2026-08-16T20:08+05:30", "ref": "https://www.instagram.com/p/17930298156380275", "engagement": null}
