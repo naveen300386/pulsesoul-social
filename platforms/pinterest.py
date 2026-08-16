@@ -16,10 +16,14 @@ the same code starts creating real Pins.
 
 Two consequences, both handled below rather than left as traps:
 
-  * Sandbox board ids are different, so sandbox mode requires its own
-    PINTEREST_SANDBOX_BOARD_ID. If it is missing the platform is SKIPPED, not
-    attempted -- a failed attempt would burn a queue slot and a schedule slot
-    on a request that cannot succeed.
+  * The sandbox has its OWN token and its OWN board ids. Pinterest's docs are
+    explicit: "You cannot use the Sandbox token in your production
+    environment, nor can you use a production token for Sandbox." A production
+    token on this host answers {"code":2,"message":"Authentication failed."}.
+    So sandbox mode needs PINTEREST_SANDBOX_TOKEN and
+    PINTEREST_SANDBOX_BOARD_ID, and if either is missing the platform is
+    SKIPPED rather than attempted -- a failed attempt would burn a queue slot
+    and a schedule slot on a request that cannot succeed.
   * A sandbox pin is not a published post. Its ref is prefixed SANDBOX so the
     log, --status and history all say so, and so history.platforms_seen() does
     not count it as a working account. Otherwise the run goes green forever
@@ -65,24 +69,26 @@ class Pinterest(Platform):
         """Trial access can only create Pins on the sandbox host."""
         return SANDBOX_API if self.sandbox() else API
 
+    # Credentials are per-environment. NEVER fall back across hosts: a
+    # production board id or token sent to the sandbox fails on every run, and
+    # the write-ahead ordering means each of those failures costs a queued post.
+    SANDBOX_NEEDS = ["PINTEREST_SANDBOX_TOKEN", "PINTEREST_SANDBOX_BOARD_ID"]
+
+    def token(self) -> str:
+        return self.env("PINTEREST_SANDBOX_TOKEN") if self.sandbox() else self.env("PINTEREST_TOKEN")
+
     def board_id(self) -> str:
-        """Sandbox boards are a separate set with their own ids. Never fall
-        back to the production id here: that sends a real board id to the
-        sandbox host, which 404s on every single run."""
         return self.env("PINTEREST_SANDBOX_BOARD_ID") if self.sandbox() else self.env("PINTEREST_BOARD_ID")
 
     def missing(self) -> list[str]:
-        """Sandbox mode swaps which board id is required, so a half-set-up
+        """Sandbox mode swaps WHICH credentials are required, so a half-set-up
         sandbox reads as 'not connected yet' and is skipped, instead of failing
         after the run has already recorded the post as spent."""
         try:
-            sandbox = self.sandbox()
+            keys = self.SANDBOX_NEEDS if self.sandbox() else self.needs
         except RuntimeError as exc:
             return [str(exc)]
-        gaps = super().missing()
-        if sandbox and not self.env("PINTEREST_SANDBOX_BOARD_ID"):
-            gaps.append("PINTEREST_SANDBOX_BOARD_ID (sandbox boards have their own ids)")
-        return gaps
+        return [k for k in keys if not self.env(k)]
 
     def available(self) -> bool:
         return not self.missing()
@@ -115,7 +121,7 @@ class Pinterest(Platform):
         base = self.base_url()
         resp = requests.post(
             f"{base}/pins",
-            headers={"Authorization": f"Bearer {self.env('PINTEREST_TOKEN')}", "Content-Type": "application/json"},
+            headers={"Authorization": f"Bearer {self.token()}", "Content-Type": "application/json"},
             json=payload,
             timeout=TIMEOUT,
         )

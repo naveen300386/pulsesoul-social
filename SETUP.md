@@ -433,6 +433,7 @@ lets you make → submit for Standard.
 |---|---|
 | `PINTEREST_TOKEN` | the access token |
 | `PINTEREST_BOARD_ID` | the board id |
+| `PINTEREST_SANDBOX_TOKEN` | a **Sandbox** access token (see below) — the production one will not work there |
 | `PINTEREST_SANDBOX_BOARD_ID` | the board id **from the sandbox host** (see below) |
 
 And one repository **variable** — same page, the *Variables* tab, not Secrets:
@@ -452,14 +453,25 @@ live host at all:
 > production https://api.pinterest.com — use API Sandbox
 > https://api-sandbox.pinterest.com instead.*
 
-`api-sandbox.pinterest.com` is a separate environment with its own boards and
-its own Pins, visible only to you. Your `PulseSoul` board does **not** exist
-over there — it starts empty. The token is the same one.
+`api-sandbox.pinterest.com` is a completely separate environment: its own
+token, its own boards, its own Pins, visible only to you. Pinterest's docs put
+it plainly — *"You cannot use the Sandbox token in your production
+environment, nor can you use a production token for Sandbox."* A production
+token there answers `{"code":2,"message":"Authentication failed."}`.
 
-So make a board on that host and read its id (PowerShell, one block):
+So, first a **sandbox token**:
+
+1. <https://developers.pinterest.com/apps/> → **Manage** on your app → the
+   **Configure** tab.
+2. Find **Generate access token**, set the environment to **Sandbox**.
+3. Tick `boards:read`, `boards:write`, `pins:read`, `pins:write` → generate →
+   copy it. That is `PINTEREST_SANDBOX_TOKEN`.
+
+Then a **board on that host** — your `PulseSoul` board does not exist over
+there, the environment starts empty:
 
 ```powershell
-$t   = 'PASTE_YOUR_PINTEREST_TOKEN'
+$t   = 'PASTE_YOUR_SANDBOX_TOKEN'
 $h   = @{ Authorization = "Bearer $t" }
 $api = 'https://api-sandbox.pinterest.com/v5/boards'
 $board = (Invoke-RestMethod $api -Headers $h).items | Where-Object name -eq 'PulseSoul'
@@ -470,15 +482,17 @@ if (-not $board) {
 $board | Select-Object id, name
 ```
 
-Put the printed `id` in `PINTEREST_SANDBOX_BOARD_ID`. If that block errors with
-401 or 403, the token is missing `boards:write` — generate it again with all
-three scopes.
+Put the printed `id` in `PINTEREST_SANDBOX_BOARD_ID`. If that block says
+`Authentication failed`, you used the production token — go back and generate a
+**Sandbox** one. If it errors 403, the token is missing `boards:write`.
 
 Two things the runner does so this cannot rot quietly:
 
-* Sandbox mode **without** `PINTEREST_SANDBOX_BOARD_ID` reads as *not connected
+* Sandbox mode without **both** sandbox credentials reads as *not connected
   yet* and is skipped. It does not try and fail — a failed attempt would use up
-  one of the queued posts on a request that cannot succeed.
+  one of the queued posts on a request that cannot succeed. Your production
+  `PINTEREST_TOKEN` / `PINTEREST_BOARD_ID` are left untouched, waiting for the
+  day the flag comes off.
 * Every sandbox pin is logged as `SANDBOX ... private, not published`, and the
   run says so in its summary, every time.
 
