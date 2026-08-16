@@ -16,3 +16,4 @@
 {"platform": "telegram", "post_id": "t03", "slot": "12:00", "weekday": "Sun", "posted_at": "2026-08-16T12:28+05:30", "ref": "telegram message 7", "engagement": null}
 {"platform": "instagram", "post_id": "t10", "slot": "13:00", "weekday": "Sun", "posted_at": "2026-08-16T13:15+05:30", "ref": "https://www.instagram.com/p/18465774268115553", "engagement": null}
 {"platform": "pinterest", "post_id": "t07", "slot": "15:00", "weekday": "Sun", "posted_at": "2026-08-16T15:11+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":3,\"message\":\"Your token does not have sufficient permissions to perform this operation. Please ensure your token is authorized with the correct set of scopes. Missing: ['boards:write']\"}", "engagement": null}
+{"platform": "bluesky", "post_id": "t12", "slot": "16:00", "weekday": "Sun", "posted_at": "2026-08-16T16:09+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mt6yows2wg2w", "engagement": null}
