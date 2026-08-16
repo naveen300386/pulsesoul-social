@@ -523,6 +523,27 @@
       "image": "pulsesoul_18",
       "english": "No engagement metrics in this app. No streak leaderboard, no time-spent chart, no daily active badge.\n\nOne quiet line a day about the people you have not spoken to. That is the whole system.",
       "hinglish": "Is app mein koi engagement metric nahi. Na streak leaderboard, na time-spent chart, na daily active badge.\n\nDin mein ek shaant line, un logon ke baare mein jinse baat nahi hui. Bas itna hi system hai."
+    },
+    {
+      "id": "a01",
+      "phase": "evergreen",
+      "image": "ad_selfie_sanity",
+      "english": "This app brought my family closer.\n\nNot with anything clever. The calls stopped getting missed. Mum's voice notes stopped drowning in group chats. Reaching home became one tap, not a chase.\n\nPulseSoul is a calm messaging app for the eight people you'd call at 2am — chat, free calls, a family album, one tap to say you're safe. No feed, no strangers, no ads.\n\nImage created with AI.",
+      "hinglish": "Is app ne mere parivaar ko paas la diya.\n\nKoi jaadu nahi. Bas calls miss hona band ho gayi. Maa ke voice notes group chat mein doobna band ho gaye. Ghar pahunchna ek tap ban gaya, poochh-taachh nahi.\n\nPulseSoul un aath logon ke liye hai jinhe aap raat 2 baje call karenge — chat, free calls, family album, ek tap mein “main theek hoon”. Na feed, na ajnabi, na ads.\n\nImage AI se banayi gayi hai."
+    },
+    {
+      "id": "a02",
+      "phase": "evergreen",
+      "image": "ad_selfie_girl",
+      "english": "My whole family in one app.\n\nNot a group chat that never sleeps. Not five apps for five relatives. One quiet place where mum, papa, bhai and nani are all a tap away — and nobody else is.\n\nPulseSoul: chat, free calls, a shared album, and no strangers. Free on Google Play.\n\nImage created with AI.",
+      "hinglish": "Poora parivaar ek app mein.\n\nNa wo group chat jo kabhi soti nahi. Na paanch rishtedaaron ke liye paanch apps. Ek shaant jagah jahan maa, papa, bhai aur nani ek tap door hain — aur koi aur nahi.\n\nPulseSoul: chat, free calls, saanjha album, aur koi ajnabi nahi. Google Play par free.\n\nImage AI se banayi gayi hai."
+    },
+    {
+      "id": "a03",
+      "phase": "evergreen",
+      "image": "ad_selfie_father",
+      "english": "One tap. She knows I'm safe.\n\nNo more \"reached?\" calls. No more phone left on silent by mistake and a house full of worry. One button sends I'm safe to the family you chose, with live location that switches itself off.\n\nIt goes to your family only. It is not an emergency service.\n\nPulseSoul is free on Google Play. Image created with AI.",
+      "hinglish": "Ek tap. Use pata hai main theek hoon.\n\nAb \"pahunch gaye?\" wali calls nahi. Galti se silent pe chhoda phone aur ghar bhar ki chinta nahi. Ek button aapke chune parivaar ko “main theek hoon” bhejta hai, live location ke saath jo khud band ho jaati hai.\n\nYe sirf parivaar tak jaata hai. Emergency service nahi hai.\n\nPulseSoul Google Play par free hai. Image AI se banayi gayi hai."
     }
   ]
 }

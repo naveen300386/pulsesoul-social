@@ -1,0 +1,369 @@
+{
+  "_readme": [
+    "Daily advertisement posters. Each entry is one creative; tools/make_ad.py",
+    "renders it. Photos are licensed stock or your own, in assets/photos/.",
+    "The store badge is Google's own artwork in assets/brand/google-play.png."
+  ],
+  "ads": {
+    "launch": {
+      "image": "ad_launch",
+      "theme": "light",
+      "screen": "chats_liquid",
+      "photo": "holi.jpg",
+      "headline": "One app for the <em>whole family.</em>",
+      "sub": "Chat, call, share photos and know everyone is safe — one calm place for the whole family.",
+      "features": [
+        {
+          "icon": "chat",
+          "title": "Family chat, no strangers",
+          "sub": "Just your people. No feeds, no discover tab."
+        },
+        {
+          "icon": "call",
+          "title": "Free voice & video calls",
+          "sub": "Over the internet, no minutes."
+        },
+        {
+          "icon": "pin",
+          "title": "One tap: I'm safe",
+          "sub": "Live location that stops on its own."
+        },
+        {
+          "icon": "photo",
+          "title": "Family Moments album",
+          "sub": "Photos that stay, not scroll away."
+        },
+        {
+          "icon": "shield",
+          "title": "CareShield for parents",
+          "sub": "A gentle nudge if a phone goes quiet."
+        }
+      ],
+      "pill": "Free · No ads · No subscriptions",
+      "cta": "Download PulseSoul",
+      "cta_sub": "Scan, or search “PulseSoul” on Play",
+      "link": "https://pulsesoul.app"
+    },
+    "premium_family": {
+      "image": "ad_premium_family",
+      "layout": "premium",
+      "screen": "chats_liquid",
+      "photo": "holi.jpg",
+      "glow": "#E0A63A",
+      "headline": "Family.<br><b>Closer.</b>",
+      "sub": "One calm place for the people who matter.",
+      "words": [
+        "Chat",
+        "Call",
+        "Stay safe"
+      ]
+    },
+    "premium_safe": {
+      "image": "ad_premium_safe",
+      "layout": "premium",
+      "screen": "safety",
+      "photo": "",
+      "glow": "#E85D5D",
+      "headline": "One tap.<br><b>I'm safe.</b>",
+      "sub": "Live location that switches itself off.",
+      "words": [
+        "Live location",
+        "SOS",
+        "Family only"
+      ]
+    },
+    "call_home": {
+      "image": "ad_call_home",
+      "layout": "lifestyle",
+      "photo": "life_grandmother_phone.jpg",
+      "screen": "card_chats",
+      "card": true,
+      "accent": "#F0A63A",
+      "align": "left",
+      "focus": "50% 35%",
+      "headline_lines": [
+        "Her whole day",
+        "just got",
+        "better."
+      ],
+      "copy": "One video call. That's all it took. PulseSoul makes calling home free, simple, and impossible to forget.",
+      "cta": "Download PulseSoul"
+    },
+    "safe": {
+      "image": "ad_safe",
+      "layout": "lifestyle",
+      "photo": "life_woman_night.jpg",
+      "screen": "card_safety",
+      "card": true,
+      "accent": "#E85D5D",
+      "align": "left",
+      "focus": "50% 30%",
+      "headline_lines": [
+        "Two words.",
+        "Everyone",
+        "breathes."
+      ],
+      "copy": "One tap sends “I'm safe” to your whole family. Live location that switches itself off. Nothing to explain.",
+      "cta": "Download PulseSoul"
+    },
+    "moments": {
+      "image": "ad_moments",
+      "layout": "lifestyle",
+      "photo": "life_family_selfie.jpg",
+      "screen": "card_moments",
+      "card": true,
+      "accent": "#8FD3A0",
+      "align": "left",
+      "focus": "50% 40%",
+      "headline_lines": [
+        "Photos that",
+        "stay in the",
+        "family."
+      ],
+      "copy": "Family Moments is a private album, not a feed. No strangers, no likes — just the people in the picture.",
+      "cta": "Download PulseSoul"
+    },
+    "careshield": {
+      "image": "ad_careshield",
+      "layout": "lifestyle",
+      "photo": "life_elderly_couple.jpg",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#7FB0F0",
+      "align": "left",
+      "focus": "50% 35%",
+      "headline_lines": [
+        "Not watching.",
+        "Just there",
+        "if it's quiet."
+      ],
+      "copy": "CareShield asks a parent's phone first, gently. It nudges you only if the quiet continues. Optional, and never an alarm.",
+      "cta": "Download PulseSoul"
+    },
+    "no_strangers": {
+      "image": "ad_no_strangers",
+      "layout": "lifestyle",
+      "photo": "life_family_dinner.jpg",
+      "screen": "card_chats",
+      "card": true,
+      "accent": "#F0A63A",
+      "align": "left",
+      "focus": "50% 50%",
+      "headline_lines": [
+        "No strangers.",
+        "No feed.",
+        "Just family."
+      ],
+      "copy": "PulseSoul opens to your people — not a discover tab, not influencers, not anyone you didn't invite.",
+      "cta": "Download PulseSoul"
+    },
+    "streak": {
+      "image": "ad_streak",
+      "layout": "lifestyle",
+      "photo": "life_siblings.jpg",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#F07AA8",
+      "align": "left",
+      "focus": "50% 40%",
+      "headline_lines": [
+        "A silly little",
+        "number that",
+        "keeps you close."
+      ],
+      "copy": "A streak with your sister is an excuse to message every day. We'll take it.",
+      "cta": "Download PulseSoul"
+    },
+    "voice": {
+      "image": "ad_voice",
+      "layout": "lifestyle",
+      "photo": "life_mother_child.jpg",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#F0A63A",
+      "align": "left",
+      "focus": "50% 35%",
+      "headline_lines": [
+        "Some things",
+        "sound better",
+        "in her voice."
+      ],
+      "copy": "Voice notes for the family who won't type. Filters that make the kids laugh. Free, forever.",
+      "cta": "Download PulseSoul"
+    },
+    "dates": {
+      "image": "ad_dates",
+      "layout": "lifestyle",
+      "photo": "life_hands_food.jpg",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#F0C060",
+      "align": "left",
+      "focus": "50% 55%",
+      "headline_lines": [
+        "Nobody forgets",
+        "a birthday",
+        "on purpose."
+      ],
+      "copy": "Every family date in PulseSoul repeats every year and reminds all of you — not just the one who always remembers.",
+      "cta": "Download PulseSoul"
+    },
+    "free": {
+      "image": "ad_free",
+      "layout": "lifestyle",
+      "photo": "life_father_child.jpg",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#8FD3A0",
+      "align": "left",
+      "focus": "50% 30%",
+      "headline_lines": [
+        "Free means",
+        "free.",
+        "Always."
+      ],
+      "copy": "No premium tier. No sticker shop. Nothing to unlock. A family app should not have a shop in it.",
+      "cta": "Download PulseSoul"
+    },
+    "built": {
+      "image": "ad_built",
+      "layout": "lifestyle",
+      "photo": "life_grandparents_wave.jpg",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#F0A63A",
+      "align": "left",
+      "focus": "50% 35%",
+      "headline_lines": [
+        "Built in India,",
+        "for how we",
+        "actually talk."
+      ],
+      "copy": "Grandparents who prefer voice notes. Cousins in four cities. A group that never sleeps. PulseSoul was made for that.",
+      "cta": "Download PulseSoul"
+    },
+    "sample_call": {
+      "image": "ad_sample_call",
+      "layout": "lifestyle",
+      "photo": "chhath.jpg",
+      "screen": "card_chats",
+      "card": true,
+      "accent": "#F0A63A",
+      "align": "left",
+      "focus": "50% 30%",
+      "headline_lines": [
+        "Some calls",
+        "can't wait",
+        "till Sunday."
+      ],
+      "copy": "PulseSoul keeps your family one tap away — chat, call, and a quiet way to say you're safe.",
+      "cta": "Download PulseSoul"
+    },
+    "sample_safe": {
+      "image": "ad_sample_safe",
+      "layout": "lifestyle",
+      "photo": "karva.jpg",
+      "screen": "card_safety",
+      "card": true,
+      "accent": "#E85D5D",
+      "align": "left",
+      "focus": "50% 45%",
+      "headline_lines": [
+        "Two words.",
+        "Everyone",
+        "breathes."
+      ],
+      "copy": "One tap sends “I'm safe” to your whole family. Live location that switches itself off. Nothing to explain.",
+      "cta": "Download PulseSoul"
+    },
+    "sample_moments": {
+      "image": "ad_sample_moments",
+      "layout": "lifestyle",
+      "photo": "sankranti.jpg",
+      "screen": "card_moments",
+      "card": false,
+      "accent": "#8FD3A0",
+      "align": "centre",
+      "focus": "50% 40%",
+      "headline_lines": [
+        "Some things",
+        "are worth",
+        "keeping."
+      ],
+      "copy": "Family Moments is a private album, not a feed. No strangers, no likes — just the people who were there.",
+      "cta": "Download PulseSoul"
+    },
+    "selfie_sanity": {
+      "image": "ad_selfie_sanity",
+      "layout": "selfie",
+      "photo": "ai_woman_selfie.png",
+      "screen": "safety",
+      "phone_box": [
+        560,
+        470,
+        900,
+        900
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.42,
+      "accent": "#F0578F",
+      "headline_lines": [
+        "THIS APP",
+        "BROUGHT MY",
+        "FAMILY CLOSER"
+      ],
+      "sub": "no more missed calls home",
+      "tagline": "Less noise. More family.",
+      "headline_size": 92,
+      "headline_top": 52
+    },
+    "selfie_girl": {
+      "image": "ad_selfie_girl",
+      "layout": "selfie",
+      "photo": "ai_girl_selfie.png",
+      "screen": "chats_liquid",
+      "phone_box": [
+        130,
+        380,
+        340,
+        760
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.35,
+      "accent": "#F0578F",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "MY WHOLE",
+        "FAMILY IN",
+        "ONE APP"
+      ],
+      "sub": "no group chat chaos",
+      "tagline": "Never Miss What Matters."
+    },
+    "selfie_father": {
+      "image": "ad_selfie_father",
+      "layout": "selfie",
+      "photo": "ai_father_daughter.png",
+      "screen": "safety",
+      "phone_box": [
+        540,
+        500,
+        780,
+        890
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.4,
+      "accent": "#F0A63A",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "ONE TAP.",
+        "SHE KNOWS",
+        "I'M SAFE."
+      ],
+      "sub": "no more 'reached?' calls",
+      "tagline": "Less worry. More family."
+    }
+  }
+}
