@@ -29,3 +29,5 @@
 {"platform": "telegram", "post_id": "t05", "slot": "19:00", "weekday": "Sun", "posted_at": "2026-08-16T19:14+05:30", "ref": "telegram message 9", "engagement": null}
 {"platform": "facebook", "post_id": "t05", "slot": "20:00", "weekday": "Sun", "posted_at": "2026-08-16T20:08+05:30", "ref": "https://facebook.com/1272833339242313_122120499255389902", "engagement": null}
 {"platform": "instagram", "post_id": "t12", "slot": "20:00", "weekday": "Sun", "posted_at": "2026-08-16T20:08+05:30", "ref": "https://www.instagram.com/p/17930298156380275", "engagement": null}
+{"platform": "bluesky", "post_id": "t02", "slot": "21:00", "weekday": "Sun", "posted_at": "2026-08-16T21:05+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mt7jasebxy25", "engagement": null}
+{"platform": "pinterest", "post_id": "t10", "slot": "21:00", "weekday": "Sun", "posted_at": "2026-08-16T21:05+05:30", "ref": "SANDBOX pin 812759064045613659 - private, not published (Trial access)", "engagement": null}
