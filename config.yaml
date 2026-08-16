@@ -35,20 +35,24 @@ bio_cta: "Link in bio → pulsesoul.app"
 # that account; the rest go out in English. 0 = always English, 1 = always
 # Hinglish, 0.5 = roughly half and half.
 #
+# Currently ALL ZERO by request: every account posts English only. The
+# Hinglish copy is still written for every post, so turning any account back
+# on is one number here, no rewriting.
+#
 # Which post gets which language is decided by a hash of the account name and
 # the post id, so it never changes between runs and the two accounts posting
 # the same item do not have to say it the same way. Change a number here and
 # the split changes; nothing else has to be edited.
 language:
   mix:
-    facebook: 0.6
-    instagram: 0.6
-    telegram: 0.5
-    threads: 0.4
-    pinterest: 0.25
-    bluesky: 0.0      # audience is mostly outside India
-    mastodon: 0.0     # same
-    linkedin: 0.0     # the one account a partner or recruiter reads
+    facebook: 0.0
+    instagram: 0.0
+    telegram: 0.0
+    threads: 0.0
+    pinterest: 0.0
+    bluesky: 0.0
+    mastodon: 0.0
+    linkedin: 0.0
 
 schedule:
   timezone: Asia/Kolkata
