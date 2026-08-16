@@ -364,6 +364,338 @@
       ],
       "sub": "no more 'reached?' calls",
       "tagline": "Less worry. More family."
+    },
+    "s_father_elder": {
+      "image": "ad_s_father_elder",
+      "layout": "selfie",
+      "photo": "ai_father_elder.png",
+      "screen": "careshield_liquid",
+      "phone_box": [
+        520,
+        340,
+        700,
+        700
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.3,
+      "accent": "#F0A63A",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "MY KIDS",
+        "KNOW I'M",
+        "OKAY."
+      ],
+      "sub": "no calls to check on me",
+      "tagline": "Quiet care. No alarms."
+    },
+    "s_girl_balcony": {
+      "image": "ad_s_girl_balcony",
+      "layout": "selfie",
+      "photo": "ai_girl_balcony.png",
+      "screen": "chats_liquid",
+      "phone_box": [
+        140,
+        240,
+        400,
+        600
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.3,
+      "accent": "#F0578F",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "FINALLY",
+        "A CHAT FOR",
+        "JUST FAMILY"
+      ],
+      "sub": "no strangers, no feed",
+      "tagline": "Never Miss What Matters."
+    },
+    "s_girl_bedroom": {
+      "image": "ad_s_girl_bedroom",
+      "layout": "selfie",
+      "photo": "ai_girl_bedroom.png",
+      "screen": "streak",
+      "phone_box": [
+        380,
+        480,
+        530,
+        750
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.35,
+      "accent": "#F07AA8",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "A STREAK",
+        "WITH MY",
+        "SISTER"
+      ],
+      "sub": "silly. and it works.",
+      "tagline": "Never Miss What Matters."
+    },
+    "s_girl_college": {
+      "image": "ad_s_girl_college",
+      "layout": "selfie",
+      "photo": "ai_girl_college.png",
+      "screen": "safety",
+      "phone_box": [
+        260,
+        360,
+        430,
+        650
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.3,
+      "accent": "#E85D5D",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "REACHED.",
+        "ONE TAP.",
+        "DONE."
+      ],
+      "sub": "mom stops worrying",
+      "tagline": "Less worry. More family."
+    },
+    "s_lady_cafe": {
+      "image": "ad_s_lady_cafe",
+      "layout": "selfie",
+      "photo": "ai_lady_cafe.png",
+      "screen": "calls",
+      "phone_box": [
+        540,
+        360,
+        730,
+        680
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.3,
+      "accent": "#F0A63A",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "FREE CALLS",
+        "TO HOME.",
+        "EVERY DAY."
+      ],
+      "sub": "no minutes, no top-up",
+      "tagline": "Never Miss What Matters."
+    },
+    "s_lady_kitchen": {
+      "image": "ad_s_lady_kitchen",
+      "layout": "selfie",
+      "photo": "ai_lady_kitchen.png",
+      "screen": "events",
+      "phone_box": [
+        140,
+        240,
+        340,
+        620
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.3,
+      "accent": "#F0578F",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "NEVER MISS",
+        "PAPA'S",
+        "BIRTHDAY"
+      ],
+      "sub": "the app remembers for all of us",
+      "tagline": "Never Miss What Matters."
+    },
+    "s_lady_saree": {
+      "image": "ad_s_lady_saree",
+      "layout": "selfie",
+      "photo": "ai_lady_saree.png",
+      "screen": "moments",
+      "phone_box": [
+        240,
+        390,
+        390,
+        650
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.3,
+      "accent": "#F0A63A",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "OUR FAMILY",
+        "ALBUM.",
+        "PRIVATE."
+      ],
+      "sub": "no likes. no strangers.",
+      "tagline": "Moments worth keeping."
+    },
+    "s_mother_daughter": {
+      "image": "ad_s_mother_daughter",
+      "layout": "selfie",
+      "photo": "ai_mother_daughter.png",
+      "screen": "voice",
+      "phone_box": [
+        580,
+        340,
+        780,
+        700
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.35,
+      "accent": "#F07AA8",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "NANI HEARS",
+        "HER VOICE",
+        "EVERY DAY"
+      ],
+      "sub": "voice notes, not typing",
+      "tagline": "Never Miss What Matters."
+    },
+    "s_mother_elder": {
+      "image": "ad_s_mother_elder",
+      "layout": "selfie",
+      "photo": "ai_mother_elder.png",
+      "screen": "chats_liquid",
+      "phone_box": [
+        590,
+        360,
+        790,
+        690
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.3,
+      "accent": "#F0A63A",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "MY CHILDREN",
+        "ARE ONE",
+        "TAP AWAY"
+      ],
+      "sub": "simple enough for me",
+      "tagline": "Made for every generation."
+    },
+    "s_parents_together": {
+      "image": "ad_s_parents_together",
+      "layout": "selfie",
+      "photo": "ai_parents_together.png",
+      "screen": "careshield_liquid",
+      "phone_box": [
+        680,
+        360,
+        860,
+        700
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.3,
+      "accent": "#8FD3A0",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "WE'RE FINE.",
+        "THE APP",
+        "TELLS THEM."
+      ],
+      "sub": "gentle. optional. never an alarm.",
+      "tagline": "Quiet care for parents."
+    },
+    "s_sisters": {
+      "image": "ad_s_sisters",
+      "layout": "selfie",
+      "photo": "ai_sisters.png",
+      "screen": "background",
+      "phone_box": [
+        480,
+        440,
+        680,
+        740
+      ],
+      "focus_x": 0.5,
+      "focus_y": 0.35,
+      "accent": "#F0578F",
+      "headline_size": 92,
+      "headline_top": 52,
+      "headline_lines": [
+        "ONE CHAT.",
+        "TWO CITIES.",
+        "ZERO DRAMA."
+      ],
+      "sub": "our chat, our colours",
+      "tagline": "Never Miss What Matters."
+    },
+    "l_grandmother": {
+      "image": "ad_l_grandmother",
+      "layout": "lifestyle",
+      "photo": "ai_grandmother_grandchild.png",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#F0A63A",
+      "align": "left",
+      "focus": "50% 35%",
+      "headline_lines": [
+        "Some laughs",
+        "are worth",
+        "keeping."
+      ],
+      "copy": "Family Moments is a private album inside PulseSoul — no strangers, no likes, no algorithm. Just the people who were there.",
+      "cta": "Download PulseSoul"
+    },
+    "l_mother_alone": {
+      "image": "ad_l_mother_alone",
+      "layout": "lifestyle",
+      "photo": "ai_mother_alone_home.png",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#7FB0F0",
+      "align": "left",
+      "focus": "50% 30%",
+      "headline_lines": [
+        "Not watching.",
+        "Just there",
+        "if it's quiet."
+      ],
+      "copy": "CareShield asks a parent's phone first, gently. It nudges you only if the quiet continues. Optional, and never an alarm.",
+      "cta": "Download PulseSoul"
+    },
+    "l_parents_waiting": {
+      "image": "ad_l_parents_waiting",
+      "layout": "lifestyle",
+      "photo": "ai_parents_waiting.png",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#F0A63A",
+      "align": "left",
+      "focus": "50% 45%",
+      "headline_lines": [
+        "They don't",
+        "want much.",
+        "Just a call."
+      ],
+      "copy": "PulseSoul makes calling home free and simple — voice, video, or a two-minute voice note. No minutes, no fuss.",
+      "cta": "Download PulseSoul"
+    },
+    "l_three_gen": {
+      "image": "ad_l_three_gen",
+      "layout": "lifestyle",
+      "photo": "ai_family_three_gen.png",
+      "screen": "card_chats",
+      "card": false,
+      "accent": "#8FD3A0",
+      "align": "left",
+      "focus": "50% 45%",
+      "headline_lines": [
+        "Three",
+        "generations.",
+        "One chat."
+      ],
+      "copy": "Grandparents who prefer voice notes. Cousins in four cities. A group that never sleeps. PulseSoul was built for exactly this.",
+      "cta": "Download PulseSoul"
     }
   }
 }
