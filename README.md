@@ -192,3 +192,30 @@ they are enforced in code rather than left to memory.
 The renderer scales your art to fit and fills the leftover space with a
 blurred copy of the same image, so the background gradient just continues. It
 draws nothing.
+
+## Festival greetings
+
+On Diwali, Holi, Raksha Bandhan, Independence Day and fifteen other occasions,
+Facebook and Instagram post a greeting instead of the marketing post that was
+due. One post that day, at the first slot, then silence until tomorrow. The
+marketing post is not consumed -- the queue does not advance -- so it goes out
+at the next slot instead.
+
+    content/festivals.json      the greetings and the dated calendar
+    tools/make_greeting.py      rebuilds the cards
+    core/festivals.py           the date lookup and the once-a-day guard
+
+Only Facebook and Instagram take part. LinkedIn, Bluesky and Mastodon are left
+out on purpose: a Diwali greeting reads warmly to family-app followers in India
+and as noise to a global feed.
+
+**The calendar is hand-dated and it will run out.** Hindu festivals follow a
+lunar calendar, so no code can compute them -- every date in the file was
+checked against a published panchang for that specific year. `tools/check.py`
+warns when fewer than 90 days remain and fails outright when the list is empty.
+When that happens, look the dates up. Do not estimate them: a Diwali greeting
+posted a day late is worse than none at all.
+
+The cards are typographic -- the brand gradient, Poppins, and nothing drawn.
+They are built 1080x1350 rather than 1080x1920, because with no phone in the
+frame the taller shape left a third of the card empty.

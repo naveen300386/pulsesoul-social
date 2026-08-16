@@ -14,7 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from autopost import PROTECTED, compose, load_config, voice_for  # noqa: E402
-from core import queue, schedule  # noqa: E402
+from core import festivals, queue, schedule  # noqa: E402
 from platforms import ALL  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -104,6 +104,59 @@ def main() -> int:
                     problems.append(
                         f"{post['id']} on {platform.name} ({voice}): '{phrase}' was in the copy but got dropped to fit"
                     )
+
+    # --- festival greetings ------------------------------------------------
+    # These are hand-dated: a lunar festival cannot be computed, so the file
+    # goes stale silently unless something shouts about it.
+    fest = festivals.load()
+    known_platforms = {p.name for p in ALL}
+    for name in fest.get("platforms", []):
+        if name not in known_platforms:
+            problems.append(f"festivals.json lists '{name}', which is not a platform this project supports")
+
+    for key, greeting in (fest.get("greetings") or {}).items():
+        for field in ("image", "card_title", "card_line", "english", "hinglish"):
+            if not str(greeting.get(field, "")).strip():
+                problems.append(f"festival '{key}': missing {field}")
+        stem = greeting.get("image", "")
+        if stem and not (ROOT / "assets" / "screenshots" / f"{stem}.png").exists():
+            problems.append(f"festival '{key}': assets/screenshots/{stem}.png missing -- run tools/make_greeting.py")
+        if stem:
+            for shape in ("sq", "p45", "pin"):
+                if not (ROOT / "rendered" / f"{stem}__{shape}.jpg").exists():
+                    problems.append(f"festival '{key}': rendered/{stem}__{shape}.jpg missing -- run tools/render_images.py")
+        blob = f"{greeting.get('english', '')} {greeting.get('hinglish', '')}".lower()
+        for phrase, why in FORBIDDEN:
+            if phrase in blob and not any(ok in blob for ok in ALLOWED_AROUND.get(phrase, ())):
+                problems.append(f"festival '{key}': says '{phrase}' -- {why}")
+        fake = {"id": f"festival:{key}", "english": greeting.get("english", ""),
+                "hinglish": greeting.get("hinglish", "")}
+        for platform in ALL:
+            if platform.name not in fest.get("platforms", []):
+                continue
+            for voice in ("english", "hinglish"):
+                text = compose(fake, platform, cfg, voice=voice)
+                if platform.limit and len(text) > platform.limit:
+                    problems.append(f"festival '{key}' on {platform.name} ({voice}): {len(text)} chars, "
+                                    f"over the {platform.limit} limit")
+
+    from datetime import datetime, timezone  # noqa: E402
+    for stamp, key in (fest.get("dates") or {}).items():
+        try:
+            datetime.strptime(stamp, "%Y-%m-%d")
+        except ValueError:
+            problems.append(f"festivals.json date '{stamp}' is not YYYY-MM-DD")
+            continue
+        if key not in (fest.get("greetings") or {}):
+            problems.append(f"festivals.json date {stamp} points at '{key}', which has no greeting")
+
+    if fest.get("dates"):
+        left = festivals.days_of_calendar_left(datetime.now(timezone.utc))
+        if left <= 0:
+            problems.append("the festival calendar has run out -- every future festival will pass in silence")
+        elif left < 90:
+            warnings.append(f"the festival calendar runs out in {left} days; look up next year's dates "
+                            f"and add them to content/festivals.json (never guess a lunar date)")
 
     # --- schedule sanity ---------------------------------------------------
     # These checks exist because a one-character typo used to silence a whole

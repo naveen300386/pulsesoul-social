@@ -44,8 +44,14 @@ def shoot(html: Path, png: Path, w: int, h: int) -> Path:
     _check_positioning(html.read_text(encoding="utf-8"), html)
     png.parent.mkdir(parents=True, exist_ok=True)
     png.unlink(missing_ok=True)          # never let a stale file look like success
+    # --virtual-time-budget: let fonts and images finish loading before the
+    # capture. Without it the screenshot races the @font-face load, and a page
+    # with a large photo in it comes out with EMPTY text bubbles -- the frame
+    # was taken before Poppins arrived. Intermittent, so it looks like a fluke
+    # until it lands in a published card.
     r = subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--no-sandbox", "--hide-scrollbars",
                         "--force-device-scale-factor=1", f"--window-size={w},{h + SLACK}",
+                        "--virtual-time-budget=6000", "--run-all-compositor-stages-before-draw",
                         f"--screenshot={png}", f"file://{html.resolve()}"],
                        capture_output=True, timeout=120)
     if r.returncode != 0 or not png.exists():

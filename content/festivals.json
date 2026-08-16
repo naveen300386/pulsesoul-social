@@ -1,0 +1,447 @@
+{
+  "_readme": [
+    "Festival greetings for Facebook and Instagram.",
+    "",
+    "On a date listed in 'dates', those two accounts post the matching greeting",
+    "at their first slot of the day INSTEAD of the queued marketing post, and",
+    "stay quiet for the rest of that day. The marketing post is not consumed --",
+    "the queue does not advance -- so it simply goes out at the next slot.",
+    "",
+    "Hindu festival dates move with the lunar calendar, so they cannot be",
+    "computed: every date here was checked against a published panchang for",
+    "that specific year. When this list runs out, tools/check.py starts warning.",
+    "Do not guess a date; look it up.",
+    "",
+    "Cards are typographic -- background plus Poppins, no drawn artwork.",
+    "Rebuild them with: python tools/make_greeting.py"
+  ],
+  "platforms": [
+    "facebook",
+    "instagram"
+  ],
+  "greetings": {
+    "diwali": {
+      "image": "greeting_diwali",
+      "card_title": "Happy Diwali",
+      "card_line": "May your family be a little less far apart",
+      "english": "Every house will be full of light tonight.\n\nThe one that matters is the call you make to the person who is not in the room — the one who moved away for work, the one who could not travel this year, the one you keep meaning to ring.\n\nHappy Diwali from PulseSoul. May your family be a little less far apart tonight.",
+      "hinglish": "Aaj har ghar roshan hoga.\n\nPar sabse zaroori wo call hai jo us insaan ko jaati hai jo aaj kamre mein nahi hai — jo kaam ke liye door chala gaya, jo is baar aa nahi paaya, jisse baat karne ka soch kar aap bhool jaate hain.\n\nPulseSoul ki taraf se Diwali ki shubhkamnayein. Aaj parivaar thoda paas aa jaaye.",
+      "chat": {
+        "from": "Priya",
+        "colour": "#E0788A",
+        "time": "07:40",
+        "reply_time": "07:42",
+        "message": "Tumhara diya bhi jala diya 🪔 Jab tak nahi aate, jalta rahega.",
+        "reply": "Aa raha hoon 🙏 Video call karte hain abhi",
+        "earlier": {
+          "out": "Kal kitne baje aa rahe ho sab?",
+          "in": "Shaam tak. Mithai le aana 😄"
+        },
+        "photo": "diwali.jpg"
+      },
+      "palette": [
+        "#0A0806",
+        "#F2A33A"
+      ]
+    },
+    "dhanteras": {
+      "image": "greeting_dhanteras",
+      "card_title": "Happy Dhanteras",
+      "card_line": "The real wealth is who picks up your call",
+      "english": "Dhanteras is about what you bring home.\n\nAfter a certain age you notice the real wealth is the list of people who answer when you ring. That list does not grow on its own — it is kept alive by small messages on ordinary days.\n\nHappy Dhanteras from PulseSoul.",
+      "hinglish": "Dhanteras us cheez ke baare mein hai jo aap ghar laate hain.\n\nEk umar ke baad samajh aata hai ki asli daulat wo log hain jo aapka phone uthate hain. Ye list apne aap nahi badhti — aam dinon ke chhote messages hi ise zinda rakhte hain.\n\nPulseSoul ki taraf se Dhanteras ki shubhkamnayein.",
+      "chat": {
+        "from": "Aarav",
+        "colour": "#E0894F",
+        "photo": "dhanteras.jpg",
+        "message": "Aaj ki puja ho gayi 🪔 Tumhare naam ka bhi diya rakha hai.",
+        "reply": "Thank you papa 🙏 Shaam ko call karta hoon",
+        "time": "18:40",
+        "reply_time": "18:44"
+      },
+      "palette": [
+        "#0A0806",
+        "#F0B24A"
+      ]
+    },
+    "bhaidooj": {
+      "image": "greeting_bhaidooj",
+      "card_title": "Happy Bhai Dooj",
+      "card_line": "Some bonds need only one message",
+      "english": "Bhai Dooj asks very little: show up, sit down, eat something.\n\nIf distance makes that impossible this year, a call is not a poor substitute. It is the whole thing, just carried differently.\n\nHappy Bhai Dooj from PulseSoul.",
+      "hinglish": "Bhai Dooj zyada nahi maangta: aa jaao, baith jaao, kuch kha lo.\n\nAgar is baar doori ki wajah se ye mumkin nahi, to call koi kam nahi hai. Wahi baat hai, bas alag tareeke se pahunchti hai.\n\nPulseSoul ki taraf se Bhai Dooj ki shubhkamnayein.",
+      "chat": {
+        "from": "Meera",
+        "colour": "#6E76D8",
+        "photo": "bhaidooj.jpg",
+        "message": "Tumhare bina thali adhoori hai bhai 🙏 Ye photo bhej rahi hoon, tilak video call pe.",
+        "reply": "5 minute mein call karta hoon didi ❤️",
+        "time": "10:12",
+        "reply_time": "10:13"
+      },
+      "palette": [
+        "#0A0708",
+        "#F0A050"
+      ]
+    },
+    "rakhi": {
+      "image": "greeting_rakhi",
+      "card_title": "Happy Raksha Bandhan",
+      "card_line": "A thread is a promise you keep all year",
+      "english": "The thread takes a second to tie and a year to honour.\n\nMost of that year is not dramatic. It is answering the phone. It is noticing she has gone quiet. It is the message that says nothing much at all.\n\nHappy Raksha Bandhan from PulseSoul.",
+      "hinglish": "Dhaaga bandhne mein ek pal lagta hai, nibhane mein poora saal.\n\nAur wo saal koi filmi nahi hota. Bas phone uthana. Ye dhyaan rakhna ki wo kuch dinon se chup hai. Wo message jismein khaas kuch hota bhi nahi.\n\nPulseSoul ki taraf se Raksha Bandhan ki shubhkamnayein.",
+      "chat": {
+        "from": "Meera",
+        "colour": "#6E76D8",
+        "time": "09:05",
+        "reply_time": "09:07",
+        "message": "Tumhari rakhi taiyaar hai bhai 🧵 Courier se aa rahi hai, pehen lena!",
+        "reply": "Mil gayi ✅ Abhi baandh raha hoon, photo aa rahi hai",
+        "earlier": {
+          "out": "Rakhi pe aa nahi paunga is baar 😔",
+          "in": "Koi baat nahi, main bhej deti hoon"
+        },
+        "photo": "rakhi.jpg"
+      },
+      "palette": [
+        "#0A080B",
+        "#E8A0BE"
+      ]
+    },
+    "holi": {
+      "image": "greeting_holi",
+      "card_title": "Happy Holi",
+      "card_line": "Some things are easier said in colour",
+      "english": "Holi is the one day nobody stands on ceremony.\n\nOld arguments get buried under colour, and people who had not spoken in months end up laughing on the same street. Worth remembering the rest of the year too.\n\nHappy Holi from PulseSoul.",
+      "hinglish": "Holi wo ek din hai jab koi formality nahi bachti.\n\nPurane jhagde rang ke neeche dab jaate hain, aur jo log mahinon se nahi bole, wo ek hi gali mein saath haste mile jaate hain. Ye baat baaki saal bhi yaad rakhne laayak hai.\n\nPulseSoul ki taraf se Holi ki shubhkamnayein.",
+      "chat": {
+        "from": "Rohan",
+        "colour": "#6BBE8E",
+        "photo": "holi.jpg",
+        "message": "Bhai rang tumhare liye rakh liya hai 🎨 Video call pe hi laga denge 😄",
+        "reply": "Haha aa raha hoon, bachke rehna 😂",
+        "time": "09:50",
+        "reply_time": "09:52"
+      },
+      "palette": [
+        "#08080B",
+        "#F06AA0"
+      ]
+    },
+    "janmashtami": {
+      "image": "greeting_janmashtami",
+      "card_title": "Happy Janmashtami",
+      "card_line": "The house feels fuller when everyone calls",
+      "english": "Janmashtami is a house full of noise — bells, sweets, children awake far too late.\n\nIf your family is spread across three cities now, the noise still counts when it comes down a phone line.\n\nHappy Janmashtami from PulseSoul.",
+      "hinglish": "Janmashtami matlab ghar bhar ka shor — ghanti, mithai, bacche jo der raat tak jaage rehte hain.\n\nAgar aaj aapka parivaar teen shehron mein bata hua hai, to wo shor phone par bhi utna hi asli hai.\n\nPulseSoul ki taraf se Janmashtami ki shubhkamnayein.",
+      "chat": {
+        "from": "Priya",
+        "colour": "#E0788A",
+        "photo": "janmashtami.jpg",
+        "message": "Jhula sajaya hai 🌸 Raat 12 baje jaagna hai, call kar lena.",
+        "reply": "Zaroor maa, alarm laga liya 🙏",
+        "time": "19:20",
+        "reply_time": "19:23"
+      },
+      "palette": [
+        "#080810",
+        "#7FA8F0"
+      ]
+    },
+    "ganesh": {
+      "image": "greeting_ganesh",
+      "card_title": "Ganpati Bappa Morya",
+      "card_line": "New beginnings go better with family watching",
+      "english": "Ganesh Chaturthi begins things.\n\nWhatever you are starting this year — a job, a move, a small business nobody has heard of yet — it goes better when the people at home know about it.\n\nGanpati Bappa Morya, from PulseSoul.",
+      "hinglish": "Ganesh Chaturthi shuruaat ka tyohaar hai.\n\nIs saal aap jo bhi shuru kar rahe hain — naya kaam, naya shehar, ya koi chhota business jiske baare mein abhi kisi ko pata nahi — wo tab behtar chalta hai jab ghar walon ko pata ho.\n\nGanpati Bappa Morya. PulseSoul ki taraf se.",
+      "chat": {
+        "from": "Kabir",
+        "colour": "#8B8FE3",
+        "photo": "ganesh.jpg",
+        "message": "Bappa aa gaye ghar 🙏 Is baar tum nahi ho, isliye photo bhej raha hoon.",
+        "reply": "Ganpati Bappa Morya! Visarjan pe pakka aaunga",
+        "time": "11:05",
+        "reply_time": "11:08"
+      },
+      "palette": [
+        "#0A0806",
+        "#F0A03C"
+      ]
+    },
+    "navratri": {
+      "image": "greeting_navratri",
+      "card_title": "Happy Navratri",
+      "card_line": "Nine nights, nine reasons to call home",
+      "english": "Nine nights of getting ready, dancing, eating late and starting again.\n\nSomewhere in those nine days is a good reason to ring the people who taught you the steps.\n\nHappy Navratri from PulseSoul.",
+      "hinglish": "Nau raatein — taiyaari, garba, der raat khana, aur agle din phir wahi.\n\nIn nau dinon mein kahin na kahin wo bahana zaroor milega jinhone aapko ye sab sikhaya tha, unhe phone karne ka.\n\nPulseSoul ki taraf se Navratri ki shubhkamnayein.",
+      "chat": {
+        "from": "Ananya",
+        "colour": "#C98BB0",
+        "photo": "navratri.jpg",
+        "message": "Aaj garba hai society mein 💃 Tumhare bina team incomplete lag rahi hai.",
+        "reply": "Video call karo raat ko, main wahi se dance karungi 😄",
+        "time": "17:30",
+        "reply_time": "17:33"
+      },
+      "palette": [
+        "#0A070C",
+        "#E86AB0"
+      ]
+    },
+    "dussehra": {
+      "image": "greeting_dussehra",
+      "card_title": "Happy Dussehra",
+      "card_line": "Distance between people burns easiest",
+      "english": "Dussehra is about burning what should not be carried any further.\n\nMost families are carrying something small — a misunderstanding nobody has bothered to fix, a call nobody wants to make first. Today is a decent excuse to make it.\n\nHappy Dussehra from PulseSoul.",
+      "hinglish": "Dussehra us cheez ko jalane ka din hai jo aage nahi le jaani chahiye.\n\nHar parivaar kuch na kuch chhota utha ke chal raha hota hai — koi galatfehmi jo kisi ne sudhaari nahi, koi call jo pehle karne se sab katrate hain. Aaj wo call karne ka accha bahana hai.\n\nPulseSoul ki taraf se Dussehra ki shubhkamnayein.",
+      "chat": {
+        "from": "Aarav",
+        "colour": "#E0894F",
+        "photo": "dussehra.jpg",
+        "message": "Ravan dahan dekhne aaye hain 🔥 Tum bachpan mein sabse aage khade hote the.",
+        "reply": "Yaad hai papa 😊 Video call kijiye na",
+        "time": "19:15",
+        "reply_time": "19:17"
+      },
+      "palette": [
+        "#0A0806",
+        "#F08A3A"
+      ]
+    },
+    "karva": {
+      "image": "greeting_karva",
+      "card_title": "Happy Karva Chauth",
+      "card_line": "Waiting is easier when you can see them",
+      "english": "A day built entirely around one person keeping another in mind.\n\nWhatever you think of the fast, that part is worth keeping.\n\nHappy Karva Chauth from PulseSoul.",
+      "hinglish": "Ek poora din jiska matlab bas itna hai ki koi kisi ko yaad rakh raha hai.\n\nVrat ke baare mein aapki jo bhi raay ho, ye baat sambhaal ke rakhne laayak hai.\n\nPulseSoul ki taraf se Karva Chauth ki shubhkamnayein.",
+      "chat": {
+        "from": "Meera",
+        "colour": "#6E76D8",
+        "photo": "karva.jpg",
+        "message": "Mehendi lag gayi 🌙 Chaand nikle to tumhe hi pehle call karungi.",
+        "reply": "Main bhi chhat pe wait kar raha hoon 😊",
+        "time": "16:40",
+        "reply_time": "16:42"
+      },
+      "palette": [
+        "#0A0810",
+        "#C98BE8"
+      ]
+    },
+    "chhath": {
+      "image": "greeting_chhath",
+      "card_title": "Happy Chhath Puja",
+      "card_line": "Four days that bring everyone home",
+      "english": "Chhath empties cities and fills villages.\n\nFor everyone who could not get a ticket this year: the ghat is far away, but the people are one call closer than they feel.\n\nHappy Chhath Puja from PulseSoul.",
+      "hinglish": "Chhath par shehar khaali ho jaate hain aur gaon bhar jaate hain.\n\nJinhe is baar ticket nahi mila, unke liye: ghat door hai, par log utne door nahi jitna lagta hai — bas ek call ki doori par hain.\n\nPulseSoul ki taraf se Chhath Puja ki shubhkamnayein.",
+      "chat": {
+        "from": "Priya",
+        "colour": "#E0788A",
+        "photo": "chhath.jpg",
+        "message": "Ghat pe aaye hain, subah ka arghya hai 🌅 Tumhare liye bhi prarthana ki.",
+        "reply": "Thank you maa 🙏 Agle saal pakka aaunga",
+        "time": "06:10",
+        "reply_time": "06:14"
+      },
+      "palette": [
+        "#0A0806",
+        "#F0A050"
+      ]
+    },
+    "sankranti": {
+      "image": "greeting_sankranti",
+      "card_title": "Happy Makar Sankranti",
+      "card_line": "Someone has to hold the other end",
+      "english": "Sankranti is the first festival of the year and the least complicated.\n\nSun, sweets, a rooftop, and somebody holding the other end of the string. That last part is the whole idea.\n\nHappy Makar Sankranti from PulseSoul.",
+      "hinglish": "Sankranti saal ka pehla tyohaar hai aur sabse simple bhi.\n\nDhoop, til-gud, chhat, aur koi jo dhaage ka doosra sira pakde ho. Asli baat wahi aakhri wali hai.\n\nPulseSoul ki taraf se Makar Sankranti ki shubhkamnayein.",
+      "chat": {
+        "from": "Rohan",
+        "colour": "#6BBE8E",
+        "photo": "sankranti.jpg",
+        "message": "Chhat pe patang udai 🪁 Tumhari wali abhi bhi sabse upar hai 😄",
+        "reply": "Haha dhaaga mat kaatne dena!",
+        "time": "12:30",
+        "reply_time": "12:32"
+      },
+      "palette": [
+        "#07090C",
+        "#6AB8F0"
+      ]
+    },
+    "shivratri": {
+      "image": "greeting_shivratri",
+      "card_title": "Happy Maha Shivratri",
+      "card_line": "A quiet night to check on someone",
+      "english": "A night for staying awake and being quiet at the same time.\n\nIf you are up anyway, send a message to whoever came to mind while you were reading this.\n\nHappy Maha Shivratri from PulseSoul.",
+      "hinglish": "Ek raat jo jaagne ki bhi hai aur shaant rehne ki bhi.\n\nAgar jaag hi rahe hain, to jo naam ye padhte hue dimaag mein aaya, use ek message bhej dijiye.\n\nPulseSoul ki taraf se Maha Shivratri ki shubhkamnayein.",
+      "chat": {
+        "from": "Aarav",
+        "colour": "#E0894F",
+        "photo": "shivratri.jpg",
+        "message": "Mandir ho aaye 🙏 Raat ko jaagran hai, tum bhi ek diya jala lena.",
+        "reply": "Jala dunga papa. Har Har Mahadev 🙏",
+        "time": "20:05",
+        "reply_time": "20:08"
+      },
+      "palette": [
+        "#08080B",
+        "#8FB8E8"
+      ]
+    },
+    "ramnavami": {
+      "image": "greeting_ramnavami",
+      "card_title": "Happy Ram Navami",
+      "card_line": "Every old story is about going home",
+      "english": "Strip away everything else and the oldest story we tell is about someone finding their way back to their family.\n\nHappy Ram Navami from PulseSoul.",
+      "hinglish": "Sab kuch hata dijiye, to hamari sabse purani kahani bhi yahi hai — koi apne parivaar tak wapas pahunchta hai.\n\nPulseSoul ki taraf se Ram Navami ki shubhkamnayein.",
+      "chat": {
+        "from": "Kabir",
+        "colour": "#8B8FE3",
+        "photo": "ramnavami.jpg",
+        "message": "Mandir mein bahut bheed thi 🙏 Prasad tumhare liye rakh liya hai.",
+        "reply": "Jai Shri Ram 🙏 Sunday aata hoon",
+        "time": "12:15",
+        "reply_time": "12:18"
+      },
+      "palette": [
+        "#0A0806",
+        "#F0A840"
+      ]
+    },
+    "independence": {
+      "image": "greeting_independence",
+      "card_title": "Happy Independence Day",
+      "card_line": "Built in India, for Indian families",
+      "english": "PulseSoul was built in India, by one person, for the way Indian families actually talk — grandparents who prefer voice notes, cousins in four cities, a group that never sleeps.\n\nHappy Independence Day.",
+      "hinglish": "PulseSoul India mein bani hai, ek hi insaan ne banayi hai, aur bilkul usi tarah ke liye jaise Indian parivaar baat karte hain — dadi-nani jo voice note bhejti hain, cousins jo chaar shehron mein hain, aur wo group jo kabhi sota hi nahi.\n\nSwatantrata Diwas ki shubhkamnayein.",
+      "chat": {
+        "from": "Aarav",
+        "colour": "#E0894F",
+        "time": "08:20",
+        "reply_time": "08:22",
+        "message": "Society mein jhanda laga diya 🇮🇳 8:30 baje neeche aa jao",
+        "reply": "Aa raha hoon papa, 2 minute",
+        "earlier": {
+          "out": "Kal chhutti hai, ghar pe hi hoon",
+          "in": "Accha, subah jaldi uthna phir 😄"
+        },
+        "photo": "independence.jpg"
+      },
+      "palette": [
+        "#07090C",
+        "#F0A040"
+      ]
+    },
+    "republic": {
+      "image": "greeting_republic",
+      "card_title": "Happy Republic Day",
+      "card_line": "A country of families, one call at a time",
+      "english": "Republic Day, and a small thought: a country is mostly just a very large number of families trying to stay in touch.\n\nHappy Republic Day from PulseSoul.",
+      "hinglish": "Republic Day par ek chhoti si baat: desh aakhir mein bahut saare parivaaron ka jod hi to hai, jo ek doosre se jude rehne ki koshish kar rahe hain.\n\nPulseSoul ki taraf se Gantantra Diwas ki shubhkamnayein.",
+      "chat": {
+        "from": "Ananya",
+        "colour": "#C98BB0",
+        "photo": "republic.jpg",
+        "message": "India Gate aaye hain 🇮🇳 Parade dekh ke tumhari yaad aayi.",
+        "reply": "Wah! Photo bhejti rehna 😊",
+        "time": "10:30",
+        "reply_time": "10:32"
+      },
+      "palette": [
+        "#07090C",
+        "#F0A040"
+      ]
+    },
+    "gandhi": {
+      "image": "greeting_gandhi",
+      "card_title": "Gandhi Jayanti",
+      "card_line": "Small things, done gently, done daily",
+      "english": "He was right about the small things: gentleness, done daily, adds up to more than one grand gesture.\n\nThat is true of families too.\n\nGandhi Jayanti greetings from PulseSoul.",
+      "hinglish": "Chhoti cheezon ke baare mein unki baat sahi thi: naramī, roz thodi thodi, kisi ek bade kaam se zyada asar karti hai.\n\nParivaaron par bhi yahi laagu hota hai.\n\nPulseSoul ki taraf se Gandhi Jayanti ki shubhkamnayein.",
+      "chat": {
+        "from": "Priya",
+        "colour": "#E0788A",
+        "photo": "gandhi.jpg",
+        "message": "Aaj bapu ki jayanti pe charkha nikala 🧵 Tumhari dadi ka tha.",
+        "reply": "Sambhaal ke rakhna maa, agli baar dekhunga ❤️",
+        "time": "11:00",
+        "reply_time": "11:03"
+      },
+      "palette": [
+        "#0A0906",
+        "#E8C070"
+      ]
+    },
+    "christmas": {
+      "image": "greeting_christmas",
+      "card_title": "Merry Christmas",
+      "card_line": "The good part was the table, not the tree",
+      "english": "Whatever your family celebrates, the shape of this day is familiar everywhere: people who do not meet often, in one room, eating too much.\n\nIf your room is missing someone this year, call them.\n\nMerry Christmas from PulseSoul.",
+      "hinglish": "Aapka parivaar jo bhi manata ho, is din ki shakal har jagah ek jaisi hai: wo log jo aksar nahi milte, ek kamre mein, zaroorat se zyada khaate hue.\n\nAgar is baar aapke kamre mein koi kam hai, to unhe call kijiye.\n\nPulseSoul ki taraf se Merry Christmas.",
+      "chat": {
+        "from": "Meera",
+        "colour": "#6E76D8",
+        "photo": "christmas.jpg",
+        "message": "Ghar pe lights laga di 🎄 Tum aate to aur acchi lagti.",
+        "reply": "Next weekend pakka! Merry Christmas didi 🎁",
+        "time": "20:15",
+        "reply_time": "20:18"
+      },
+      "palette": [
+        "#08080B",
+        "#F0B040"
+      ]
+    },
+    "newyear": {
+      "image": "greeting_newyear",
+      "card_title": "Happy New Year",
+      "card_line": "One resolution worth keeping: call them more",
+      "english": "Most resolutions are about becoming someone else.\n\nHere is an easier one: message the people at home more often than you did last year. It costs nothing and it is the only one anybody will notice.\n\nHappy New Year from PulseSoul.",
+      "hinglish": "Zyadatar resolutions kisi aur insaan ban jaane ke baare mein hote hain.\n\nEk aasaan wala ye hai: ghar walon ko pichle saal se thoda zyada message kijiye. Isme kuch kharch nahi hota, aur sirf yahi ek hai jo logon ko sach mein mehsoos hoga.\n\nPulseSoul ki taraf se Naye Saal ki shubhkamnayein.",
+      "chat": {
+        "from": "Rohan",
+        "colour": "#6BBE8E",
+        "photo": "newyear.jpg",
+        "message": "Happy New Year bhai 🎆 Is saal zyada milenge, promise?",
+        "reply": "Promise. Happy New Year ❤️",
+        "time": "00:02",
+        "reply_time": "00:04"
+      },
+      "palette": [
+        "#08080B",
+        "#F0A050"
+      ]
+    }
+  },
+  "dates": {
+    "2026-08-28": "rakhi",
+    "2026-09-04": "janmashtami",
+    "2026-09-14": "ganesh",
+    "2026-10-02": "gandhi",
+    "2026-10-11": "navratri",
+    "2026-10-20": "dussehra",
+    "2026-10-29": "karva",
+    "2026-11-06": "dhanteras",
+    "2026-11-08": "diwali",
+    "2026-11-11": "bhaidooj",
+    "2026-11-15": "chhath",
+    "2026-12-25": "christmas",
+    "2027-01-01": "newyear",
+    "2027-01-14": "sankranti",
+    "2027-01-26": "republic",
+    "2027-03-06": "shivratri",
+    "2027-03-23": "holi",
+    "2027-04-15": "ramnavami",
+    "2027-08-15": "independence",
+    "2027-08-17": "rakhi",
+    "2027-08-25": "janmashtami",
+    "2027-09-04": "ganesh",
+    "2027-10-02": "gandhi",
+    "2027-10-09": "dussehra",
+    "2027-10-18": "karva",
+    "2027-10-29": "diwali",
+    "2027-10-31": "bhaidooj",
+    "2027-11-04": "chhath",
+    "2027-12-25": "christmas"
+  }
+}

@@ -20,7 +20,7 @@ from pathlib import Path
 
 import yaml
 
-from core import history, log, queue, schedule
+from core import festivals, history, log, queue, schedule
 from platforms import ALL, BY_NAME
 
 ROOT = Path(__file__).resolve().parent
@@ -194,6 +194,7 @@ def run(args) -> int:
 
     targets = [BY_NAME[args.only]] if args.only else ALL
     when = schedule.now_local(cfg, args.now)
+    festival_data = festivals.load()
 
     if args.status:
         log.header(f"Accounts  |  {when:%a %d %b %H:%M} IST")
@@ -236,7 +237,18 @@ def run(args) -> int:
             skipped += 1
             continue
 
-        post = queue.next_for(platform.name, posts, state, phase)
+        # A festival takes over the day on the accounts listed in
+        # festivals.json. It replaces the queued post rather than joining it:
+        # one greeting, at the first slot, then silence until tomorrow. The
+        # marketing post is NOT consumed -- the queue does not advance -- so it
+        # simply goes out at the next slot instead of being lost.
+        festival = festivals.for_date(when, platform.name, festival_data)
+        if festival and festivals.already_sent(platform.name, when, state):
+            log.skip(f"{platform.name}: today's greeting has already gone out")
+            skipped += 1
+            continue
+
+        post = festival or queue.next_for(platform.name, posts, state, phase)
         if not post:
             log.skip(f"{platform.name}: queue is empty for this phase")
             skipped += 1
@@ -271,7 +283,10 @@ def run(args) -> int:
         # notices, a duplicate is public and permanent.
         if slot:
             schedule.record_fire(platform.name, slot_day, slot, state)
-        queue.mark_posted(platform.name, post["id"], state)
+        if festival:
+            festivals.record(platform.name, when, state)
+        else:
+            queue.mark_posted(platform.name, post["id"], state)
         queue.save_state(state)
 
         try:

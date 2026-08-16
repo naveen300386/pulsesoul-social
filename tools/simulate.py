@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 import autopost  # noqa: E402
-from core import history, queue, schedule  # noqa: E402
+from core import festivals, history, queue, schedule  # noqa: E402
 import platforms as platforms_pkg  # noqa: E402
 
 # What SHOULD happen, written out by hand rather than derived from the code
@@ -143,6 +143,19 @@ def main() -> int:
         dropped = lost_pushes = 0
         per_platform_calls = defaultdict(list)
 
+        # A festival day is one post, not two, on the accounts that greet. The
+        # expected count has to know that or a correct run reports as a miss --
+        # and a report that cries wolf is worse than no report.
+        fest = festivals.load()
+        skipped_for_festival = defaultdict(int)
+        for day in range(args.days):
+            date = (start + timedelta(days=day)).strftime("%Y-%m-%d")
+            if date not in (fest.get("dates") or {}):
+                continue
+            for name in fest.get("platforms", []):
+                slots = len(schedule.slots_for(name, start + timedelta(days=day), cfg))
+                skipped_for_festival[name] += max(0, slots - 1)
+
         for hour in range(args.days * 24):
             wake = start + timedelta(hours=hour, minutes=17)  # GitHub fires at :17
 
@@ -209,7 +222,7 @@ def main() -> int:
         total_sent = total_expected = 0
         for f in fakes:
             sent = len(per_platform_calls[f.name])
-            want = round(EXPECTED_PER_WEEK.get(f.name, 0) * weeks)
+            want = round(EXPECTED_PER_WEEK.get(f.name, 0) * weeks) - skipped_for_festival[f.name]
             total_sent += sent
             total_expected += want
             pct = (100 * sent / want) if want else 0
