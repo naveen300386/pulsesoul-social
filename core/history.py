@@ -67,9 +67,13 @@ def platforms_seen() -> set:
     """Platforms that have successfully posted at least once, ever.
 
     Used to tell 'not set up yet' apart from 'was working, now silent'.
+
+    SANDBOX counts as not-seen on purpose. A Pinterest app on Trial access can
+    only make private sandbox pins; treating those as a working account would
+    mean the day it silently stops, nothing complains.
     """
     return {
         e["platform"]
         for e in load()
-        if e.get("platform") and not str(e.get("ref", "")).startswith("FAILED")
+        if e.get("platform") and not str(e.get("ref", "")).startswith(("FAILED", "SANDBOX"))
     }

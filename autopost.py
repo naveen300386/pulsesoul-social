@@ -205,6 +205,7 @@ def run(args) -> int:
                 log.ok(
                     f"{p.name:<10} ready       {done}/{total} sent  |  today: "
                     f"{schedule.describe(p.name, when, cfg)}  |  next: {schedule.next_slot_after(p.name, when, cfg)}"
+                    f"{getattr(p, 'note', lambda: '')()}"
                 )
             else:
                 log.skip(f"{p.name:<10} not set up  needs: {', '.join(p.missing())}")
@@ -219,6 +220,7 @@ def run(args) -> int:
     sent = 0
     failed = 0
     skipped = 0
+    private = []   # posted, but to a place nobody else can see (Pinterest sandbox)
 
     for platform in targets:
         if not platform.available():
@@ -294,6 +296,8 @@ def run(args) -> int:
             where = platform.post(text, post.get("image", ""), cfg["link"])
             log.ok(f"{platform.name}: posted -> {where}")
             sent += 1
+            if str(where).startswith("SANDBOX"):
+                private.append(platform.name)
         except Exception as exc:  # one platform must never take down the rest
             failed += 1
             where = f"FAILED: {exc}"
@@ -331,6 +335,12 @@ def run(args) -> int:
     log.header(f"done in {log.elapsed()}  |  posted {sent}  |  failed {failed}  |  skipped {skipped}")
     if args.dry_run:
         log.info(f"full preview written to {PREVIEW.name}")
+
+    # Said every run, not once at setup. "It posts fine" plus "nobody can see
+    # it" is the kind of thing that runs for six months unnoticed.
+    for name in sorted(set(private)):
+        log.info(f"{name}: that pin is PRIVATE - sandbox mode. Nobody but you can see it. "
+                 f"Clear the PINTEREST_SANDBOX secret once Standard access is approved.")
 
     for name in gone_quiet:
         log.fail(f"{name}: was posting before, now has no credentials - a secret was deleted or renamed")

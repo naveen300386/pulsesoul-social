@@ -3,7 +3,11 @@ Mastodon.
 
 Free, no review. Create an application inside your own Mastodon account's
 settings (Preferences -> Development) and copy the access token.
-MASTODON_INSTANCE looks like https://mastodon.social
+
+MASTODON_INSTANCE looks like https://mastodon.social. Write it without the
+scheme and requests raises "Invalid URL '/api/v2/media': No scheme supplied",
+which reads like a bug in this file rather than a typo in a secret -- so the
+scheme is added here if it is missing instead.
 """
 import time
 
@@ -22,6 +26,8 @@ class Mastodon(Platform):
 
     def post(self, text: str, image_stem: str, link: str) -> str:
         base = self.env("MASTODON_INSTANCE").rstrip("/")
+        if not base.startswith(("http://", "https://")):
+            base = f"https://{base}"
         auth = {"Authorization": f"Bearer {self.env('MASTODON_TOKEN')}"}
         payload = {"status": clip(text, self.limit), "visibility": "public"}
 

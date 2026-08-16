@@ -88,6 +88,16 @@ jobs:
           LINKEDIN_FEED:        ${{ secrets.LINKEDIN_FEED }}
           PINTEREST_TOKEN:      ${{ secrets.PINTEREST_TOKEN }}
           PINTEREST_BOARD_ID:   ${{ secrets.PINTEREST_BOARD_ID }}
+          # Trial access cannot create Pins on the live host -- Pinterest
+          # answers 403 code 29 and points at api-sandbox.pinterest.com.
+          # The sandbox is a separate environment with its OWN token and its
+          # OWN board ids -- a production token there fails to authenticate.
+          # PINTEREST_SANDBOX is a repository VARIABLE, not a secret: GitHub
+          # blanks secret values out of the log wherever they appear, so a
+          # secret whose value is "1" turns every 1 in the log into ***.
+          PINTEREST_SANDBOX:          ${{ vars.PINTEREST_SANDBOX || secrets.PINTEREST_SANDBOX }}
+          PINTEREST_SANDBOX_TOKEN:    ${{ secrets.PINTEREST_SANDBOX_TOKEN }}
+          PINTEREST_SANDBOX_BOARD_ID: ${{ secrets.PINTEREST_SANDBOX_BOARD_ID }}
         run: |
           ARGS=""
           [ "$INPUT_DRY_RUN" = "true" ] && ARGS="$ARGS --dry-run"

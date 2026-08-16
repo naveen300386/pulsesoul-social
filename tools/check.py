@@ -53,6 +53,7 @@ def main() -> int:
     posts = queue.load_posts()
     phase = cfg.get("phase")
     problems = []
+    warnings = []
 
     for post in posts:
         blob = f"{post.get('english', '')} {post.get('hinglish', '')}".lower()
@@ -162,7 +163,6 @@ def main() -> int:
     # These checks exist because a one-character typo used to silence a whole
     # platform while every tool reported success. `weekdays:` instead of
     # `weekday:` fell through to an empty default and posted nothing, forever.
-    warnings = []
 
     if phase not in {p.get("phase") for p in posts}:
         problems.append(f"config.yaml phase '{phase}' is not used by any post in posts.json")

@@ -423,7 +423,9 @@ lets you make → submit for Standard.
 2. <https://developers.pinterest.com/apps/> → create an app → apply for Trial
    access. If it stalls, chase it through Pinterest's app-approval help portal.
 3. Create a board called `PulseSoul`.
-4. Generate a token with `boards:read` and `pins:write`.
+4. Generate a token with `boards:read`, **`boards:write`** and `pins:write`.
+   `boards:write` is needed to create the sandbox board below; a token minted
+   without it has to be generated again.
 5. Get the board id from <https://api.pinterest.com/v5/boards> or the board URL.
 6. Once posting works, apply for **Standard access** with a screen recording.
 
@@ -431,6 +433,57 @@ lets you make → submit for Standard.
 |---|---|
 | `PINTEREST_TOKEN` | the access token |
 | `PINTEREST_BOARD_ID` | the board id |
+| `PINTEREST_SANDBOX_BOARD_ID` | the board id **from the sandbox host** (see below) |
+
+And one repository **variable** — same page, the *Variables* tab, not Secrets:
+
+| Variable name | Value |
+|---|---|
+| `PINTEREST_SANDBOX` | `1` while your app is on Trial access — delete it when Standard is approved |
+
+(A variable rather than a secret on purpose: GitHub blanks secret values out of
+the log wherever they appear, so a secret whose value is `1` can turn every `1`
+in the log into `***`. This flag is not sensitive.)
+
+**Why the sandbox.** On Trial access Pinterest refuses to create Pins on the
+live host at all:
+
+> HTTP 403, code 29 — *Apps with Trial access may not create Pins in
+> production https://api.pinterest.com — use API Sandbox
+> https://api-sandbox.pinterest.com instead.*
+
+`api-sandbox.pinterest.com` is a separate environment with its own boards and
+its own Pins, visible only to you. Your `PulseSoul` board does **not** exist
+over there — it starts empty. The token is the same one.
+
+So make a board on that host and read its id (PowerShell, one block):
+
+```powershell
+$t   = 'PASTE_YOUR_PINTEREST_TOKEN'
+$h   = @{ Authorization = "Bearer $t" }
+$api = 'https://api-sandbox.pinterest.com/v5/boards'
+$board = (Invoke-RestMethod $api -Headers $h).items | Where-Object name -eq 'PulseSoul'
+if (-not $board) {
+  $body  = @{ name = 'PulseSoul'; description = 'PulseSoul' } | ConvertTo-Json
+  $board = Invoke-RestMethod $api -Method Post -Headers $h -ContentType 'application/json' -Body $body
+}
+$board | Select-Object id, name
+```
+
+Put the printed `id` in `PINTEREST_SANDBOX_BOARD_ID`. If that block errors with
+401 or 403, the token is missing `boards:write` — generate it again with all
+three scopes.
+
+Two things the runner does so this cannot rot quietly:
+
+* Sandbox mode **without** `PINTEREST_SANDBOX_BOARD_ID` reads as *not connected
+  yet* and is skipped. It does not try and fail — a failed attempt would use up
+  one of the queued posts on a request that cannot succeed.
+* Every sandbox pin is logged as `SANDBOX ... private, not published`, and the
+  run says so in its summary, every time.
+
+The day Standard access is approved: delete the `PINTEREST_SANDBOX` variable.
+Nothing else changes — `PINTEREST_BOARD_ID` is already the real board.
 
 ---
 
@@ -495,4 +548,8 @@ python autopost.py               # posts for real
 | `HTTP 426` from LinkedIn | the API version in `platforms/linkedin.py` has been sunset — bump `VERSION` |
 | `HTTP 400` from Bluesky | the post was over 300 characters — run `python tools/check.py` |
 | Telegram: `chat not found` | the bot is not an admin of the channel, or the id has `t.me/` in it — it must be exactly `@pulsesoulreal` |
+| `HTTP 403` from Pinterest with `code 29` | the app is on Trial access, which cannot create Pins on the live host — set the `PINTEREST_SANDBOX` variable and a sandbox board id |
+| `HTTP 404` from Pinterest | a production board id was sent to the sandbox host — set `PINTEREST_SANDBOX_BOARD_ID` |
+| Pinterest posts fine but the pins are nowhere on your profile | `PINTEREST_SANDBOX` is still set. Standard access approved? Delete the variable |
+| `Invalid URL '/api/v2/media': No scheme supplied` | `MASTODON_INSTANCE` is empty. It should be `https://mastodon.social` |
 | The whole run is red but some accounts posted | correct behaviour. The ones that worked are recorded and will not repeat; fix the failing one and the next run catches up |
