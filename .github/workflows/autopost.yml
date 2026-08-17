@@ -55,7 +55,7 @@ jobs:
       - name: Load the newest state, not this commit's
         run: |
           git fetch origin "${{ github.ref_name }}" --depth=1
-          git checkout "origin/${{ github.ref_name }}" -- content/state.json content/history.jsonl || true
+          git checkout "origin/${{ github.ref_name }}" -- content/state.json content/history.jsonl content/feed.xml || true
 
       - name: Post
         env:
@@ -127,6 +127,10 @@ jobs:
           mkdir -p /tmp/ap
           cp content/state.json   /tmp/ap/state.json
           cp content/history.jsonl /tmp/ap/history.jsonl
+          # feed.xml too. It is written during the Post step, and the reset
+          # below would otherwise throw the new LinkedIn item away -- which
+          # it silently did, so the Page went quiet while the log said "queued".
+          cp content/feed.xml     /tmp/ap/feed.xml 2>/dev/null || true
 
           for attempt in 1 2 3 4 5; do
             git fetch origin "$BRANCH"
@@ -136,6 +140,7 @@ jobs:
             # and strand the record inside a runner that is about to vanish.
             git reset --hard "origin/$BRANCH"
             cp /tmp/ap/state.json content/state.json
+            cp /tmp/ap/feed.xml   content/feed.xml 2>/dev/null || true
 
             # history is append-only lines, so union = concatenate and dedupe.
             cat content/history.jsonl /tmp/ap/history.jsonl 2>/dev/null \
