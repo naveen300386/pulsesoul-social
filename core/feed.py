@@ -30,6 +30,41 @@ HEADER = """<?xml version="1.0" encoding="UTF-8"?>
 FOOTER = "</channel></rss>\n"
 
 
+RAW = re.compile(r"^https://raw\.githubusercontent\.com/([^/]+)/([^/]+)/([^/]+)/(.+)$")
+
+
+def cdn_url(url: str | None) -> str | None:
+    """Serve the feed's image from GitHub Pages, not raw.githubusercontent.
+
+    raw.githubusercontent.com rate-limits by IP, and Zapier goes out through
+    shared egress addresses already near that ceiling. The LinkedIn step
+    fetches the enclosure, gets GitHub's HTTP 429 "Too Many Requests" page
+    instead of a JPEG, and the Zap fails with an error that reads like
+    LinkedIn's fault. It is not.
+
+    Pages serves the same files from the same repo over Fastly, with no such
+    limit, and it is first-party -- no third-party mirror to go down.
+
+    jsDelivr was the obvious answer and does not work here: it clones the
+    whole repository to mirror it, and at ~430 MB this one is past what it
+    will take. It answers "Failed to fetch ... from GitHub". Do not switch
+    back to it without checking that first.
+
+    REQUIRES Pages to be switched on: Settings -> Pages -> Deploy from a
+    branch -> main / root. Without it these URLs 404.
+
+    Only the feed uses this. Instagram and Threads keep fetching from GitHub
+    directly, because they work and one fetch an hour is nowhere near a limit.
+    """
+    if not url:
+        return url
+    m = RAW.match(url)
+    if not m:
+        return url
+    owner, repo, _ref, path = m.groups()
+    return f"https://{owner.lower()}.github.io/{repo}/{path}"
+
+
 def _existing_items(text: str) -> list[str]:
     return re.findall(r"<item>.*?</item>", text, re.S)
 
@@ -42,6 +77,7 @@ def _first_line(text: str) -> str:
 def append(post_id: str, text: str, image_url: str | None, when: datetime | None = None) -> Path:
     """Add one post to the feed and drop the oldest beyond MAX_ITEMS."""
     when = when or datetime.now(timezone.utc)
+    image_url = cdn_url(image_url)
     digest = hashlib.md5(text.encode()).hexdigest()[:8]
     guid = f"pulsesoul-{post_id}-{digest}"
 
