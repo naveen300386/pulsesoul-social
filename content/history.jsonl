@@ -46,3 +46,4 @@
 {"platform": "linkedin", "post_id": "t11", "slot": "forced", "weekday": "Mon", "posted_at": "2026-08-17T21:29+05:30", "ref": "queued in feed.xml for the PulseSoul Page", "engagement": null}
 {"platform": "linkedin", "post_id": "t12", "slot": "forced", "weekday": "Mon", "posted_at": "2026-08-17T21:50+05:30", "ref": "queued in feed.xml for the PulseSoul Page", "engagement": null}
 {"platform": "facebook", "post_id": "t08", "slot": "09:00", "weekday": "Tue", "posted_at": "2026-08-18T09:27+05:30", "ref": "https://facebook.com/1272833339242313_122120944227389902", "engagement": null}
+{"platform": "telegram", "post_id": "t08", "slot": "11:00", "weekday": "Tue", "posted_at": "2026-08-18T11:14+05:30", "ref": "telegram message 12", "engagement": null}
