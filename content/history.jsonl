@@ -60,3 +60,4 @@
 {"platform": "facebook", "post_id": "t10", "slot": "09:00", "weekday": "Wed", "posted_at": "2026-08-19T09:28+05:30", "ref": "https://facebook.com/1272833339242313_122121313611389902", "engagement": null}
 {"platform": "instagram", "post_id": "t05", "slot": "11:00", "weekday": "Wed", "posted_at": "2026-08-19T11:16+05:30", "ref": "https://www.instagram.com/p/18084807683674316", "engagement": null}
 {"platform": "telegram", "post_id": "t10", "slot": "11:00", "weekday": "Wed", "posted_at": "2026-08-19T11:16+05:30", "ref": "telegram message 14", "engagement": null}
+{"platform": "mastodon", "post_id": "t12", "slot": "13:00", "weekday": "Wed", "posted_at": "2026-08-19T13:24+05:30", "ref": "https://mastodon.social/@pulsesoul/117121092288478934", "engagement": null}
