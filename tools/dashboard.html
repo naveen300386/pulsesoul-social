@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PulseSoul — what has been posted</title>
+<style>
+  :root{
+    --ink:#16141a; --soft:#6b6572; --faint:#a8a2ae;
+    --line:#e6e2ea; --bg:#faf9fb; --card:#fff;
+    --ok:#1d7a4c; --okbg:#e8f6ee;
+    --bad:#b3261e; --badbg:#fdecea;
+    --priv:#8a5a00; --privbg:#fdf3e2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+       color:var(--ink);background:var(--bg);padding:32px 20px 80px}
+  .wrap{max-width:1000px;margin:0 auto}
+  header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+  h1{font-size:26px;font-weight:650;letter-spacing:-.02em}
+  .when{color:var(--faint);font-size:13px}
+  .sub{color:var(--soft);font-size:14px;margin-bottom:24px}
+  button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--card);
+         color:var(--soft);border-radius:8px;padding:5px 12px;cursor:pointer}
+  button:hover{color:var(--ink);border-color:var(--faint)}
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;margin-bottom:34px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .tile b{display:block;font-size:13px;font-weight:600;text-transform:capitalize}
+  .tile .n{font-size:22px;font-weight:650;letter-spacing:-.02em;margin-top:2px}
+  .tile .n small{font-size:12px;font-weight:500;color:var(--faint)}
+  .tile .last{font-size:11.5px;color:var(--faint);margin-top:3px}
+  .tile.dead .n{color:var(--bad)}
+
+  h2.day{font-size:13px;font-weight:600;color:var(--soft);text-transform:uppercase;
+         letter-spacing:.08em;margin:26px 0 10px}
+  .row{display:flex;gap:14px;align-items:flex-start;background:var(--card);
+       border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+  .thumb{width:62px;height:62px;flex:none;border-radius:8px;object-fit:cover;
+         background:#f0eef2;border:1px solid var(--line)}
+  .body{flex:1;min-width:0}
+  .top{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+  .plat{font-weight:600;font-size:14.5px;text-transform:capitalize}
+  .meta{color:var(--faint);font-size:12.5px}
+  .pill{font-size:11px;font-weight:600;border-radius:999px;padding:2px 9px;letter-spacing:.02em}
+  .pill.ok{color:var(--ok);background:var(--okbg)}
+  .pill.bad{color:var(--bad);background:var(--badbg)}
+  .pill.priv{color:var(--priv);background:var(--privbg)}
+  .ref{margin-top:5px;font-size:13px;word-break:break-word}
+  .ref a{color:#2f5bd0}
+  .ref.err{color:var(--bad);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+  .note{color:var(--soft);font-size:13px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line)}
+  .load{color:var(--faint);padding:40px 0;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>What has been posted</h1>
+    <button id="refresh">Refresh</button>
+    <span class="when" id="stamp"></span>
+  </header>
+  <p class="sub">Live from the repo — every post the autoposter has sent, newest first.</p>
+
+  <div class="tiles" id="tiles"></div>
+  <div id="feed"><p class="load">Loading…</p></div>
+
+  <p class="note" id="note"></p>
+</div>
+
+<script>
+const RAW = "https://raw.githubusercontent.com/naveen300386/pulsesoul-social/main/";
+const SHAPE = {facebook:"p45", instagram:"p45", pinterest:"pin",
+               bluesky:"sq", mastodon:"sq", telegram:"sq", threads:"sq", linkedin:"sq"};
+
+const bust = () => "?cb=" + Date.now();
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// A ref is a URL, a plain confirmation, a FAILED line, or a SANDBOX line
+// (a real pin that nobody but the owner can see). Those are three different
+// things and the dashboard must not flatten them into one green tick.
+function status(ref){
+  const r = String(ref || "");
+  if (r.startsWith("FAILED")) return "bad";
+  if (r.startsWith("SANDBOX")) return "priv";
+  return "ok";
+}
+
+function refHtml(ref){
+  const r = String(ref || "");
+  const s = status(r);
+  if (s === "bad") return `<div class="ref err">${esc(r.replace(/^FAILED:\s*/, ""))}</div>`;
+  const url = r.match(/https?:\/\/\S+/);
+  if (url) return `<div class="ref"><a href="${esc(url[0])}" target="_blank" rel="noopener">${esc(url[0])}</a></div>`;
+  return `<div class="ref">${esc(r)}</div>`;
+}
+
+async function load(){
+  document.getElementById("feed").innerHTML = '<p class="load">Loading…</p>';
+  let entries = [], images = {};
+  try {
+    const [h, p] = await Promise.all([
+      fetch(RAW + "content/history.jsonl" + bust()).then(r => r.text()),
+      fetch(RAW + "content/posts.json" + bust()).then(r => r.json()).catch(() => null),
+    ]);
+    entries = h.split("\n").filter(l => l.trim()).map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    const posts = Array.isArray(p) ? p : (p && p.posts) || [];
+    posts.forEach(x => { if (x.id) images[x.id] = x.image; });
+  } catch (e) {
+    document.getElementById("feed").innerHTML =
+      `<p class="load">Could not read the repo (${esc(e.message)}). If it is private, this page cannot see it.</p>`;
+    return;
+  }
+
+  entries.sort((a, b) => String(b.posted_at).localeCompare(String(a.posted_at)));
+
+  // --- per-account tiles ---
+  const by = {};
+  for (const e of entries){
+    const k = e.platform; if (!k) continue;
+    by[k] = by[k] || {ok:0, bad:0, priv:0, last:null};
+    by[k][status(e.ref)]++;
+    if (!by[k].last) by[k].last = e.posted_at;
+  }
+  document.getElementById("tiles").innerHTML = Object.keys(by).sort().map(k => {
+    const t = by[k];
+    const live = t.ok + t.priv;
+    const day = t.last ? String(t.last).slice(0, 10) : "—";
+    return `<div class="tile${t.ok === 0 && t.bad ? " dead" : ""}">
+      <b>${esc(k)}</b>
+      <div class="n">${live}${t.bad ? ` <small>· ${t.bad} failed</small>` : ""}</div>
+      <div class="last">last ${esc(day)}</div>
+    </div>`;
+  }).join("");
+
+  // --- the feed, grouped by day ---
+  let html = "", day = null;
+  for (const e of entries){
+    const d = String(e.posted_at).slice(0, 10);
+    if (d !== day){ day = d; html += `<h2 class="day">${esc(d)}</h2>`; }
+    const time = String(e.posted_at).slice(11, 16);
+    const stem = images[e.post_id];
+    const shape = SHAPE[e.platform] || "sq";
+    const img = stem ? `${RAW}rendered/${encodeURIComponent(stem)}__${shape}.jpg` : "";
+    const s = status(e.ref);
+    const pill = s === "bad" ? '<span class="pill bad">failed</span>'
+               : s === "priv" ? '<span class="pill priv">private · sandbox</span>'
+               : '<span class="pill ok">posted</span>';
+    html += `<div class="row">
+      ${img ? `<img class="thumb" src="${img}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`
+            : `<div class="thumb"></div>`}
+      <div class="body">
+        <div class="top">
+          <span class="plat">${esc(e.platform)}</span>
+          ${pill}
+          <span class="meta">${esc(time)} · ${esc(e.post_id || "")} · ${esc(e.slot || "")}</span>
+        </div>
+        ${refHtml(e.ref)}
+      </div>
+    </div>`;
+  }
+  document.getElementById("feed").innerHTML = html || '<p class="load">Nothing posted yet.</p>';
+
+  document.getElementById("stamp").textContent = "read " + new Date().toLocaleString();
+  const bad = entries.filter(e => status(e.ref) === "bad").length;
+  const priv = entries.filter(e => status(e.ref) === "priv").length;
+  document.getElementById("note").innerHTML =
+    `${entries.length} entries · ${bad} failed · ${priv} private.<br>` +
+    `<b>private · sandbox</b> means the pin was really created, but on Pinterest's sandbox host — ` +
+    `nobody but you can see it until Standard access is approved.`;
+}
+
+document.getElementById("refresh").onclick = load;
+load();
+</script>
+</body>
+</html>

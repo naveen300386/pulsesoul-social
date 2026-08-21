@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><style>
+@font-face{font-family:P;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Regular.ttf')}
+@font-face{font-family:P;font-weight:500;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf')}
+@font-face{font-family:P;font-weight:700;src:url('/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf')}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{width:1080px;height:2280px;font-family:P,sans-serif;overflow:hidden;position:relative;
+     background:#EDE6DB;color:#1E1B16}
+.hdr{height:150px;background:#E3D8C2;display:flex;align-items:center;justify-content:space-between;padding:0 34px}
+.brand{display:flex;align-items:center;gap:16px}
+.mark{width:66px;height:60px}
+.word{font-size:46px;font-weight:700;background:linear-gradient(95deg,#D9822B,#C9A227);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hi{display:flex;gap:38px;align-items:center}
+.hi svg{width:46px;height:46px}
+.me{width:72px;height:72px;border-radius:50%;background:#6E76D8;display:flex;align-items:center;
+    justify-content:center;font-size:32px;font-weight:600;color:#fff;box-shadow:0 0 0 5px #E3D8C2,0 0 0 8px #C9A227}
+.panel{margin:56px 30px 0;background:#F3EDE4;border:1.5px solid #00000010;border-radius:40px;
+       padding:70px 40px 56px;display:flex;flex-direction:column;align-items:center}
+.eyebrow{font-size:27px;font-weight:600;letter-spacing:3px;color:#8A8378;text-transform:uppercase}
+.stage{position:relative;width:520px;height:520px;margin:52px 0 44px;display:flex;
+       align-items:center;justify-content:center}
+.ring{position:absolute;border-radius:50%;border:3px solid #D32F2F;opacity:.18}
+.r1{width:520px;height:520px}
+.r2{width:430px;height:430px;opacity:.28}
+.progress{position:absolute;width:340px;height:340px}
+.btn{width:300px;height:300px;border-radius:50%;
+     background:radial-gradient(circle at 34% 30%,#EF5350,#D32F2F 62%,#B71C1C 100%);
+     box-shadow:0 0 0 14px #F3EDE4,0 0 0 17px #D32F2F44,0 30px 60px -18px #B71C1C99;
+     display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff}
+.btn b{font-size:64px;font-weight:700;letter-spacing:4px}
+.btn span{font-size:23px;font-weight:500;opacity:.92;margin-top:6px}
+.hold{margin-top:6px;font-size:33px;font-weight:600;color:#B4231F}
+.who{margin-top:20px;font-size:30px;color:#6B6459;text-align:center;line-height:1.5}
+.who b{color:#1E1B16;font-weight:700}
+.foot{margin-top:44px;font-size:24px;color:#8A8378;text-align:center;line-height:1.6}
+.dock{position:absolute;left:26px;right:26px;bottom:34px;height:150px;border-radius:75px;
+      background:#EBE3D6;display:flex;align-items:center;justify-content:space-around}
+.tab{display:flex;flex-direction:column;align-items:center;gap:8px;color:#6B6459;font-size:27px;font-weight:500}
+.tab svg{width:44px;height:44px;fill:currentColor}
+.tab.on{color:#1E1B16}
+.tab.on .box{background:#E0A63A;border-radius:38px;padding:12px 48px;margin-bottom:4px;display:inline-block;color:#3A2A08}
+</style></head><body>
+<div class="hdr"><div class="brand"><svg class="mark" viewBox="0 0 48 44">
+ <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#8B5CF6"/><stop offset=".55" stop-color="#EC4899"/><stop offset="1" stop-color="#F97316"/></linearGradient></defs>
+ <path d="M24 3.5C12.6 3.5 3.5 11 3.5 20.2c0 5.3 3 10 7.8 13l-1.6 7.3 8-4.3c2 .5 4.1.7 6.3.7 11.4 0 20.5-7.5 20.5-16.7S35.4 3.5 24 3.5z" fill="none" stroke="url(#g)" stroke-width="3.4"/>
+ <path d="M11.5 20.5h5l2.8-6.2 3.8 12.4 3.2-7.6 2.5 3.8h2.8" fill="none" stroke="#EF4444" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M33.4 17c1.5-1.6 4.1-1.4 5.3.4 1 1.4.7 3.3-.6 4.5l-4.4 4-4.4-4c-1.3-1.2-1.6-3.1-.6-4.5 1.2-1.8 3.8-2 5.3-.4z" fill="#EF4444"/></svg><span class="word">PulseSoul</span></div><div class="hi">
+ <svg viewBox="0 0 24 24" fill="none" stroke="#1E1B16" stroke-width="2"><path d="M11 19l-7-7 7-7M4 12h16"/></svg>
+ <span class="me">M</span></div></div>
+<div class="panel">
+  <div class="eyebrow">Family SOS</div>
+  <div class="stage">
+    <div class="ring r1"></div><div class="ring r2"></div>
+    <svg class="progress" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#E0A63A" stroke-width="4"
+              stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="52"
+              transform="rotate(-90 50 50)"/>
+    </svg>
+    <div class="btn"><b>SOS</b><span>keep holding</span></div>
+  </div>
+  <div class="hold">Hold for 3 seconds</div>
+  <div class="who">Alerts <b>Priya, Rohan +2</b> and shares<br>your live location with them.</div>
+  <div class="foot">Family only &middot; never emergency services</div>
+</div>
+<div class="dock">
+ <div class="tab on"><span class="box"><svg viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="14" rx="3"/><path d="M7 21.2l1.2-3.2h3.4z"/></svg></span>Chats</div>
+ <div class="tab"><svg viewBox="0 0 24 24"><path d="M5.2 3.6h3.9l1.9 4.8-2.8 1.9a12.4 12.4 0 005.5 5.5l1.9-2.8 4.8 1.9v3.9a1.8 1.8 0 01-1.8 1.8A16.8 16.8 0 013.4 5.4a1.8 1.8 0 011.8-1.8z"/></svg>Calls</div>
+ <div class="tab"><svg viewBox="0 0 24 24"><circle cx="8.6" cy="8.2" r="3.1"/><circle cx="16.4" cy="9.4" r="2.5"/><path d="M2.6 19.4c0-3.3 2.7-5.2 6-5.2s6 1.9 6 5.2zM15.4 19.4c0-2 .5-3.4 1.5-4.2 2.6-.3 4.5 1.3 4.5 4.2z"/></svg>Groups</div>
+ <div class="tab"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5.5"><circle cx="12" cy="12" r="8.4"/></svg>Moments</div>
+</div>
+</body></html>

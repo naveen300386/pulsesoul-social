@@ -13,3 +13,10 @@ assets/template/_verify/
 # scratch: safe to delete, never committed
 _to_delete/
 UPDATE.txt
+
+# The CareShield film: videos and score are rebuilt by tools/make_film.py +
+# tools/make_score.py and are far too big for the repo (jsDelivr already
+# refused this repo once for size). Only the tools and end cards are tracked.
+assets/film/*.mp4
+assets/film/score.wav
+assets/film/qc/
