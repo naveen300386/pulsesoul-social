@@ -29,11 +29,12 @@ def load_posts() -> list:
 
 def load_state() -> dict:
     if not STATE.exists():
-        return {"posted": {}, "fired": {}}
+        return {"posted": {}, "fired": {}, "cycle": {}}
     with open(STATE, encoding="utf-8") as f:
         state = json.load(f)
     state.setdefault("posted", {})
     state.setdefault("fired", {})
+    state.setdefault("cycle", {})
     return state
 
 
@@ -84,8 +85,22 @@ def next_for(platform: str, posts: list, state: dict, phase: str | None = None) 
     # Every post in this phase has run at least once -> start the cycle again.
     # Clearing only this pool's ids means switching phase and switching back
     # does not lose your place in the other phase.
+    #
+    # The cycle counter is what makes that reset survive the push. state.json
+    # is union-merged with the remote copy on the way back to the repo, and a
+    # plain union cannot tell "this id belongs to the cycle I just finished"
+    # from "a parallel runner sent this id" -- so it put all twelve ids back
+    # and every platform re-sent ordered[0] forever. Bumping the cycle here
+    # gives the merge the one fact it was missing.
     pool_ids = {p["id"] for p in pool}
     state["posted"][platform] = [i for i in state["posted"].get(platform, []) if i not in pool_ids]
+    cycles = state.get("cycle") or {}
+    state["cycle"] = cycles
+    try:
+        current = int(cycles.get(platform, 0))
+    except (TypeError, ValueError):
+        current = 0          # a hand-edited state must never crash the run
+    cycles[platform] = current + 1
     return ordered[0]
 
 
