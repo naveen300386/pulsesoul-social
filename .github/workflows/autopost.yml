@@ -1,14 +1,55 @@
 name: AutoPost
 
+# ---------------------------------------------------------------------------
+# WHY THIS IS SHAPED THE WAY IT IS
+#
+# Until 26 Aug 2026 this was a plain hourly cron: wake, ask config.yaml who is
+# due, post, exit. It worked for eleven days and then stopped, without a single
+# red run and without one line of code changing.
+#
+# GitHub simply stopped delivering the schedule. Measured on the Actions API:
+#
+#     25 Aug  18 scheduled runs      27 Aug   2 scheduled runs
+#     26 Aug  16 scheduled runs      28 Aug   2 scheduled runs
+#                                    29 Aug   2 scheduled runs
+#
+# Every one of those runs concluded "success". They woke, found nothing inside
+# the 120-minute catch-up window, and exited proud of themselves. Posting fell
+# from 12 a day to 1 a day and the Actions tab stayed green throughout.
+#
+# `cron:` on the free tier is a hint, not a contract, and it is the ONLY part
+# of this system with no redundancy. So it is no longer trusted alone. Four
+# independent things now have to fail before posting stops:
+#
+#   1. THE WATCHDOG LOOP. A run no longer exits after one pass. It stays alive
+#      for WATCH_MINUTES, re-checking the schedule every few minutes. One
+#      delivered cron now covers a whole block of the day instead of one
+#      instant of it, so a slot is missed only if NOTHING woke for hours.
+#   2. TWO CRON ENTRIES at different minutes. GitHub drops them independently.
+#   3. SELF-CHAINING. The last thing a run does is ask for the next one, so the
+#      chain is self-sustaining and the cron is only needed to restart it.
+#      Needs the DISPATCH_TOKEN secret; degrades to a warning without it.
+#   4. repository_dispatch. Any external pinger (cron-job.org, UptimeRobot, a
+#      phone shortcut) can wake this with one HTTP call.
+#
+# And when all four do fail, the health job at the bottom goes red and emails
+# you, instead of the silence that took three days to notice.
+# ---------------------------------------------------------------------------
+
 on:
   schedule:
-    # Wakes every hour and asks config.yaml who is due. Most runs post nothing
-    # and finish in seconds. The real schedule lives in config.yaml, in IST,
-    # per platform -- do not put posting times here.
-    #
-    # Minute 17 on purpose: GitHub's shared scheduler is most congested at :00
-    # and :30, and a congested run can be delayed or dropped entirely.
+    # The real schedule lives in config.yaml, in IST, per platform -- do not
+    # put posting times here. These two only decide how often the runner wakes
+    # up to look. Two entries, well apart, because GitHub drops each one
+    # independently and minute :00 and :30 are the most congested.
     - cron: "17 * * * *"
+    - cron: "43 * * * *"
+
+  # Lets the previous run start the next one, and lets any external pinger
+  # wake this with a single authenticated POST. See SETUP.md.
+  repository_dispatch:
+    types: [tick]
+
   workflow_dispatch:
     inputs:
       dry_run:
@@ -23,17 +64,33 @@ on:
         description: "Post right now, ignoring the peak-time schedule"
         type: boolean
         default: false
+      watch_minutes:
+        description: "Minutes to stay alive re-checking (blank = default, 0 = one pass)"
+        type: string
+        default: ""
 
+# A long-lived run holds this group, so a cron that fires while one is already
+# watching becomes the PENDING successor and starts the moment the current one
+# ends -- the handover keeps coverage continuous. cancel-in-progress stays
+# false: cancelling mid-post is the one way to post without recording it.
+# GitHub keeps only the newest pending run and cancels older ones; cancelled
+# scheduled runs in the log are that, and are expected.
 concurrency:
   group: autopost
   cancel-in-progress: false
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   post:
     runs-on: ubuntu-latest
+    # The hard ceiling on a GitHub job is 6 hours. Stop short of it so the
+    # watchdog exits cleanly and hands over, rather than being killed
+    # mid-cycle with results still only on the runner's disk.
+    timeout-minutes: 350
+
     steps:
       - uses: actions/checkout@v4
 
@@ -57,8 +114,20 @@ jobs:
           git fetch origin "${{ github.ref_name }}" --depth=1
           git checkout "origin/${{ github.ref_name }}" -- content/state.json content/history.jsonl content/feed.xml || true
 
-      - name: Post
+      - name: Post, then keep watching
         env:
+          BRANCH: ${{ github.ref_name }}
+
+          # Set the AUTOPOST_PAUSE repository variable to 1 to stop posting
+          # without disabling the workflow or revoking anything. It also
+          # breaks the self-chain, so this is the off switch.
+          AUTOPOST_PAUSE: ${{ vars.AUTOPOST_PAUSE }}
+
+          # Blank on a cron or a dispatch tick -> the AUTOPOST_WATCH_MINUTES
+          # repository variable, or DEFAULT_WATCH below if that is unset too.
+          INPUT_WATCH: ${{ github.event.inputs.watch_minutes }}
+          VAR_WATCH:   ${{ vars.AUTOPOST_WATCH_MINUTES }}
+
           # Instagram and Threads fetch the image from a URL instead of
           # accepting uploaded bytes, so it has to be publicly readable.
           IMAGE_BASE_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/rendered
@@ -99,73 +168,130 @@ jobs:
           PINTEREST_SANDBOX_TOKEN:    ${{ secrets.PINTEREST_SANDBOX_TOKEN }}
           PINTEREST_SANDBOX_BOARD_ID: ${{ secrets.PINTEREST_SANDBOX_BOARD_ID }}
         run: |
-          ARGS=""
-          [ "$INPUT_DRY_RUN" = "true" ] && ARGS="$ARGS --dry-run"
-          [ "$INPUT_FORCE"   = "true" ] && ARGS="$ARGS --force"
-          if [ -n "$INPUT_ONLY" ]; then
-            python autopost.py $ARGS --only "$INPUT_ONLY"
-          else
-            python autopost.py $ARGS
+          set -u
+
+          if [ "${AUTOPOST_PAUSE:-}" = "1" ]; then
+            echo "AUTOPOST_PAUSE is set -- posting nothing and not chaining."
+            exit 0
           fi
 
-      # always() matters: the Post step exits non-zero when an account fails,
-      # and the accounts that DID post must still have that recorded or they
-      # post the same thing again next hour.
-      #
-      # The retry loop matters more. This push is the ONLY thing that makes
-      # "already posted" durable -- the runner is destroyed afterwards. If it
-      # is allowed to fail, the next run repeats every post this one made.
-      - name: Remember what was posted
-        if: always() && github.event.inputs.dry_run != 'true'
-        run: |
-          BRANCH="${{ github.ref_name }}"
-          git config user.name  "autopost-bot"
-          git config user.email "autopost-bot@users.noreply.github.com"
-          touch content/history.jsonl
+          # 330 minutes = 5.5 hours, inside the 6-hour job ceiling with room
+          # for a slow final cycle. POLL is how often the schedule is
+          # re-checked; a slot is due for at least catch_up_minutes, so this
+          # only has to be small compared to that.
+          DEFAULT_WATCH=330
+          POLL=5
 
-          # Keep this run's results somewhere git cannot touch them.
-          mkdir -p /tmp/ap
-          cp content/state.json   /tmp/ap/state.json
-          cp content/history.jsonl /tmp/ap/history.jsonl
-          # feed.xml too. It is written during the Post step, and the reset
-          # below would otherwise throw the new LinkedIn item away -- which
-          # it silently did, so the Page went quiet while the log said "queued".
-          cp content/feed.xml     /tmp/ap/feed.xml 2>/dev/null || true
+          WATCH="${INPUT_WATCH:-}"
+          case "$WATCH" in ''|*[!0-9]*) WATCH="${VAR_WATCH:-}" ;; esac
+          case "$WATCH" in ''|*[!0-9]*) WATCH="$DEFAULT_WATCH" ;; esac
+          if [ "$WATCH" -gt 340 ]; then WATCH=340; fi
 
-          for attempt in 1 2 3 4 5; do
-            git fetch origin "$BRANCH"
+          ARGS=""
+          if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          if [ "$INPUT_FORCE"   = "true" ]; then ARGS="$ARGS --force"; fi
 
-            # Start from exactly what the remote has, then lay our results back
-            # on top. No rebase, so there is no conflict that can halt the step
-            # and strand the record inside a runner that is about to vanish.
-            git reset --hard "origin/$BRANCH"
-            cp /tmp/ap/state.json content/state.json
-            cp /tmp/ap/feed.xml   content/feed.xml 2>/dev/null || true
+          # A dry run or a --force is somebody watching a screen. One pass,
+          # then out -- nobody wants to hold a terminal open for 5.5 hours.
+          if [ -n "$ARGS" ]; then WATCH=0; fi
 
-            # history is append-only lines, so union = concatenate and dedupe.
-            cat content/history.jsonl /tmp/ap/history.jsonl 2>/dev/null \
-              | awk 'NF && !seen[$0]++' > /tmp/ap/merged.jsonl
-            cp /tmp/ap/merged.jsonl content/history.jsonl
+          END=$(( $(date +%s) + WATCH * 60 ))
+          rc=0
+          cycle=0
 
-            # Union-merge the remote's state INTO ours: a slot that fired on
-            # either side has fired. Worst case a post is skipped, never repeated.
-            python tools/merge_state.py "origin/$BRANCH"
+          while : ; do
+            cycle=$(( cycle + 1 ))
+            echo "::group::cycle $cycle  ($(date -u '+%H:%M') UTC)"
 
-            git add content/state.json content/history.jsonl content/feed.xml
-            if git diff --staged --quiet; then
-              echo "nothing new to record"
-              exit 0
+            if [ -n "$INPUT_ONLY" ]; then
+              python autopost.py $ARGS --only "$INPUT_ONLY" || rc=$?
+            else
+              python autopost.py $ARGS || rc=$?
             fi
 
-            git commit -m "posted $(date -u '+%Y-%m-%d %H:%M') UTC"
-            if git push origin "HEAD:$BRANCH"; then
-              echo "state saved on attempt $attempt"
-              exit 0
+            # Saved every cycle, not once at the end. The whole point of a
+            # long run is that it posts at several different times; if the
+            # record only went back at the end, a runner killed at hour four
+            # would repeat every post it had made.
+            if [ "$INPUT_DRY_RUN" != "true" ]; then
+              bash tools/save_state.sh "$BRANCH" || echo "::warning::state save failed on cycle $cycle"
             fi
-            echo "push failed, retrying (attempt $attempt)"
-            sleep $((attempt * 5))
+
+            echo "::endgroup::"
+
+            NOW=$(date +%s)
+            if [ "$NOW" -ge "$END" ]; then
+              break
+            fi
+
+            SLEEP=$(( POLL * 60 ))
+            REMAIN=$(( END - NOW ))
+            if [ "$SLEEP" -gt "$REMAIN" ]; then SLEEP=$REMAIN; fi
+            sleep "$SLEEP"
           done
 
-          echo "::error::Could not save posting state after 5 attempts."
-          echo "::error::The next run may repeat these posts. Check branch protection on ${{ github.ref_name }}."
-          exit 1
+          echo "watched for $WATCH minutes over $cycle cycles"
+          exit $rc
+
+      # Backstop. The loop saves after every cycle, so this normally prints
+      # "nothing new to record" -- but if the run was cancelled or timed out
+      # mid-cycle, this is what stops the next run repeating the posts.
+      - name: Remember what was posted
+        if: always() && github.event.inputs.dry_run != 'true'
+        run: bash tools/save_state.sh "${{ github.ref_name }}"
+
+      # The chain. GITHUB_TOKEN deliberately cannot start another workflow --
+      # that is GitHub's loop guard -- so this needs a fine-grained PAT with
+      # Contents: read and write on this repo, stored as DISPATCH_TOKEN.
+      # Without it everything above still works; you are just back to relying
+      # on the cron being delivered.
+      - name: Wake the next watcher
+        if: always() && github.event.inputs.dry_run != 'true'
+        env:
+          DISPATCH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
+          AUTOPOST_PAUSE: ${{ vars.AUTOPOST_PAUSE }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -u
+          if [ "${AUTOPOST_PAUSE:-}" = "1" ]; then
+            echo "paused -- not chaining"
+            exit 0
+          fi
+          if [ -z "${DISPATCH_TOKEN:-}" ]; then
+            echo "::warning::DISPATCH_TOKEN is not set, so this run cannot start the next one."
+            echo "::warning::Posting then depends entirely on GitHub delivering the cron, which is what failed in Aug 2026. See SETUP.md."
+            exit 0
+          fi
+          code=$(curl -sS -o /tmp/dispatch.out -w '%{http_code}' \
+            -X POST "https://api.github.com/repos/$REPO/dispatches" \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $DISPATCH_TOKEN" \
+            -d '{"event_type":"tick"}')
+          if [ "$code" = "204" ]; then
+            echo "next watcher requested"
+          else
+            echo "::warning::could not chain the next run (HTTP $code): $(cat /tmp/dispatch.out)"
+          fi
+
+  # Separate job on purpose: it must not be able to stop the posting job, and
+  # it must run whether that job passed, failed or was cancelled. Its only
+  # output is green or red, because a red run is the one alert that reaches
+  # you without you going to look.
+  health:
+    needs: post
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Is it actually posting?
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: python tools/health.py

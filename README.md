@@ -20,11 +20,31 @@ rendered/             the same art reframed for each platform's shape
       ↓
 config.yaml           who posts, and at what time, per platform
       ↓
-autopost.py           wakes hourly, posts whoever is due
+autopost.py           wakes, posts whoever is due, then keeps watching
       ↓
 content/state.json    what has been posted, so nothing repeats
 content/history.jsonl what went out when, so tools/learn.py can improve it
 ```
+
+## Staying alive
+
+`cron:` on GitHub's free tier is a hint, not a promise. In August 2026 delivery
+on this repo fell from ~17 runs a day to 2, without a single red run, and
+posting dropped by 92% for three days before anyone noticed. Four independent
+things now have to fail before that can happen again:
+
+1. **The watchdog loop.** A run stays alive 5.5 hours re-checking the schedule
+   every 5 minutes and pushing state after each cycle, so one delivered cron
+   covers a block of the day rather than one instant of it.
+2. **Two cron entries** at different minutes — GitHub drops each separately.
+3. **The self-chain.** Each run asks for its successor before exiting, so the
+   cron only has to restart a chain that has broken. Needs the `DISPATCH_TOKEN`
+   secret; without it the workflow says so in a warning every run.
+4. **`repository_dispatch`.** Any external pinger can wake it with one POST.
+
+And when all four fail, the health job scores the last 48 hours of slots and
+turns the run red, so you get an email instead of silence. Set the
+`AUTOPOST_PAUSE` repository variable to `1` to stop the whole thing.
 
 ## Posting times
 
@@ -140,7 +160,10 @@ python autopost.py --force               post now, ignoring the schedule
 python autopost.py --only telegram --force
 python autopost.py --dry-run --now "2026-08-19 20:17"   test any moment in time
 python tools/check.py                    validates content and schedule
+python tools/health.py                   is it actually still posting? (red = no)
 python tools/simulate.py --chaos         proves the schedule under a bad runner
+python tools/simulate.py --wakes-per-day 2 --watch 330 --chain --faults
+                                         proves it survives GitHub throttling the cron
 python tools/learn.py --refresh          what your real audience responded to
 python tools/render_images.py            rebuild rendered/ after adding screenshots
 ```

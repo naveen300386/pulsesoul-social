@@ -102,6 +102,19 @@ def main() -> int:
     ap.add_argument("--faults", action="store_true", help="chaos, plus lost responses and lost state pushes")
     ap.add_argument("--brutal", action="store_true",
                     help="faults at absurd rates, to show where the design finally breaks")
+    ap.add_argument("--wakes-per-day", type=int, default=24, metavar="N",
+                    help="how many times GitHub actually delivers the cron. 24 = hourly, "
+                         "as advertised. 2 = what it degraded to in Aug 2026.")
+    ap.add_argument("--watch", type=int, default=0, metavar="MINUTES",
+                    help="minutes each run stays alive re-checking the schedule "
+                         "(the watchdog loop in autopost.yml). 0 = the old exit-immediately run.")
+    ap.add_argument("--poll", type=int, default=5, metavar="MINUTES",
+                    help="how often the watchdog re-checks inside its window")
+    ap.add_argument("--chain", action="store_true",
+                    help="each run asks for the next one before it exits (the DISPATCH_TOKEN "
+                         "self-chain), so coverage continues without waiting for a cron")
+    ap.add_argument("--chain-loss", type=int, default=3, metavar="PCT",
+                    help="how often a chain hand-off fails and only a cron can restart it")
     args = ap.parse_args()
     if args.brutal:
         args.faults = True
@@ -156,22 +169,92 @@ def main() -> int:
                 slots = len(schedule.slots_for(name, start + timedelta(days=day), cfg))
                 skipped_for_festival[name] += max(0, slots - 1)
 
-        for hour in range(args.days * 24):
-            wake = start + timedelta(hours=hour, minutes=17)  # GitHub fires at :17
+        # ---- when does the runner ACTUALLY wake? --------------------------
+        # This used to be "every hour, because cron says so". That assumption
+        # is what broke in Aug 2026: GitHub went from delivering ~17 crons a
+        # day to 2, and nothing in the system noticed, because every run it
+        # did deliver succeeded. --wakes-per-day models the drought.
+        #
+        # --watch models the fix. A delivered run no longer dies immediately;
+        # it stays up and re-checks every --poll minutes, so one delivery
+        # covers a block of hours instead of a single instant.
+        # What GitHub delivers, before anything we do about it.
+        deliveries = []
+        for day in range(args.days):
+            midnight = start + timedelta(days=day)
+            if args.wakes_per_day >= 24:
+                hours = list(range(24))
+            else:
+                # The few deliveries that do arrive land at unhelpful times,
+                # not conveniently on top of the posting slots.
+                step = 24 / max(1, args.wakes_per_day)
+                hours = [int(i * step + rng.next() % max(1, int(step))) % 24
+                         for i in range(args.wakes_per_day)]
+            for hour in sorted(set(hours)):
+                wake = midnight + timedelta(hours=hour, minutes=17)  # GitHub fires at :17
+                if args.chaos:
+                    if rng.next() < 12:                          # ~12% of runs never happen
+                        dropped += 1
+                        continue
+                    wake += timedelta(minutes=rng.next() // 3)   # 0-33 minutes late
+                deliveries.append(wake)
 
-            if args.chaos:
-                if rng.next() < 12:                          # ~12% of runs never happen
-                    dropped += 1
-                    continue
-                wake += timedelta(minutes=rng.next() // 3)   # 0-33 minutes late
+        # Turn deliveries into the windows a runner is actually alive for.
+        # A delivery that lands while a run is already watching does not start
+        # a second run -- the concurrency group makes it the pending successor,
+        # which is the same thing the chain does, so it adds nothing here.
+        finish = start + timedelta(days=args.days)
+        handover = timedelta(minutes=2)     # queue + runner boot
+        windows = []
+        covered_to = start - timedelta(days=1)
+        chain_breaks = 0
+        for wake in sorted(deliveries):
+            if wake <= covered_to:
+                continue
+            at = wake
+            while at < finish:
+                end = at + timedelta(minutes=args.watch)
+                windows.append((at, end))
+                covered_to = end
+                if not args.chain:
+                    break
+                # The hand-off is one API call and it can fail: an expired
+                # DISPATCH_TOKEN, a 5xx, GitHub declining. When it does, the
+                # chain is dead until the next cron restarts it -- which is
+                # exactly why the cron entries stay in the workflow.
+                if rng.next() < args.chain_loss:
+                    chain_breaks += 1
+                    break
+                at = end + handover
 
+        # (moment, fresh_runner). fresh_runner marks the first cycle of a new
+        # run: a brand new machine that has just checked state out of the repo.
+        # Every later cycle is the SAME machine with the same disk, which is
+        # what makes a failed push survivable -- see the push-loss handling
+        # below.
+        wakes = []
+        for at, end in windows:
+            wakes.append((at, True))
+            for offset in range(args.poll, args.watch + 1, args.poll):
+                moment = at + timedelta(minutes=offset)
+                if moment <= end:
+                    wakes.append((moment, False))
+
+        # What the REPO holds, as opposed to what the runner's disk holds.
+        # They diverge exactly when a push is lost.
+        origin_state = (work / "state.json").read_text()
+
+        for wake, fresh_runner in sorted(wakes):
             if args.faults:
                 for f in fakes:
                     if rng.next() < response_loss:
                         f.fail_next_response = True
 
+            if fresh_runner:
+                # actions/checkout, plus the "load the newest state" step
+                (work / "state.json").write_text(origin_state)
+
             before = {f.name: len(f.calls) for f in fakes}
-            snapshot = (work / "state.json").read_text()
 
             autopost.run(SimpleNamespace(
                 dry_run=False, only=None, phase=None, status=False,
@@ -183,11 +266,21 @@ def main() -> int:
                     per_platform_calls[f.name].append((wake, text))
                 f.fail_next_response = False
 
-            # The state push is what makes "already posted" durable. When it
-            # fails, the next run wakes up with the old file.
+            # The state push is what makes "already posted" durable.
+            #
+            # A lost push does NOT roll the runner's own disk back -- the
+            # record is still sitting there and tools/save_state.sh tries again
+            # on the very next cycle. It only bites when the run ENDS with the
+            # record still unpushed, because the next runner then checks out
+            # state that has forgotten those posts and sends them again.
+            #
+            # Modelling it the sloppy way (rolling the file back every time)
+            # invents double posts that cannot happen, and modelling it as
+            # never failing hides the one that can.
             if args.faults and rng.next() < push_loss:
-                (work / "state.json").write_text(snapshot)
                 lost_pushes += 1
+            else:
+                origin_state = (work / "state.json").read_text()
 
         # ---- the checks that matter ---------------------------------------
         problems = []
@@ -214,7 +307,10 @@ def main() -> int:
 
         weeks = args.days / 7
         mode = "faults" if args.faults else ("chaos" if args.chaos else "clean")
-        print(f"\n{args.days} days, mode={mode}"
+        woke = (f"{args.wakes_per_day} cron(s)/day"
+                + (f", each watching {args.watch}m" if args.watch else ", exiting immediately")
+                + (f", self-chained ({chain_breaks} hand-offs lost)" if args.chain else ""))
+        print(f"\n{args.days} days, mode={mode}, {woke}"
               f"{f', {dropped} runs dropped, {lost_pushes} state pushes lost' if args.chaos else ''}\n")
         print(f"{'platform':<11} {'sent':>6} {'expected':>9} {'delivered':>10}   result")
         print("-" * 62)
@@ -233,7 +329,7 @@ def main() -> int:
             elif sent > want:
                 verdict = f"OVER by {sent - want}"
                 problems.append(f"{f.name} sent {sent - want} more than scheduled")
-            elif not args.chaos and sent < want:
+            elif not args.chaos and args.wakes_per_day >= 24 and sent < want:
                 verdict = f"MISSED {want - sent}"
                 problems.append(f"{f.name} missed {want - sent} slots with a perfect runner")
             elif pct < 80:

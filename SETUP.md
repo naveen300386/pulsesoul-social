@@ -524,16 +524,117 @@ python tools/simulate.py          # a fortnight of posting, hour by hour
 **To change the times,** edit `schedule.platforms` in `config.yaml` — not the
 workflow. Times are IST, whole hours only.
 
-**About GitHub's timing:** the free scheduler is shared. Runs land 5–30
-minutes late routinely and occasionally one is dropped — GitHub never retries
-a missed run. That is why each slot stays live for 2 hours rather than needing
-an exact hit. If a slot is missed anyway, nothing is lost: the queue only
-advances on a successful post, so that post goes out at the next slot instead.
+**About GitHub's timing — read this one.** The free scheduler is shared, and
+`cron:` is a hint rather than a promise. Runs land 5–30 minutes late as a
+matter of course, and GitHub never retries a run it drops.
 
-> GitHub disables scheduled workflows on public repos after 60 days of no
+It does not stop at dropping the odd run. Between 26 and 27 August 2026 the
+delivery rate on this repo fell off a cliff and stayed there:
+
+| date | scheduled runs delivered | posts that went out |
+|---|---|---|
+| 25 Aug | 18 | 12 |
+| 26 Aug | 16 | 12 |
+| 27 Aug | **2** | **1** |
+| 28 Aug | **2** | **1** |
+| 29 Aug | **2** | **1** |
+
+Nothing in the code changed, no token expired, and **every single run in the
+Actions tab was green**, because a run that wakes up, finds nothing inside the
+catch-up window and exits is a success. Posting dropped by 92% and the only
+symptom was silence on the accounts.
+
+Three things came out of that, and they are why the workflow looks the way it
+does now:
+
+1. **A run no longer exits after one look.** It stays alive for 5.5 hours,
+   re-checking the schedule every 5 minutes and pushing state after every
+   cycle. One delivered cron now covers a large block of the day.
+2. **Each run asks for the next one before it exits** — see the next section.
+   That makes the chain self-sustaining, and demotes the cron to a way of
+   restarting the chain if it ever breaks.
+3. **A health job scores the last 48 hours of slots** and turns the run red
+   when they are not being filled, so silence sends you an email instead of
+   waiting to be noticed.
+
+Measured with `tools/simulate.py`, on two cron deliveries a day — the drought
+rate, not the healthy rate:
+
+| setup | delivered |
+|---|---|
+| old: exit after one pass | 16% |
+| watchdog loop only | 57% |
+| watchdog + self-chain | 97–100% |
+
+> GitHub also disables scheduled workflows on public repos after 60 days of no
 > activity. This workflow commits `content/state.json` back after every real
-> post, so that timer resets twice a day and will never fire while it is
-> actually posting.
+> post, so that timer resets several times a day and will never fire while it
+> is actually posting.
+
+## The failsafe: DISPATCH_TOKEN (5 minutes, do it)
+
+Without this, posting depends entirely on GitHub delivering the cron — the
+thing that just failed for three days. With it, every run starts its
+successor, so the schedule keeps itself alive.
+
+GitHub deliberately refuses to let the built-in `GITHUB_TOKEN` start another
+workflow run (it is their infinite-loop guard), so this needs a token of your
+own.
+
+1. GitHub → your avatar → **Settings** → **Developer settings** →
+   **Personal access tokens** → **Fine-grained tokens** → **Generate new token**.
+2. Name it `autopost-chain`. **Repository access** → *Only select repositories*
+   → `pulsesoul-social`.
+3. **Repository permissions** → **Contents: Read and write**. Nothing else.
+   That single permission is what `POST /dispatches` requires.
+4. Expiry: pick the longest you are offered, and put a reminder in your
+   calendar a week before. **An expired token breaks the chain silently** —
+   the workflow logs a warning and falls back to the cron.
+5. Copy the token. Repo → **Settings** → **Secrets and variables** →
+   **Actions** → **New repository secret** → name `DISPATCH_TOKEN`, paste, save.
+
+To check it worked: after the next run finishes, the Actions tab should show a
+new run whose trigger reads **repository_dispatch** rather than *Scheduled*.
+The health job also warns if 24 hours pass with no dispatch-triggered run.
+
+**Any external pinger works too**, with or without the token above — useful as
+a third leg. Point cron-job.org or UptimeRobot at:
+
+```
+POST https://api.github.com/repos/naveen300386/pulsesoul-social/dispatches
+Authorization: Bearer <the same fine-grained token>
+Accept: application/vnd.github+json
+Body: {"event_type":"tick"}
+```
+
+**The off switch.** Repo → Settings → Secrets and variables → Actions →
+Variables → new variable `AUTOPOST_PAUSE` = `1`. Posting stops and the chain
+stops requesting successors, without disabling the workflow or touching a
+single token. Delete the variable to start again.
+
+### One honest caveat about the chain
+
+With `DISPATCH_TOKEN` set, a runner is occupied essentially all the time: each
+run holds a machine for 5.5 hours and then immediately asks for another. On a
+public repo that is free and within the concurrency limits, but GitHub's
+acceptable-use terms say Actions is for building, testing and publishing the
+project, and a job that idles round the clock sits closer to the edge of that
+than a job that wakes, posts and leaves.
+
+Two ways to stay well inside it, if you would rather:
+
+- **Leave `DISPATCH_TOKEN` unset.** Each delivered cron still covers 5.5 hours
+  instead of one instant, which took delivery from 16% to 57% in simulation —
+  a large improvement over what is running now, with no continuous occupancy.
+- **Use an external pinger instead of the chain.** cron-job.org (free) posting
+  the `dispatches` call above every hour gives you a reliable trigger *and*
+  short runs. Set `AUTOPOST_WATCH_MINUTES` to something small like `20`, and
+  each ping becomes a brief run, the way the original design intended — except
+  that the trigger is now something that actually fires.
+
+`AUTOPOST_WATCH_MINUTES` (repository variable) sets how long each run stays
+alive, capped at 340 to stay under GitHub's 6-hour job ceiling. Blank means
+330.
 
 ## Running it from your own PC instead
 
