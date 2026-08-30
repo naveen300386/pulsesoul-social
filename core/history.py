@@ -24,7 +24,12 @@ def load() -> list:
     if not HISTORY.exists():
         return []
     entries = []
-    for line in HISTORY.read_text(encoding="utf-8").splitlines():
+    # utf-8-sig, not utf-8: content/history.jsonl was first written on Windows
+    # and carries a byte-order mark. Reading it as plain utf-8 leaves those
+    # three bytes glued to the front of line 1, json.loads rejects it, and the
+    # except below quietly swallows the oldest post in the log -- which is
+    # exactly the kind of loss you never notice.
+    for line in HISTORY.read_text(encoding="utf-8-sig").splitlines():
         line = line.strip()
         if not line:
             continue

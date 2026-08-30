@@ -9,8 +9,9 @@ run in the Actions tab was green the whole time, because a run that wakes,
 finds nothing due and leaves IS a success.
 
 So health is not measured on runs, or on exit codes, or on tokens. It is
-measured on slots that came and went: for every account with credentials, how
-many of the slots config.yaml promised in the last two days actually fired.
+measured on the slots that have come and gone unfilled since the last thing
+that actually worked -- a streak rather than a window, so it goes quiet the
+moment posting resumes instead of staying red for two days after the fix.
 
 Run by the health job after every posting run. Its exit code is the alert --
 GitHub emails the repo owner when a scheduled workflow goes red, and that
@@ -31,19 +32,27 @@ import autopost  # noqa: E402
 from core import history, queue, schedule  # noqa: E402
 from platforms import ALL  # noqa: E402
 
-# How far back to score. Two days is long enough to survive one bad night and
-# short enough that a real outage shows up the same day it starts.
-WINDOW_HOURS = 48
-
-# Below this share of promised slots, something is wrong. Not 100%: a festival
-# day replaces several slots with one greeting, a single slot can legitimately
-# be missed, and an alert that cries wolf gets ignored, which is worse than no
-# alert at all.
-MIN_DELIVERY = 0.60
+# How far back to look for slots at all. Only ever used to bound the search.
+WINDOW_DAYS = 7
 
 # A slot is not late until its catch-up window has closed -- before that it is
 # still perfectly likely to fire.
 GRACE_MINUTES = 30
+
+# Missed slots in a row, counted back from now, before this is an outage
+# rather than one unlucky slot. Roughly half a day of posting.
+STALE_LIMIT = 6
+
+# Same idea for one account while the others are fine, which is a token
+# problem rather than a scheduler problem. Lower, because it is a narrower
+# claim and a wrong one is cheap to check.
+ACCOUNT_STALE_LIMIT = 4
+
+# An account's miss only counts against that account if the system was
+# demonstrably alive around then -- i.e. some OTHER account posted within this
+# many hours of the slot. Otherwise everything was down, and blaming the
+# account sends you hunting a token that is working perfectly.
+COMPANY_HOURS = 3
 
 # How far back an account has to have posted for its silence to count as a
 # fault rather than as "not set up yet".
@@ -62,50 +71,73 @@ def established(now):
     cutoff = (now - timedelta(days=ESTABLISHED_DAYS)).isoformat(timespec="minutes")
     seen = set()
     for entry in history.load():
-        at = str(entry.get("posted_at", ""))
-        if at >= cutoff and str(entry.get("ref", "")).lower().find("failed") != 0:
+        if str(entry.get("posted_at", "")) >= cutoff:
             seen.add(entry.get("platform"))
     return seen
 
 
-def scored_slots(name, now, cfg):
-    """Every slot promised to this account inside the window that is now past saving."""
+def scored_slots(name, now, cfg, state):
+    """Every slot promised to this account that is now past saving, oldest first.
+
+    "Past saving" means its catch-up window has closed. A slot still inside its
+    window is not late, it is pending, and counting it as a miss would set this
+    alarm off every evening at five past the hour.
+    """
     deadline = now - timedelta(minutes=schedule.catch_up_of(cfg) + GRACE_MINUTES)
     out = []
-    for offset in range(-(WINDOW_HOURS // 24) - 1, 1):
+    for offset in range(-WINDOW_DAYS, 1):
         day = now + timedelta(days=offset)
         for slot in schedule.slots_for(name, day, cfg):
             parsed = schedule.parse_slot(slot)
             if not parsed:
                 continue
             when = day.replace(hour=parsed[0], minute=parsed[1], second=0, microsecond=0)
-            if now - timedelta(hours=WINDOW_HOURS) <= when <= deadline:
-                out.append((day, slot))
-    return out
+            if when <= deadline:
+                out.append((when, slot, schedule.already_fired(name, day, slot, state)))
+    return sorted(out)
 
 
-def delivery_report(now, cfg, state):
+def assess(now, cfg, state):
+    """
+    The question is "is it posting NOW", not "how were the last two days".
+
+    The first version of this scored a fixed 48-hour window, and it was wrong
+    in the way alarms usually are wrong. Once the Aug 2026 outage was fixed and
+    every slot was firing again, it stayed red for another two days, because
+    the window still contained the outage. An alarm that stays on after the
+    fault is cleared is one you learn to ignore, which is worse than no alarm.
+
+    So: measure the streak, not the window. Slots that came and went AFTER the
+    last thing that worked. That number is large during an outage and drops to
+    zero the moment posting resumes.
+    """
     live = established(now)
-    rows, promised, fired = [], 0, 0
-    for platform in ALL:
-        if platform.name not in live:
-            rows.append((platform.name, None, None, "never posted / not set up"))
-            continue
-        slots = scored_slots(platform.name, now, cfg)
-        hit = sum(1 for day, slot in slots
-                  if schedule.already_fired(platform.name, day, slot, state))
-        promised += len(slots)
-        fired += hit
-        if not slots:
-            verdict = "nothing scheduled"
-        elif hit == 0:
-            verdict = "SILENT"
-        elif hit < len(slots) * MIN_DELIVERY:
-            verdict = "BEHIND"
-        else:
-            verdict = "ok"
-        rows.append((platform.name, hit, len(slots), verdict))
-    return rows, fired, promised
+    slots = {name: scored_slots(name, now, cfg, state)
+             for name in (p.name for p in ALL) if name in live}
+
+    successes = sorted(when for rows in slots.values() for when, _, fired in rows if fired)
+    last_success = successes[-1] if successes else None
+
+    # Whole system: everything promised since the last thing that worked.
+    stale = sorted(when for rows in slots.values() for when, _, fired in rows
+                   if not fired and (last_success is None or when > last_success))
+
+    # One account: its own misses, but only the ones where somebody else was
+    # visibly posting at the time.
+    per_account = {}
+    for name, rows in slots.items():
+        own = [when for when, _, fired in rows if fired]
+        last_own = own[-1] if own else None
+        blamed = []
+        for when, _, fired in rows:
+            if fired or (last_own is not None and when <= last_own):
+                continue
+            if any(abs((other - when).total_seconds()) <= COMPANY_HOURS * 3600
+                   for other in successes if other != when):
+                blamed.append(when)
+        per_account[name] = (blamed, last_own)
+
+    return live, last_success, stale, per_account
 
 
 def wake_report():
@@ -149,18 +181,38 @@ def main() -> int:
     state = queue.load_state()
     now = schedule.now_local(cfg)
 
-    print(f"Health at {now:%a %d %b %H:%M} IST -- last {WINDOW_HOURS}h\n")
-    rows, fired, promised = delivery_report(now, cfg, state)
+    live, last_success, stale, per_account = assess(now, cfg, state)
 
-    print(f"{'account':<11} {'fired':>6} {'due':>5}   status")
-    print("-" * 44)
-    for name, hit, total, verdict in rows:
-        got = "-" if hit is None else str(hit)
-        want = "-" if total is None else str(total)
-        print(f"{name:<11} {got:>6} {want:>5}   {verdict}")
+    print(f"Health at {now:%a %d %b %H:%M} IST\n")
+    print(f"{'account':<11} {'last posted':>13} {'missed since':>13}   status")
+    print("-" * 60)
 
-    share = (fired / promised) if promised else 1.0
-    print(f"\ndelivered {fired}/{promised} slots = {share * 100:.0f}%")
+    problems = []
+    for platform in ALL:
+        name = platform.name
+        if name not in live:
+            print(f"{name:<11} {'-':>13} {'-':>13}   never posted / not set up")
+            continue
+        blamed, last_own = per_account[name]
+        ago = "never"
+        if last_own is not None:
+            hours = (now - last_own).total_seconds() / 3600
+            ago = f"{hours:.0f}h ago" if hours < 48 else f"{hours / 24:.0f}d ago"
+        if len(blamed) >= ACCOUNT_STALE_LIMIT:
+            verdict = f"CHECK THIS ACCOUNT ({len(blamed)} missed while others posted)"
+            problems.append(name)
+        elif blamed:
+            verdict = "behind, catching up"
+        else:
+            verdict = "ok"
+        print(f"{name:<11} {ago:>13} {len(blamed):>13}   {verdict}")
+
+    if last_success is None:
+        print("\nNothing has ever posted.")
+    else:
+        hours = (now - last_success).total_seconds() / 3600
+        print(f"\nlast slot filled: {last_success:%a %d %b %H:%M} IST ({hours:.0f}h ago)")
+    print(f"slots come and gone unfilled since then: {len(stale)}")
 
     counts = wake_report()
     if counts is not None:
@@ -168,24 +220,22 @@ def main() -> int:
         print(f"runs in the last 24h -- {summary}")
         if counts.get("schedule", 0) < 6:
             print("::warning::GitHub delivered the cron fewer than 6 times in 24h. "
-                  "The watchdog loop and the self-chain are carrying this now; "
-                  "if DISPATCH_TOKEN is unset, fix that before it bites.")
+                  "The watchdog loop is carrying this; if DISPATCH_TOKEN is unset, "
+                  "set it before that stops being enough.")
         if counts.get("repository_dispatch", 0) == 0:
             print("::warning::No repository_dispatch runs in 24h -- the self-chain is not "
-                  "running. Check the DISPATCH_TOKEN secret has not expired.")
+                  "running. Either DISPATCH_TOKEN is unset, or it has expired.")
 
-    problems = [name for name, hit, total, verdict in rows if verdict in ("SILENT", "BEHIND")]
-    if promised and share < MIN_DELIVERY:
-        print(f"::error::Only {share * 100:.0f}% of scheduled slots posted in the last "
-              f"{WINDOW_HOURS}h. The autoposter is not working.")
+    if len(stale) >= STALE_LIMIT:
+        print(f"::error::{len(stale)} scheduled slots have come and gone unfilled since "
+              f"anything last posted. The autoposter is not working.")
         return 1
     if problems:
-        print(f"::error::{', '.join(problems)} missed most of their slots in the last "
-              f"{WINDOW_HOURS}h while other accounts posted normally -- "
-              f"that points at those accounts' tokens, not the scheduler.")
+        print(f"::error::{', '.join(problems)} kept missing slots while other accounts "
+              f"posted normally -- that points at those accounts' tokens, not the scheduler.")
         return 1
 
-    print("\nposting normally")
+    print("\nposting, with a few slots still to catch up" if stale else "\nposting normally")
     return 0
 
 
