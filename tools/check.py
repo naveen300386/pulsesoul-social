@@ -8,6 +8,7 @@ if an image is missing, if an id is duplicated, or if a post makes a claim
 the app cannot back up.
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -229,6 +230,27 @@ def main() -> int:
                     f"every ~{days:.0f} days. Fine for a short recruitment push; add posts before "
                     f"leaving it running for months"
                 )
+
+    # ---- content/feed.xml -------------------------------------------------
+    # LinkedIn is published by a feed reader, and a feed reader dedupes on the
+    # item guid. Two items sharing one means the newer was silently never
+    # published -- which is exactly how the Page went quiet from 26 Aug 2026
+    # while every log line said "queued".
+    #
+    # A warning, deliberately never a problem: check.py failing stops the run
+    # before anything is sent anywhere, and taking eight accounts down over one
+    # LinkedIn item would be the worse bug. It clears itself on the next
+    # LinkedIn send -- see the dedupe in core.feed.append.
+    feed_path = ROOT / "content" / "feed.xml"
+    if feed_path.exists():
+        guids = re.findall(r"<guid[^>]*>(.*?)</guid>",
+                           feed_path.read_text(encoding="utf-8"))
+        for guid in sorted({g for g in guids if guids.count(g) > 1}):
+            warnings.append(
+                f"content/feed.xml has {guids.count(guid)} items sharing the guid "
+                f"'{guid}', so a feed reader published only the older one. "
+                f"Clears itself on the next LinkedIn post"
+            )
 
     print(f"checked {len(posts)} posts across {len(ALL)} platforms")
     if warnings:

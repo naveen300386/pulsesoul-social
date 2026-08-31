@@ -9,7 +9,28 @@ publishes to the PulseSoul Page.
 
 The feed is a queue with a memory: it keeps the most recent MAX_ITEMS entries
 so a reader that was offline for a day still finds what it missed, and each
-item carries a stable guid so no reader posts the same item twice.
+item carries a stable guid so a retry of the same send is not published twice.
+
+THE GUID IS THE WHOLE GAME HERE, and it was wrong until 30 Aug 2026. It used
+to be a hash of the post text alone, which sounds right -- same words, same
+id -- and quietly killed the LinkedIn Page.
+
+The content bank cycles. Twelve tester posts, one LinkedIn slot a weekday, so
+on 26 Aug the queue came back around to the post it had already sent on 15
+Aug. Identical text, therefore identical guid. Zapier's RSS trigger dedupes on
+guid, decided it had seen that item eleven days ago, and skipped it. Not an
+error, not a retry, nothing in any log: the Zap simply had nothing new to do.
+Every post after that was also a repeat, so the Page would have stayed silent
+for good while this project cheerfully recorded "queued in feed.xml" each day.
+
+So the guid now identifies ONE SEND: post, text, and the date it went out.
+Same slot retried an hour later -> same guid -> still deduped, which is the
+property worth keeping. Same post coming round again next cycle -> new date ->
+new guid -> published. LinkedIn posts at most once a day and catch_up_minutes
+cannot push a slot past midnight, so the date can never split one send in two.
+
+NEVER regenerate the guids of items already in the feed. A reader that has
+seen them would treat every one as new and publish the lot in a burst.
 """
 import hashlib
 import html
@@ -79,7 +100,8 @@ def append(post_id: str, text: str, image_url: str | None, when: datetime | None
     when = when or datetime.now(timezone.utc)
     image_url = cdn_url(image_url)
     digest = hashlib.md5(text.encode()).hexdigest()[:8]
-    guid = f"pulsesoul-{post_id}-{digest}"
+    # The date is what stops a cycling bank looking like a repeat. See above.
+    guid = f"pulsesoul-{post_id}-{digest}-{when:%Y%m%d}"
 
     parts = [
         "<item>",
@@ -97,7 +119,26 @@ def append(post_id: str, text: str, image_url: str | None, when: datetime | None
     item = "\n".join(parts)
 
     old = _existing_items(FEED.read_text(encoding="utf-8")) if FEED.exists() else []
-    items = [item] + old[: MAX_ITEMS - 1]
+
+    # A retry of a send already in the feed changes nothing. Appending a second
+    # copy under the same guid would leave the feed self-contradicting, and a
+    # reader that maps on something other than guid could publish it twice.
+    if any(f"<guid isPermaLink=\"false\">{guid}</guid>" in existing for existing in old):
+        return FEED
+
+    # Drop anything older that shares a guid with something newer -- including
+    # the collisions the old content-only guid left behind. Newest wins,
+    # because that is the one a reader has not published yet.
+    seen, kept = set(), []
+    for existing in old:
+        found = re.search(r"<guid[^>]*>(.*?)</guid>", existing, re.S)
+        key = found.group(1) if found else existing
+        if key in seen or key == guid:
+            continue
+        seen.add(key)
+        kept.append(existing)
+
+    items = [item] + kept[: MAX_ITEMS - 1]
 
     FEED.parent.mkdir(parents=True, exist_ok=True)
     FEED.write_text(HEADER + "\n".join(items) + "\n" + FOOTER, encoding="utf-8")
