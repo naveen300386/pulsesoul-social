@@ -202,3 +202,4 @@
 {"platform": "pinterest", "post_id": "t05", "slot": "15:00", "weekday": "Wed", "posted_at": "2026-09-02T15:02+05:30", "ref": "SANDBOX pin 812759064045889088 - private, not published (Trial access)", "engagement": null}
 {"platform": "linkedin", "post_id": "t11", "slot": "16:00", "weekday": "Wed", "posted_at": "2026-09-02T16:02+05:30", "ref": "queued in feed.xml for the PulseSoul Page", "engagement": null}
 {"platform": "bluesky", "post_id": "t04", "slot": "18:00", "weekday": "Wed", "posted_at": "2026-09-02T18:02+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mujwxmdrzr2r", "engagement": null}
+{"platform": "mastodon", "post_id": "t08", "slot": "19:00", "weekday": "Wed", "posted_at": "2026-09-02T19:02+05:30", "ref": "https://mastodon.social/@pulsesoul/117201696867015925", "engagement": null}
