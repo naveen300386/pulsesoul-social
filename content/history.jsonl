@@ -211,3 +211,4 @@
 {"platform": "telegram", "post_id": "t03", "slot": "11:00", "weekday": "Thu", "posted_at": "2026-09-03T11:04+05:30", "ref": "telegram message 39", "engagement": null}
 {"platform": "instagram", "post_id": "t01", "slot": "12:00", "weekday": "Thu", "posted_at": "2026-09-03T12:00+05:30", "ref": "https://www.instagram.com/p/18111655517021779", "engagement": null}
 {"platform": "mastodon", "post_id": "t09", "slot": "13:00", "weekday": "Thu", "posted_at": "2026-09-03T13:00+05:30", "ref": "https://mastodon.social/@pulsesoul/117205934519445643", "engagement": null}
+{"platform": "pinterest", "post_id": "t06", "slot": "15:00", "weekday": "Thu", "posted_at": "2026-09-03T15:00+05:30", "ref": "SANDBOX pin 812759064045905737 - private, not published (Trial access)", "engagement": null}
