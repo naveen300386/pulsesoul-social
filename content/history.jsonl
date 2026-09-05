@@ -232,3 +232,4 @@
 {"platform": "linkedin", "post_id": "t02", "slot": "09:00", "weekday": "Sat", "posted_at": "2026-09-05T09:00+05:30", "ref": "queued in feed.xml for the PulseSoul Page", "engagement": null}
 {"platform": "facebook", "post_id": "t06", "slot": "11:00", "weekday": "Sat", "posted_at": "2026-09-05T11:01+05:30", "ref": "https://facebook.com/1272833339242313_122126850963389902", "engagement": null}
 {"platform": "telegram", "post_id": "t07", "slot": "12:00", "weekday": "Sat", "posted_at": "2026-09-05T12:01+05:30", "ref": "telegram message 43", "engagement": null}
+{"platform": "instagram", "post_id": "t03", "slot": "13:00", "weekday": "Sat", "posted_at": "2026-09-05T13:01+05:30", "ref": "https://www.instagram.com/p/18368492983243964", "engagement": null}
