@@ -246,3 +246,4 @@
 {"platform": "instagram", "post_id": "t05", "slot": "13:00", "weekday": "Sun", "posted_at": "2026-09-06T13:03+05:30", "ref": "https://www.instagram.com/p/18159176068491136", "engagement": null}
 {"platform": "pinterest", "post_id": "t10", "slot": "15:00", "weekday": "Sun", "posted_at": "2026-09-06T15:04+05:30", "ref": "SANDBOX pin 812759064045955579 - private, not published (Trial access)", "engagement": null}
 {"platform": "bluesky", "post_id": "t12", "slot": "16:00", "weekday": "Sun", "posted_at": "2026-09-06T16:04+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3muts7ld7jy2k", "engagement": null}
+{"platform": "mastodon", "post_id": "t02", "slot": "17:00", "weekday": "Sun", "posted_at": "2026-09-06T17:04+05:30", "ref": "https://mastodon.social/@pulsesoul/117223880534584689", "engagement": null}
