@@ -254,3 +254,4 @@
 {"platform": "pinterest", "post_id": "t11", "slot": "21:00", "weekday": "Sun", "posted_at": "2026-09-06T21:00+05:30", "ref": "SANDBOX pin 812759064045959244 - private, not published (Trial access)", "engagement": null}
 {"platform": "facebook", "post_id": "t10", "slot": "09:00", "weekday": "Mon", "posted_at": "2026-09-07T09:01+05:30", "ref": "https://facebook.com/1272833339242313_122127329835389902", "engagement": null}
 {"platform": "telegram", "post_id": "t11", "slot": "11:00", "weekday": "Mon", "posted_at": "2026-09-07T11:02+05:30", "ref": "telegram message 47", "engagement": null}
+{"platform": "instagram", "post_id": "t07", "slot": "12:00", "weekday": "Mon", "posted_at": "2026-09-07T12:02+05:30", "ref": "https://www.instagram.com/p/17943170349340202", "engagement": null}
