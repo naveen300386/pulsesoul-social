@@ -4,7 +4,7 @@
 #   testers   -> recruiting the 12 closed testers Google requires (start here)
 #   launch    -> switch to this the day PulseSoul goes live on Play
 #   evergreen -> the long-running feature and story posts
-phase: testers
+phase: evergreen
 
 # Where every post points.
 link: https://pulsesoul.app
