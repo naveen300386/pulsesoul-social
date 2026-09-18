@@ -7,7 +7,14 @@
 phase: launch
 
 # Where every post points.
-link: https://pulsesoul.app
+link: https://play.google.com/store/apps/details?id=com.pulsesoul.app
+
+# Bluesky allows 290 characters and the Play Store URL is 63 of them. Handing
+# it the long link costs the hashtags on 15 posts, a paragraph on 22, and
+# pushes 6 past the limit outright -- which tools/check.py fails the build on.
+# So Bluesky keeps the short site link; every other account gets the store.
+link_overrides:
+  bluesky: https://pulsesoul.app
 
 # Instagram does not make links in captions clickable, so its posts say this instead.
 bio_cta: "Link in bio → pulsesoul.app"

@@ -113,6 +113,18 @@ def voice_for(post: dict, platform, cfg: dict) -> str:
     return "hinglish" if int(digest[:8], 16) / 0xFFFFFFFF < share else "english"
 
 
+def link_for(platform, cfg: dict) -> str:
+    """The URL this platform points at.
+
+    One campaign link is the rule, but Bluesky allows 290 characters and the
+    Play Store URL is 63 of them -- long enough that compose() starts shedding
+    hashtags and paragraphs to make room, and long enough to push some posts
+    past the limit entirely. A platform may therefore override the link with a
+    shorter one that still reaches the same place.
+    """
+    return (cfg.get("link_overrides") or {}).get(platform.name) or cfg["link"]
+
+
 def compose(post: dict, platform, cfg: dict, voice: str | None = None) -> str:
     """
     Build the final text for one platform.
@@ -129,7 +141,7 @@ def compose(post: dict, platform, cfg: dict, voice: str | None = None) -> str:
 
     tail = ""
     if platform.link_style == "inline":
-        tail = cfg["link"]
+        tail = link_for(platform, cfg)
     elif platform.link_style == "bio":
         tail = cfg.get("bio_cta", "").strip()
 
@@ -293,7 +305,7 @@ def run(args) -> int:
 
         try:
             log.step(f"{platform.name}: sending post {post['id']} ({label})...")
-            where = platform.post(text, post.get("image", ""), cfg["link"])
+            where = platform.post(text, post.get("image", ""), link_for(platform, cfg))
             log.ok(f"{platform.name}: posted -> {where}")
             sent += 1
             if str(where).startswith("SANDBOX"):
