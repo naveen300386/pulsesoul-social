@@ -418,3 +418,4 @@
 {"platform": "pinterest", "post_id": "a14", "slot": "21:00", "weekday": "Sun", "posted_at": "2026-09-20T21:04+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
 {"platform": "facebook", "post_id": "a02", "slot": "09:00", "weekday": "Mon", "posted_at": "2026-09-21T09:00+05:30", "ref": "https://facebook.com/1272833339242313_122131196529389902", "engagement": null}
 {"platform": "telegram", "post_id": "l08", "slot": "11:00", "weekday": "Mon", "posted_at": "2026-09-21T11:00+05:30", "ref": "telegram message 75", "engagement": null}
+{"platform": "instagram", "post_id": "a18", "slot": "12:00", "weekday": "Mon", "posted_at": "2026-09-21T12:00+05:30", "ref": "https://www.instagram.com/p/18094783589538119", "engagement": null}
