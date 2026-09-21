@@ -419,3 +419,4 @@
 {"platform": "facebook", "post_id": "a02", "slot": "09:00", "weekday": "Mon", "posted_at": "2026-09-21T09:00+05:30", "ref": "https://facebook.com/1272833339242313_122131196529389902", "engagement": null}
 {"platform": "telegram", "post_id": "l08", "slot": "11:00", "weekday": "Mon", "posted_at": "2026-09-21T11:00+05:30", "ref": "telegram message 75", "engagement": null}
 {"platform": "instagram", "post_id": "a18", "slot": "12:00", "weekday": "Mon", "posted_at": "2026-09-21T12:00+05:30", "ref": "https://www.instagram.com/p/18094783589538119", "engagement": null}
+{"platform": "mastodon", "post_id": "l01", "slot": "13:00", "weekday": "Mon", "posted_at": "2026-09-21T13:00+05:30", "ref": "https://mastodon.social/@pulsesoul/117307857982772648", "engagement": null}
