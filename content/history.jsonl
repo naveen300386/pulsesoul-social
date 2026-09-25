@@ -470,3 +470,4 @@
 {"platform": "mastodon", "post_id": "a02", "slot": "13:00", "weekday": "Fri", "posted_at": "2026-09-25T13:01+05:30", "ref": "FAILED: mastodon media -> HTTP 404: 404 page not found ", "engagement": null}
 {"platform": "pinterest", "post_id": "l01", "slot": "15:00", "weekday": "Fri", "posted_at": "2026-09-25T15:02+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
 {"platform": "linkedin", "post_id": "l04", "slot": "16:00", "weekday": "Fri", "posted_at": "2026-09-25T16:02+05:30", "ref": "queued in feed.xml for the PulseSoul Page", "engagement": null}
+{"platform": "bluesky", "post_id": "a02", "slot": "18:00", "weekday": "Fri", "posted_at": "2026-09-25T18:02+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mwdrnztm5b23", "engagement": null}
