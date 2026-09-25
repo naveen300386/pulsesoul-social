@@ -468,3 +468,4 @@
 {"platform": "telegram", "post_id": "a09", "slot": "11:00", "weekday": "Fri", "posted_at": "2026-09-25T11:01+05:30", "ref": "telegram message 83", "engagement": null}
 {"platform": "instagram", "post_id": "l08", "slot": "12:00", "weekday": "Fri", "posted_at": "2026-09-25T12:01+05:30", "ref": "https://www.instagram.com/p/18110405714030831", "engagement": null}
 {"platform": "mastodon", "post_id": "a02", "slot": "13:00", "weekday": "Fri", "posted_at": "2026-09-25T13:01+05:30", "ref": "FAILED: mastodon media -> HTTP 404: 404 page not found ", "engagement": null}
+{"platform": "pinterest", "post_id": "l01", "slot": "15:00", "weekday": "Fri", "posted_at": "2026-09-25T15:02+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
