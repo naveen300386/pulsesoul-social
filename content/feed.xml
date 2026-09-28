@@ -4,6 +4,21 @@
 <link>https://pulsesoul.app</link>
 <description>Posts queued for the PulseSoul LinkedIn Page</description>
 <item>
+<title>Out now.</title>
+<guid isPermaLink="false">pulsesoul-pulsesoul_15-458f8a6b-20260928</guid>
+<pubDate>Mon, 28 Sep 2026 10:30:39 +0000</pubDate>
+<link>https://pulsesoul.app</link>
+<description>Out now.
+
+Text, photos, video, voice notes, voice filters, sound effects mapped to the emoji you actually use. Send a sound instead of a smiley for once.
+
+https://play.google.com/store/apps/details?id=com.pulsesoul.app
+
+#buildinpublic #indiedev #androiddevelopment</description>
+<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_15__sq.jpg" type="image/jpeg" length="0"/>
+<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_15__sq.jpg</image>
+</item>
+<item>
 <title>PulseSoul, now on Google Play.</title>
 <guid isPermaLink="false">pulsesoul-pulsesoul_11-df2a1e1d-20260926</guid>
 <pubDate>Sat, 26 Sep 2026 03:34:01 +0000</pubDate>
@@ -487,22 +502,5 @@ https://pulsesoul.app
 #buildinpublic #indiedev #androiddevelopment</description>
 <enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_14__sq.jpg" type="image/jpeg" length="0"/>
 <image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_14__sq.jpg</image>
-</item>
-<item>
-<title>The feature I built first, before chat even worked properly:</title>
-<guid isPermaLink="false">pulsesoul-pulsesoul_22-d6cce9e0</guid>
-<pubDate>Thu, 20 Aug 2026 10:46:37 +0000</pubDate>
-<link>https://pulsesoul.app</link>
-<description>The feature I built first, before chat even worked properly:
-
-Family birthdays that everybody in the family gets reminded of. Not one person remembering. All of them.
-
-PulseSoul opens for testing soon. 12 seats. Comment IN.
-
-https://pulsesoul.app
-
-#buildinpublic #indiedev #androiddevelopment</description>
-<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_22__sq.jpg" type="image/jpeg" length="0"/>
-<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_22__sq.jpg</image>
 </item>
 </channel></rss>
