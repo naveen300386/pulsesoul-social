@@ -4,6 +4,21 @@
 <link>https://pulsesoul.app</link>
 <description>Posts queued for the PulseSoul LinkedIn Page</description>
 <item>
+<title>PulseSoul is on Google Play.</title>
+<guid isPermaLink="false">pulsesoul-pulsesoul_20-31bde3ce-20260929</guid>
+<pubDate>Tue, 29 Sep 2026 10:33:16 +0000</pubDate>
+<link>https://pulsesoul.app</link>
+<description>PulseSoul is on Google Play.
+
+Updates that vanish in a day for the small stuff. A family album that never vanishes for everything else.
+
+https://play.google.com/store/apps/details?id=com.pulsesoul.app
+
+#buildinpublic #indiedev #androiddevelopment</description>
+<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_20__sq.jpg" type="image/jpeg" length="0"/>
+<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_20__sq.jpg</image>
+</item>
+<item>
 <title>Out now.</title>
 <guid isPermaLink="false">pulsesoul-pulsesoul_15-458f8a6b-20260928</guid>
 <pubDate>Mon, 28 Sep 2026 10:30:39 +0000</pubDate>
@@ -485,22 +500,5 @@ https://pulsesoul.app
 #buildinpublic #indiedev #androiddevelopment</description>
 <enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_20__sq.jpg" type="image/jpeg" length="0"/>
 <image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_20__sq.jpg</image>
-</item>
-<item>
-<title>My parents live alone. I wanted to know they were okay without calling three times a day.</title>
-<guid isPermaLink="false">pulsesoul-pulsesoul_14-94ccf4b7</guid>
-<pubDate>Fri, 21 Aug 2026 10:47:22 +0000</pubDate>
-<link>https://pulsesoul.app</link>
-<description>My parents live alone. I wanted to know they were okay without calling three times a day.
-
-CareShield notices a phone that has gone quiet, asks that phone first, then nudges the family you chose. Optional, and never an alarm.
-
-12 tester seats. Comment IN.
-
-https://pulsesoul.app
-
-#buildinpublic #indiedev #androiddevelopment</description>
-<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_14__sq.jpg" type="image/jpeg" length="0"/>
-<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_14__sq.jpg</image>
 </item>
 </channel></rss>
