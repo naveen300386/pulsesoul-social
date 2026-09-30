@@ -531,3 +531,5 @@
 {"platform": "linkedin", "post_id": "l08", "slot": "16:00", "weekday": "Wed", "posted_at": "2026-09-30T16:01+05:30", "ref": "queued in feed.xml for the PulseSoul Page", "engagement": null}
 {"platform": "bluesky", "post_id": "a12", "slot": "18:00", "weekday": "Wed", "posted_at": "2026-09-30T18:01+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mwqdxxvqn72h", "engagement": null}
 {"platform": "mastodon", "post_id": "a11", "slot": "19:00", "weekday": "Wed", "posted_at": "2026-09-30T19:01+05:30", "ref": "https://mastodon.social/@pulsesoul/117360237678584506", "engagement": null}
+{"platform": "instagram", "post_id": "a12", "slot": "20:00", "weekday": "Wed", "posted_at": "2026-09-30T20:04+05:30", "ref": "https://www.instagram.com/p/18397559905206418", "engagement": null}
+{"platform": "telegram", "post_id": "l02", "slot": "20:00", "weekday": "Wed", "posted_at": "2026-09-30T20:04+05:30", "ref": "telegram message 94", "engagement": null}
