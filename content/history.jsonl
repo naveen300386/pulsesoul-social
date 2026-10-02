@@ -548,3 +548,4 @@
 {"platform": "facebook", "post_id": "l05", "slot": "21:00", "weekday": "Thu", "posted_at": "2026-10-01T21:02+05:30", "ref": "https://facebook.com/1272833339242313_122134772745389902", "engagement": null}
 {"platform": "bluesky", "post_id": "a15", "slot": "21:00", "weekday": "Thu", "posted_at": "2026-10-01T21:02+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mwt6kj7lmp2o", "engagement": null}
 {"platform": "facebook", "post_id": "festival:gandhi", "slot": "09:00", "weekday": "Fri", "posted_at": "2026-10-02T09:03+05:30", "ref": "https://facebook.com/1272833339242313_122134934775389902", "engagement": null}
+{"platform": "telegram", "post_id": "l05", "slot": "11:00", "weekday": "Fri", "posted_at": "2026-10-02T11:03+05:30", "ref": "telegram message 97", "engagement": null}
