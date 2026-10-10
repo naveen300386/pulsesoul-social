@@ -647,3 +647,4 @@
 {"platform": "pinterest", "post_id": "a13", "slot": "15:00", "weekday": "Sat", "posted_at": "2026-10-10T15:01+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
 {"platform": "bluesky", "post_id": "a07", "slot": "16:00", "weekday": "Sat", "posted_at": "2026-10-10T16:01+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mxjbvqfuoa2x", "engagement": null}
 {"platform": "mastodon", "post_id": "a03", "slot": "17:00", "weekday": "Sat", "posted_at": "2026-10-10T17:01+05:30", "ref": "https://mastodon.social/@pulsesoul/117416387557184921", "engagement": null}
+{"platform": "instagram", "post_id": "a05", "slot": "18:00", "weekday": "Sat", "posted_at": "2026-10-10T18:01+05:30", "ref": "https://www.instagram.com/p/18131133682825515", "engagement": null}
