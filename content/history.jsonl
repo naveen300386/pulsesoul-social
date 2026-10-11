@@ -655,3 +655,4 @@
 {"platform": "facebook", "post_id": "festival:navratri", "slot": "11:00", "weekday": "Sun", "posted_at": "2026-10-11T11:03+05:30", "ref": "https://facebook.com/1272833339242313_122137739115389902", "engagement": null}
 {"platform": "telegram", "post_id": "a16", "slot": "12:00", "weekday": "Sun", "posted_at": "2026-10-11T12:03+05:30", "ref": "telegram message 115", "engagement": null}
 {"platform": "instagram", "post_id": "festival:navratri", "slot": "13:00", "weekday": "Sun", "posted_at": "2026-10-11T13:03+05:30", "ref": "https://www.instagram.com/p/18079920158350628", "engagement": null}
+{"platform": "pinterest", "post_id": "a15", "slot": "15:00", "weekday": "Sun", "posted_at": "2026-10-11T15:04+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
