@@ -759,3 +759,4 @@
 {"platform": "facebook", "post_id": "festival:dussehra", "slot": "09:00", "weekday": "Tue", "posted_at": "2026-10-20T09:03+05:30", "ref": "https://facebook.com/1272833339242313_122140639251389902", "engagement": null}
 {"platform": "telegram", "post_id": "a09", "slot": "11:00", "weekday": "Tue", "posted_at": "2026-10-20T11:02+05:30", "ref": "telegram message 133", "engagement": null}
 {"platform": "instagram", "post_id": "festival:dussehra", "slot": "12:00", "weekday": "Tue", "posted_at": "2026-10-20T12:03+05:30", "ref": "https://www.instagram.com/p/18020485598948387", "engagement": null}
+{"platform": "mastodon", "post_id": "l01", "slot": "13:00", "weekday": "Tue", "posted_at": "2026-10-20T13:03+05:30", "ref": "https://mastodon.social/@pulsesoul/117472076209660901", "engagement": null}
