@@ -829,3 +829,4 @@
 {"platform": "telegram", "post_id": "l03", "slot": "11:00", "weekday": "Mon", "posted_at": "2026-10-26T11:00+05:30", "ref": "telegram message 145", "engagement": null}
 {"platform": "instagram", "post_id": "a07", "slot": "12:00", "weekday": "Mon", "posted_at": "2026-10-26T12:01+05:30", "ref": "https://www.instagram.com/p/18122543539939350", "engagement": null}
 {"platform": "mastodon", "post_id": "a04", "slot": "13:00", "weekday": "Mon", "posted_at": "2026-10-26T13:01+05:30", "ref": "https://mastodon.social/@pulsesoul/117506040272380618", "engagement": null}
+{"platform": "pinterest", "post_id": "a10", "slot": "15:00", "weekday": "Mon", "posted_at": "2026-10-26T15:01+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
