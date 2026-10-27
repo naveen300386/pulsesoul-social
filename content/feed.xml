@@ -4,6 +4,21 @@
 <link>https://pulsesoul.app</link>
 <description>Posts queued for the PulseSoul LinkedIn Page</description>
 <item>
+<title>Out now.</title>
+<guid isPermaLink="false">pulsesoul-pulsesoul_15-458f8a6b-20261027</guid>
+<pubDate>Tue, 27 Oct 2026 10:34:03 +0000</pubDate>
+<link>https://pulsesoul.app</link>
+<description>Out now.
+
+Text, photos, video, voice notes, voice filters, sound effects mapped to the emoji you actually use. Send a sound instead of a smiley for once.
+
+https://play.google.com/store/apps/details?id=com.pulsesoul.app
+
+#buildinpublic #indiedev #androiddevelopment</description>
+<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_15__sq.jpg" type="image/jpeg" length="0"/>
+<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_15__sq.jpg</image>
+</item>
+<item>
 <title>PulseSoul, now on Google Play.</title>
 <guid isPermaLink="false">pulsesoul-pulsesoul_11-df2a1e1d-20261026</guid>
 <pubDate>Mon, 26 Oct 2026 10:31:26 +0000</pubDate>
@@ -513,22 +528,5 @@ https://play.google.com/store/apps/details?id=com.pulsesoul.app
 #buildinpublic #indiedev #androiddevelopment</description>
 <enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_22__sq.jpg" type="image/jpeg" length="0"/>
 <image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_22__sq.jpg</image>
-</item>
-<item>
-<title>PulseSoul is live on Google Play.</title>
-<guid isPermaLink="false">pulsesoul-pulsesoul_12-b4dc147e-20260922</guid>
-<pubDate>Tue, 22 Sep 2026 10:34:16 +0000</pubDate>
-<link>https://pulsesoul.app</link>
-<description>PulseSoul is live on Google Play.
-
-A calm messaging app built for families. Free, no ads, nothing to unlock.
-
-Download it, add your people, and tell me what to fix next.
-
-https://play.google.com/store/apps/details?id=com.pulsesoul.app
-
-#buildinpublic #indiedev #androiddevelopment</description>
-<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_12__sq.jpg" type="image/jpeg" length="0"/>
-<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_12__sq.jpg</image>
 </item>
 </channel></rss>
