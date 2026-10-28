@@ -4,6 +4,21 @@
 <link>https://pulsesoul.app</link>
 <description>Posts queued for the PulseSoul LinkedIn Page</description>
 <item>
+<title>PulseSoul is on Google Play.</title>
+<guid isPermaLink="false">pulsesoul-pulsesoul_20-31bde3ce-20261028</guid>
+<pubDate>Wed, 28 Oct 2026 10:32:19 +0000</pubDate>
+<link>https://pulsesoul.app</link>
+<description>PulseSoul is on Google Play.
+
+Updates that vanish in a day for the small stuff. A family album that never vanishes for everything else.
+
+https://play.google.com/store/apps/details?id=com.pulsesoul.app
+
+#buildinpublic #indiedev #androiddevelopment</description>
+<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_20__sq.jpg" type="image/jpeg" length="0"/>
+<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_20__sq.jpg</image>
+</item>
+<item>
 <title>Out now.</title>
 <guid isPermaLink="false">pulsesoul-pulsesoul_15-458f8a6b-20261027</guid>
 <pubDate>Tue, 27 Oct 2026 10:34:03 +0000</pubDate>
@@ -511,22 +526,5 @@ https://play.google.com/store/apps/details?id=com.pulsesoul.app
 #buildinpublic #indiedev #androiddevelopment</description>
 <enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_14__sq.jpg" type="image/jpeg" length="0"/>
 <image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_14__sq.jpg</image>
-</item>
-<item>
-<title>Now on Google Play.</title>
-<guid isPermaLink="false">pulsesoul-pulsesoul_22-360f130d-20260923</guid>
-<pubDate>Wed, 23 Sep 2026 10:31:31 +0000</pubDate>
-<link>https://pulsesoul.app</link>
-<description>Now on Google Play.
-
-PulseSoul remembers every family birthday and anniversary, and reminds all of you, not just the one person who always remembers.
-
-Free. No ads.
-
-https://play.google.com/store/apps/details?id=com.pulsesoul.app
-
-#buildinpublic #indiedev #androiddevelopment</description>
-<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_22__sq.jpg" type="image/jpeg" length="0"/>
-<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_22__sq.jpg</image>
 </item>
 </channel></rss>
