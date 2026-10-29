@@ -4,6 +4,21 @@
 <link>https://pulsesoul.app</link>
 <description>Posts queued for the PulseSoul LinkedIn Page</description>
 <item>
+<title>Now live.</title>
+<guid isPermaLink="false">pulsesoul-pulsesoul_16-a47e64b1-20261029</guid>
+<pubDate>Thu, 29 Oct 2026 10:30:47 +0000</pubDate>
+<link>https://pulsesoul.app</link>
+<description>Now live.
+
+One tap to tell everyone you are safe. And an SOS that reaches your confirmed family loudly, even through a muted chat. It alerts your family, not emergency services.
+
+https://play.google.com/store/apps/details?id=com.pulsesoul.app
+
+#buildinpublic #indiedev #androiddevelopment</description>
+<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_16__sq.jpg" type="image/jpeg" length="0"/>
+<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_16__sq.jpg</image>
+</item>
+<item>
 <title>PulseSoul is on Google Play.</title>
 <guid isPermaLink="false">pulsesoul-pulsesoul_20-31bde3ce-20261028</guid>
 <pubDate>Wed, 28 Oct 2026 10:32:19 +0000</pubDate>
@@ -509,22 +524,5 @@ https://play.google.com/store/apps/details?id=com.pulsesoul.app
 #buildinpublic #indiedev #androiddevelopment</description>
 <enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_23__sq.jpg" type="image/jpeg" length="0"/>
 <image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_23__sq.jpg</image>
-</item>
-<item>
-<title>PulseSoul is out.</title>
-<guid isPermaLink="false">pulsesoul-pulsesoul_14-134d454f-20260924</guid>
-<pubDate>Thu, 24 Sep 2026 10:34:01 +0000</pubDate>
-<link>https://pulsesoul.app</link>
-<description>PulseSoul is out.
-
-CareShield is the part I am proudest of: if a family member&#x27;s phone goes quiet, it checks on them gently before it ever involves you. Optional, and never an alarm.
-
-On Google Play now.
-
-https://play.google.com/store/apps/details?id=com.pulsesoul.app
-
-#buildinpublic #indiedev #androiddevelopment</description>
-<enclosure url="https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_14__sq.jpg" type="image/jpeg" length="0"/>
-<image>https://naveen300386.github.io/pulsesoul-social/rendered/pulsesoul_14__sq.jpg</image>
 </item>
 </channel></rss>
