@@ -861,3 +861,4 @@
 {"platform": "telegram", "post_id": "l08", "slot": "20:00", "weekday": "Wed", "posted_at": "2026-10-28T20:02+05:30", "ref": "telegram message 150", "engagement": null}
 {"platform": "facebook", "post_id": "l03", "slot": "21:00", "weekday": "Wed", "posted_at": "2026-10-28T21:03+05:30", "ref": "https://facebook.com/1272833339242313_122142821457389902", "engagement": null}
 {"platform": "bluesky", "post_id": "l01", "slot": "21:00", "weekday": "Wed", "posted_at": "2026-10-28T21:03+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3myx35w65ny2n", "engagement": null}
+{"platform": "facebook", "post_id": "festival:karva", "slot": "09:00", "weekday": "Thu", "posted_at": "2026-10-29T09:00+05:30", "ref": "https://facebook.com/1272833339242313_122143062471389902", "engagement": null}
