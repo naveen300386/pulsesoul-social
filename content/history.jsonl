@@ -955,3 +955,4 @@
 {"platform": "facebook", "post_id": "a10", "slot": "21:00", "weekday": "Thu", "posted_at": "2026-11-05T21:04+05:30", "ref": "https://facebook.com/1272833339242313_122144947281389902", "engagement": null}
 {"platform": "bluesky", "post_id": "a10", "slot": "21:00", "weekday": "Thu", "posted_at": "2026-11-05T21:04+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mzl6xzeypw2n", "engagement": null}
 {"platform": "facebook", "post_id": "festival:dhanteras", "slot": "09:00", "weekday": "Fri", "posted_at": "2026-11-06T09:00+05:30", "ref": "https://facebook.com/1272833339242313_122145071811389902", "engagement": null}
+{"platform": "telegram", "post_id": "a18", "slot": "11:00", "weekday": "Fri", "posted_at": "2026-11-06T11:01+05:30", "ref": "telegram message 167", "engagement": null}
