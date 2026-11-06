@@ -959,3 +959,4 @@
 {"platform": "instagram", "post_id": "festival:dhanteras", "slot": "12:00", "weekday": "Fri", "posted_at": "2026-11-06T12:01+05:30", "ref": "https://www.instagram.com/p/18121440356074161", "engagement": null}
 {"platform": "mastodon", "post_id": "l06", "slot": "13:00", "weekday": "Fri", "posted_at": "2026-11-06T13:01+05:30", "ref": "https://mastodon.social/@pulsesoul/117568324798321019", "engagement": null}
 {"platform": "pinterest", "post_id": "l05", "slot": "15:00", "weekday": "Fri", "posted_at": "2026-11-06T15:01+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
+{"platform": "linkedin", "post_id": "a08", "slot": "16:00", "weekday": "Fri", "posted_at": "2026-11-06T16:01+05:30", "ref": "queued in feed.xml for the PulseSoul Page", "engagement": null}
