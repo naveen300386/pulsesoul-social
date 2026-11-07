@@ -973,3 +973,4 @@
 {"platform": "mastodon", "post_id": "l08", "slot": "17:00", "weekday": "Sat", "posted_at": "2026-11-07T17:04+05:30", "ref": "https://mastodon.social/@pulsesoul/117574942411472243", "engagement": null}
 {"platform": "instagram", "post_id": "a03", "slot": "18:00", "weekday": "Sat", "posted_at": "2026-11-07T18:04+05:30", "ref": "https://www.instagram.com/p/17973801246172821", "engagement": null}
 {"platform": "telegram", "post_id": "l03", "slot": "19:00", "weekday": "Sat", "posted_at": "2026-11-07T19:04+05:30", "ref": "telegram message 170", "engagement": null}
+{"platform": "facebook", "post_id": "a12", "slot": "20:00", "weekday": "Sat", "posted_at": "2026-11-07T20:04+05:30", "ref": "https://facebook.com/1272833339242313_122145398007389902", "engagement": null}
