@@ -981,3 +981,4 @@
 {"platform": "instagram", "post_id": "festival:diwali", "slot": "13:00", "weekday": "Sun", "posted_at": "2026-11-08T13:01+05:30", "ref": "https://www.instagram.com/p/18155859226532135", "engagement": null}
 {"platform": "pinterest", "post_id": "l08", "slot": "15:00", "weekday": "Sun", "posted_at": "2026-11-08T15:01+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
 {"platform": "bluesky", "post_id": "a15", "slot": "16:00", "weekday": "Sun", "posted_at": "2026-11-08T16:01+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mzs7gi5nf52q", "engagement": null}
+{"platform": "mastodon", "post_id": "a02", "slot": "17:00", "weekday": "Sun", "posted_at": "2026-11-08T17:01+05:30", "ref": "https://mastodon.social/@pulsesoul/117580594908098406", "engagement": null}
