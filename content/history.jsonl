@@ -1000,3 +1000,4 @@
 {"platform": "facebook", "post_id": "a15", "slot": "09:00", "weekday": "Tue", "posted_at": "2026-11-10T09:00+05:30", "ref": "https://facebook.com/1272833339242313_122145935655389902", "engagement": null}
 {"platform": "telegram", "post_id": "l08", "slot": "11:00", "weekday": "Tue", "posted_at": "2026-11-10T11:00+05:30", "ref": "telegram message 175", "engagement": null}
 {"platform": "instagram", "post_id": "a06", "slot": "12:00", "weekday": "Tue", "posted_at": "2026-11-10T12:01+05:30", "ref": "https://www.instagram.com/p/17891566911471305", "engagement": null}
+{"platform": "mastodon", "post_id": "a05", "slot": "13:00", "weekday": "Tue", "posted_at": "2026-11-10T13:01+05:30", "ref": "https://mastodon.social/@pulsesoul/117590976009306997", "engagement": null}
