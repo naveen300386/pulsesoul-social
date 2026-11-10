@@ -1002,3 +1002,4 @@
 {"platform": "instagram", "post_id": "a06", "slot": "12:00", "weekday": "Tue", "posted_at": "2026-11-10T12:01+05:30", "ref": "https://www.instagram.com/p/17891566911471305", "engagement": null}
 {"platform": "mastodon", "post_id": "a05", "slot": "13:00", "weekday": "Tue", "posted_at": "2026-11-10T13:01+05:30", "ref": "https://mastodon.social/@pulsesoul/117590976009306997", "engagement": null}
 {"platform": "pinterest", "post_id": "a04", "slot": "15:00", "weekday": "Tue", "posted_at": "2026-11-10T15:01+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
+{"platform": "linkedin", "post_id": "a11", "slot": "16:00", "weekday": "Tue", "posted_at": "2026-11-10T16:01+05:30", "ref": "queued in feed.xml for the PulseSoul Page", "engagement": null}
