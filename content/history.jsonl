@@ -1009,3 +1009,4 @@
 {"platform": "telegram", "post_id": "a02", "slot": "20:00", "weekday": "Tue", "posted_at": "2026-11-10T20:02+05:30", "ref": "telegram message 176", "engagement": null}
 {"platform": "facebook", "post_id": "a16", "slot": "21:00", "weekday": "Tue", "posted_at": "2026-11-10T21:02+05:30", "ref": "https://facebook.com/1272833339242313_122146096767389902", "engagement": null}
 {"platform": "bluesky", "post_id": "l02", "slot": "21:00", "weekday": "Tue", "posted_at": "2026-11-10T21:02+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3mzxr6tv4co2o", "engagement": null}
+{"platform": "facebook", "post_id": "festival:bhaidooj", "slot": "09:00", "weekday": "Wed", "posted_at": "2026-11-11T09:03+05:30", "ref": "https://facebook.com/1272833339242313_122146203261389902", "engagement": null}
