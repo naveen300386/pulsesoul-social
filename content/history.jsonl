@@ -1047,3 +1047,4 @@
 {"platform": "facebook", "post_id": "l03", "slot": "11:00", "weekday": "Sat", "posted_at": "2026-11-14T11:02+05:30", "ref": "https://facebook.com/1272833339242313_122146866183389902", "engagement": null}
 {"platform": "telegram", "post_id": "a09", "slot": "12:00", "weekday": "Sat", "posted_at": "2026-11-14T12:02+05:30", "ref": "telegram message 183", "engagement": null}
 {"platform": "instagram", "post_id": "a12", "slot": "13:00", "weekday": "Sat", "posted_at": "2026-11-14T13:01+05:30", "ref": "https://www.instagram.com/p/17907613668353573", "engagement": null}
+{"platform": "pinterest", "post_id": "a08", "slot": "15:00", "weekday": "Sat", "posted_at": "2026-11-14T15:02+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
