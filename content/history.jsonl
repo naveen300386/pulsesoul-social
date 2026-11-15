@@ -1060,3 +1060,4 @@
 {"platform": "instagram", "post_id": "festival:chhath", "slot": "13:00", "weekday": "Sun", "posted_at": "2026-11-15T13:00+05:30", "ref": "https://www.instagram.com/p/18117266093618113", "engagement": null}
 {"platform": "pinterest", "post_id": "a10", "slot": "15:00", "weekday": "Sun", "posted_at": "2026-11-15T15:00+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
 {"platform": "bluesky", "post_id": "a04", "slot": "16:00", "weekday": "Sun", "posted_at": "2026-11-15T16:00+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3n2dsnrjon32n", "engagement": null}
+{"platform": "mastodon", "post_id": "a14", "slot": "17:00", "weekday": "Sun", "posted_at": "2026-11-15T17:00+05:30", "ref": "https://mastodon.social/@pulsesoul/117620228400145791", "engagement": null}
