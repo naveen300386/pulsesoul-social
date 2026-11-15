@@ -1057,3 +1057,4 @@
 {"platform": "pinterest", "post_id": "a09", "slot": "21:00", "weekday": "Sat", "posted_at": "2026-11-14T21:03+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
 {"platform": "facebook", "post_id": "festival:chhath", "slot": "11:00", "weekday": "Sun", "posted_at": "2026-11-15T11:04+05:30", "ref": "https://facebook.com/1272833339242313_122147087763389902", "engagement": null}
 {"platform": "telegram", "post_id": "a11", "slot": "12:00", "weekday": "Sun", "posted_at": "2026-11-15T12:00+05:30", "ref": "telegram message 185", "engagement": null}
+{"platform": "instagram", "post_id": "festival:chhath", "slot": "13:00", "weekday": "Sun", "posted_at": "2026-11-15T13:00+05:30", "ref": "https://www.instagram.com/p/18117266093618113", "engagement": null}
