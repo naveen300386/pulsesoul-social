@@ -1166,3 +1166,7 @@
 {"platform": "pinterest", "post_id": "l04", "slot": "15:00", "weekday": "Tue", "posted_at": "2026-11-24T15:04+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
 {"platform": "linkedin", "post_id": "l05", "slot": "16:00", "weekday": "Tue", "posted_at": "2026-11-24T16:04+05:30", "ref": "queued in feed.xml for the PulseSoul Page", "engagement": null}
 {"platform": "bluesky", "post_id": "l04", "slot": "18:00", "weekday": "Tue", "posted_at": "2026-11-24T18:00+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3n32njinxhq25", "engagement": null}
+{"platform": "facebook", "post_id": "a15", "slot": "21:00", "weekday": "Tue", "posted_at": "2026-11-24T21:55+05:30", "ref": "https://facebook.com/1272833339242313_122149186935389902", "engagement": null}
+{"platform": "instagram", "post_id": "a06", "slot": "20:00", "weekday": "Tue", "posted_at": "2026-11-24T21:55+05:30", "ref": "https://www.instagram.com/p/18104244800435505", "engagement": null}
+{"platform": "telegram", "post_id": "a05", "slot": "20:00", "weekday": "Tue", "posted_at": "2026-11-24T21:55+05:30", "ref": "telegram message 204", "engagement": null}
+{"platform": "bluesky", "post_id": "l05", "slot": "21:00", "weekday": "Tue", "posted_at": "2026-11-24T21:55+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3n332oes22k2k", "engagement": null}
