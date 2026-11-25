@@ -1173,3 +1173,4 @@
 {"platform": "facebook", "post_id": "a16", "slot": "09:00", "weekday": "Wed", "posted_at": "2026-11-25T09:01+05:30", "ref": "https://facebook.com/1272833339242313_122149282233389902", "engagement": null}
 {"platform": "instagram", "post_id": "a07", "slot": "11:00", "weekday": "Wed", "posted_at": "2026-11-25T11:01+05:30", "ref": "https://www.instagram.com/p/17950060515370457", "engagement": null}
 {"platform": "telegram", "post_id": "a06", "slot": "11:00", "weekday": "Wed", "posted_at": "2026-11-25T11:01+05:30", "ref": "telegram message 205", "engagement": null}
+{"platform": "mastodon", "post_id": "a05", "slot": "13:00", "weekday": "Wed", "posted_at": "2026-11-25T13:02+05:30", "ref": "https://mastodon.social/@pulsesoul/117675913855431715", "engagement": null}
