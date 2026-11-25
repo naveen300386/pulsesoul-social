@@ -1174,3 +1174,4 @@
 {"platform": "instagram", "post_id": "a07", "slot": "11:00", "weekday": "Wed", "posted_at": "2026-11-25T11:01+05:30", "ref": "https://www.instagram.com/p/17950060515370457", "engagement": null}
 {"platform": "telegram", "post_id": "a06", "slot": "11:00", "weekday": "Wed", "posted_at": "2026-11-25T11:01+05:30", "ref": "telegram message 205", "engagement": null}
 {"platform": "mastodon", "post_id": "a05", "slot": "13:00", "weekday": "Wed", "posted_at": "2026-11-25T13:02+05:30", "ref": "https://mastodon.social/@pulsesoul/117675913855431715", "engagement": null}
+{"platform": "pinterest", "post_id": "l05", "slot": "15:00", "weekday": "Wed", "posted_at": "2026-11-25T15:58+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
