@@ -1183,3 +1183,4 @@
 {"platform": "facebook", "post_id": "a17", "slot": "21:00", "weekday": "Wed", "posted_at": "2026-11-25T21:04+05:30", "ref": "https://facebook.com/1272833339242313_122149395987389902", "engagement": null}
 {"platform": "bluesky", "post_id": "l07", "slot": "21:00", "weekday": "Wed", "posted_at": "2026-11-25T21:04+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3n35icpbkkx2l", "engagement": null}
 {"platform": "facebook", "post_id": "a18", "slot": "09:00", "weekday": "Thu", "posted_at": "2026-11-26T09:00+05:30", "ref": "https://facebook.com/1272833339242313_122149607655389902", "engagement": null}
+{"platform": "telegram", "post_id": "a08", "slot": "11:00", "weekday": "Thu", "posted_at": "2026-11-26T11:00+05:30", "ref": "telegram message 207", "engagement": null}
