@@ -1216,3 +1216,5 @@
 {"platform": "instagram", "post_id": "a14", "slot": "18:00", "weekday": "Sat", "posted_at": "2026-11-28T18:02+05:30", "ref": "https://www.instagram.com/p/18124338812291784", "engagement": null}
 {"platform": "telegram", "post_id": "a13", "slot": "19:00", "weekday": "Sat", "posted_at": "2026-11-28T19:02+05:30", "ref": "telegram message 212", "engagement": null}
 {"platform": "facebook", "post_id": "l05", "slot": "20:00", "weekday": "Sat", "posted_at": "2026-11-28T20:03+05:30", "ref": "https://facebook.com/1272833339242313_122150290845389902", "engagement": null}
+{"platform": "bluesky", "post_id": "a06", "slot": "21:00", "weekday": "Sat", "posted_at": "2026-11-28T21:03+05:30", "ref": "https://bsky.app/profile/pulsesoulreal.bsky.social/post/3n3ezmnxfdw2l", "engagement": null}
+{"platform": "pinterest", "post_id": "a02", "slot": "21:00", "weekday": "Sat", "posted_at": "2026-11-28T21:03+05:30", "ref": "FAILED: pinterest pin -> HTTP 401: {\"code\":2,\"message\":\"Authentication failed.\",\"status\":\"failure\"}", "engagement": null}
